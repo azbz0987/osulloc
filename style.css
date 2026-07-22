@@ -536,3 +536,15 @@
     font-weight: 500;
     color: var(--color-text);
   }
+
+  /* ---------- Banner ---------- */
+  .banner {
+    width: 100%;
+    margin-top: var(--section-gap);
+  }
+
+  .banner_image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
