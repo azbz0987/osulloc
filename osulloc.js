@@ -1,0 +1,91 @@
+// ---------- 드래그 슬라이드 캐러셀 (공통) ----------
+function initDragSlider(dragZone, track, startInset, viewport = dragZone) {
+  let isDragging = false;
+  let dragStartX = 0;
+  let dragStartTranslate = 0;
+  let translateX = startInset;
+
+  function getMinTranslate() {
+    const trackWidth = track.scrollWidth;
+    const viewportWidth = viewport.clientWidth;
+    return Math.min(startInset, viewportWidth - trackWidth);
+  }
+
+  function setTranslate(x) {
+    const min = getMinTranslate();
+    const clamped = Math.min(startInset, Math.max(x, min));
+    translateX = clamped;
+    track.style.transform = `translateX(${clamped}px)`;
+  }
+
+  function getClientX(e) {
+    return e.touches ? e.touches[0].clientX : e.clientX;
+  }
+
+  function onDragStart(e) {
+    isDragging = true;
+    dragZone.classList.add('isDragging');
+    dragStartX = getClientX(e);
+    dragStartTranslate = translateX;
+  }
+
+  function onDragMove(e) {
+    if (!isDragging) return;
+    const delta = getClientX(e) - dragStartX;
+    setTranslate(dragStartTranslate + delta);
+  }
+
+  function onDragEnd() {
+    isDragging = false;
+    dragZone.classList.remove('isDragging');
+  }
+
+  dragZone.addEventListener('mousedown', onDragStart);
+  window.addEventListener('mousemove', onDragMove);
+  window.addEventListener('mouseup', onDragEnd);
+
+  dragZone.addEventListener('touchstart', onDragStart, { passive: true });
+  dragZone.addEventListener('touchmove', onDragMove, { passive: true });
+  dragZone.addEventListener('touchend', onDragEnd);
+
+  setTranslate(startInset);
+}
+
+// 두 번째 컬럼 시작 지점 = 264(여백) + 94(1열) + 24(gutter) — 첫 슬라이드의 기본 위치
+initDragSlider(
+  document.getElementById('aboutSection'),
+  document.getElementById('aboutSlideTrack'),
+  382,
+  document.getElementById('aboutSlideViewport')
+);
+
+// ---------- Jeju 사진 슬라이드 (인디케이터 + 좌우 버튼) ----------
+const jejuSlides = document.querySelectorAll('#jejuPhotoWrap .jeju_slide');
+const jejuIndicator = document.getElementById('jejuIndicator');
+const jejuIndicatorLine = document.getElementById('jejuIndicatorLine');
+const jejuIndicatorItems = document.querySelectorAll('#jejuIndicator .jeju_indicatorItem');
+let jejuIndex = 0;
+
+function setJejuSlide(index) {
+  jejuIndex = (index + jejuSlides.length) % jejuSlides.length;
+
+  jejuSlides.forEach((el, i) => el.classList.toggle('isActive', i === jejuIndex));
+  jejuIndicatorItems.forEach((el, i) => el.classList.toggle('isActive', i === jejuIndex));
+
+  const gapIndex = Math.min(jejuIndex, jejuIndicatorItems.length - 2);
+  jejuIndicatorItems.forEach((el, i) => el.classList.toggle('expandGap', i === gapIndex));
+
+  const leftRect = jejuIndicatorItems[gapIndex].getBoundingClientRect();
+  const rightRect = jejuIndicatorItems[gapIndex + 1].getBoundingClientRect();
+  const indicatorRect = jejuIndicator.getBoundingClientRect();
+  jejuIndicatorLine.style.left = `${(leftRect.right + rightRect.left) / 2 - indicatorRect.left}px`;
+}
+
+jejuIndicatorItems.forEach((item, i) => {
+  item.addEventListener('click', () => setJejuSlide(i));
+});
+
+document.getElementById('jejuPhotoPrev').addEventListener('click', () => setJejuSlide(jejuIndex - 1));
+document.getElementById('jejuPhotoNext').addEventListener('click', () => setJejuSlide(jejuIndex + 1));
+
+setJejuSlide(0);
