@@ -566,18 +566,20 @@
   .banner_title {
     font-size: 32px;
     font-weight: 600;
-    margin-bottom: 16px;
+    line-height: 24px;
+    margin-bottom: 30px;
   }
 
   .banner_subtitle {
     display: block;
     font-size: 18px;
     font-weight: 500;
-    margin-bottom: 16px;
+    line-height: 24px;
   }
 
   .banner_body {
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 24px;
+    margin-top: 10px;
   }
