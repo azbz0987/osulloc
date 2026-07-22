@@ -2,10 +2,199 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=osulloc.html">
-<title>OSULLOC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OSULLOC — Header</title>
+
+<!-- Pretendard -->
+<link rel="stylesheet" as="style" crossorigin
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+
+<link rel="stylesheet" href="style.css" />
+
 </head>
 <body>
-<p><a href="osulloc.html">OSULLOC</a></p>
+
+  <header class="header">
+    <div class="header_inner">
+      <h1><a href="#" class="logo"><img src="img/logo.png" alt="OSULLOC"></a></h1>
+
+      <nav class="gnb" aria-label="주 메뉴">
+        <ul class="gnb_list">
+          <li><a href="#" class="gnb_link">Product</a></li>
+          <li><a href="#" class="gnb_link">Story</a></li>
+          <li><a href="#" class="gnb_link">Teahouse</a></li>
+          <li><a href="#" class="gnb_link">Archive</a></li>
+        </ul>
+      </nav>
+
+      <div class="header_utility">
+        <button class="menuToggle" aria-label="메뉴 열기">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <video
+      class="hero_video mediaCover"
+      id="heroVideo"
+      src="img/ep2_1920.mp4"
+      autoplay
+      muted
+      loop
+      playsinline
+      aria-label="오설록 브랜드 영상"
+    ></video>
+  </section>
+
+  <section class="intro">
+    <div class="intro_inner">
+      <h1><img src="img/logo.png" alt="OSULLOC" class="intro_logo"></h1>
+      <p class="intro_eyebrow">TEA FROM JEJU</p>
+      <p class="intro_body">대한민국이 가진 천혜의 유산 제주 화산섬<br>제주가 가진 경이로운 생명력으로<br>오설록의 차는 탄생합니다.</p>
+      <div class="intro_divider"></div>
+    </div>
+  </section>
+
+  <section class="about" id="aboutSection">
+    <div class="about_box">
+      <h2 class="about_title">ABOUT</h2>
+      <p class="about_subtitle">since 1979</p>
+      <p class="about_body">차밭을 개간한 집념을 근간으로 차를 재배하고, 가공 발효하여 세계적으로 권위있는 명차 대회에서 꾸준히 수상을 이어가며 증명된 오설록의 차는 이제 전 세계의 사람들과 만나고 있습니다.</p>
+      <a href="#" class="about_more">more</a>
+    </div>
+
+    <div class="about_slideViewport" id="aboutSlideViewport">
+      <div class="about_slideTrack" id="aboutSlideTrack">
+        <div class="about_slide">
+          <img src="img/speciality_item_bg_2_1.png" alt="오설록 - 찻잎 덖음" class="mediaCover">
+          <p class="about_slideCaption">since 1979</p>
+        </div>
+        <div class="about_slide">
+          <img src="img/speciality_item_bg_3_1.png" alt="오설록 - 감귤꽃" class="mediaCover">
+          <p class="about_slideCaption">since 1993</p>
+        </div>
+        <div class="about_slide">
+          <img src="img/speciality_item_bg_4_1.png" alt="오설록 - 감귤" class="mediaCover">
+          <p class="about_slideCaption">since 2001</p>
+        </div>
+        <div class="about_slide">
+          <img src="img/speciality_item_bg_5_1.png" alt="오설록 - 찻잔" class="mediaCover">
+          <p class="about_slideCaption">since 2010</p>
+        </div>
+        <div class="about_slide">
+          <img src="img/speciality_item_bg_6_1.png" alt="오설록 - 숲" class="mediaCover">
+          <p class="about_slideCaption">since 2021</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tealife" aria-label="OSULLOC TEA LIFE">
+    <div>
+      <div>
+        <h2 class="tealife_title">OSULLOC TEA LIFE</h2>
+        <p class="tealife_subtitle">#차한잔할까 ep.1</p>
+        <h3 class="tealife_subhead">안부, 위로, 비움</h3>
+        <p class="tealife_body">차를 마시고 건네는 행위는 숨가뿐 일상에 쉼표를 찍고<br>소중한 사람과의 따뜻한 관계맺음을 의미합니다.</p>
+      </div>
+      <div>
+        <div class="tealife_photoBg"></div>
+        <div class="tealife_photo">
+          <img src="img/w_1-2.jpg" alt="오설록 - 차 한잔" class="mediaCover">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="jeju" aria-label="제주, 그리고 오설록">
+    <div class="jeju_row">
+      <h2 class="jeju_title">제주, 그리고 오설록</h2>
+      <div class="jeju_line"></div>
+      <p class="jeju_body">대한민국이 가진 천혜의 유산 제주,<br>화산섬 제주가 가진 경이로운 생명력으로 오설록의 차는 탄생합니다.</p>
+    </div>
+    <div class="jeju_photoWrap" id="jejuPhotoWrap">
+      <div class="jeju_slide isActive">
+        <img src="img/light.png" alt="오설록 - 빛" class="jeju_photo">
+        <img src="img/tea_field_icon_light.png" alt="" class="jeju_photoIcon">
+        <div class="jeju_photoOverlay">
+          <div class="jeju_photoOverlayText">
+            <h2 class="jeju_photoOverlayTitle">아열대 기후의 화산섬</h2>
+            <strong class="jeju_photoOverlaySubtitle">연평균 기온 16℃</strong>
+            <p class="jeju_photoOverlayBody">제주 차밭은 화산섬의 완만한 지형 덕분에 태양 에너지를 한껏 끌어안습니다. 평균 기온 14~16℃를 유지해 차가 건강하게 자랄 온도를 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="jeju_slide">
+        <img src="img/img.jpg" alt="오설록 - 흙" class="jeju_photo">
+        <img src="img/tea_field_icon_soil.png" alt="" class="jeju_photoIcon">
+        <div class="jeju_photoOverlay">
+          <div class="jeju_photoOverlayText">
+            <h2 class="jeju_photoOverlayTitle">생명을 품은 화산섬의 흙</h2>
+            <strong class="jeju_photoOverlaySubtitle">최대 공극률 75%</strong>
+            <p class="jeju_photoOverlayBody">제주의 흙은 전 세계적으로도 손꼽히는 공극률과 물과 공기의 흐름을 원활하게 하고 일반 토양보다 10배나 높은 유기물을 함유하고 있습니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="jeju_slide">
+        <img src="img/water.png" alt="오설록 - 물" class="jeju_photo">
+        <img src="img/tea_field_icon_water.png" alt="" class="jeju_photoIcon">
+        <div class="jeju_photoOverlay">
+          <div class="jeju_photoOverlayText">
+            <h2 class="jeju_photoOverlayTitle">청정 화산 암반수</h2>
+            <strong class="jeju_photoOverlaySubtitle">1,800mm 빗물의 천연필터</strong>
+            <p class="jeju_photoOverlayBody">천연 필터 역할을 하는 화산 토양으로 더욱 깨끗한 제주 암반수는 차 나무가 건강하게 자라기 위한 더없이 좋은 자연의 선물입니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="jeju_slide">
+        <img src="img/fog.png" alt="오설록 - 안개" class="jeju_photo">
+        <img src="img/tea_field_icon_fog.png" alt="" class="jeju_photoIcon">
+        <div class="jeju_photoOverlay">
+          <div class="jeju_photoOverlayText">
+            <h2 class="jeju_photoOverlayTitle">한라산이 빚은 안개</h2>
+            <strong class="jeju_photoOverlaySubtitle">연평균 해무 발생일수 25일</strong>
+            <p class="jeju_photoOverlayBody">해발 1,950m 화산섬에 우뚝 솟은 한라산은 중산간에 급격한 온도차를 만들어 독특한 구름대와 안개를 형성합니다. 자연이 빚은 차광재인 안개가 최적의 그늘을 선사합니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="jeju_slide">
+        <img src="img/wind.png" alt="오설록 - 바람" class="jeju_photo">
+        <img src="img/tea_field_icon_wind.png" alt="" class="jeju_photoIcon">
+        <div class="jeju_photoOverlay">
+          <div class="jeju_photoOverlayText">
+            <h2 class="jeju_photoOverlayTitle">제주의 거친 바람</h2>
+            <strong class="jeju_photoOverlaySubtitle">연평균 초속 4~7m</strong>
+            <p class="jeju_photoOverlayBody">거친 제주의 바람이지만 차 재배에는 더없이 소중합니다. 먼 바다에서 불어오는 바람이 차 향기를 짙게 만들어 제주 차만의 특별함을 더합니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <button type="button" class="jeju_photoNav jeju_photoNavPrev" id="jejuPhotoPrev" aria-label="이전 사진">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12L15 19" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button type="button" class="jeju_photoNav jeju_photoNavNext" id="jejuPhotoNext" aria-label="다음 사진">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="jeju_indicator" id="jejuIndicator">
+      <button type="button" class="jeju_indicatorItem isActive">01</button>
+      <button type="button" class="jeju_indicatorItem">02</button>
+      <button type="button" class="jeju_indicatorItem">03</button>
+      <button type="button" class="jeju_indicatorItem">04</button>
+      <button type="button" class="jeju_indicatorItem">05</button>
+      <div class="jeju_indicatorLine" id="jejuIndicatorLine"></div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+
 </body>
 </html>
