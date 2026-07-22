@@ -545,6 +545,7 @@
 
   .banner_image {
     width: 100%;
-    height: auto;
+    height: 549px;
+    object-fit: cover;
     display: block;
   }
