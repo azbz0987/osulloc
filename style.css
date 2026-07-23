@@ -583,3 +583,14 @@
     line-height: 24px;
     margin-top: 10px;
   }
+
+  .banner_more {
+    display: inline-block;
+    margin-top: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-transform: lowercase;
+  }
