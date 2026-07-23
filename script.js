@@ -90,20 +90,66 @@ document.getElementById('jejuPhotoNext').addEventListener('click', () => setJeju
 
 setJejuSlide(0);
 
-// ---------- Scroll 인디케이터 (섹션 스크롤 진행률에 따라 thumb 이동) ----------
+// ---------- Scroll 인디케이터 + 사진 3단 전환 (섹션 스크롤 진행률 기반) ----------
 const scrollSection = document.getElementById('scrollSection');
 const scrollThumb = document.getElementById('scrollThumb');
-const SCROLL_TRACK_HEIGHT = 620;
+const scrollPhoto1 = document.getElementById('scrollPhoto1');
+const scrollPhoto2 = document.getElementById('scrollPhoto2');
+const scrollPhoto3 = document.getElementById('scrollPhoto3');
+const SCROLL_TRACK_HEIGHT = 660;
 const SCROLL_THUMB_SIZE = 60;
+const SCROLL_PHOTO1_INSET = 60; // photo1이 처음에 갖고 있는 여백(px), 스크롤에 따라 0으로 줄어듦
 
-function updateScrollThumb() {
+function getScrollProgress() {
   const scrollableRange = scrollSection.offsetHeight - window.innerHeight;
-  const progress = scrollableRange > 0
+  return scrollableRange > 0
     ? Math.min(1, Math.max(0, (window.scrollY - scrollSection.offsetTop) / scrollableRange))
     : 0;
-  scrollThumb.style.top = `${progress * (SCROLL_TRACK_HEIGHT - SCROLL_THUMB_SIZE)}px`;
 }
 
-window.addEventListener('scroll', updateScrollThumb);
-window.addEventListener('resize', updateScrollThumb);
-updateScrollThumb();
+function updateScrollThumb(progress) {
+  scrollThumb.style.setProperty('--thumb-progress', `${progress * (SCROLL_TRACK_HEIGHT - SCROLL_THUMB_SIZE)}px`);
+}
+
+function updateScrollPhotos(progress) {
+  const seg = 1 / 3;
+  let inset1;
+  let opacity1;
+  let opacity2;
+  let opacity3;
+
+  if (progress <= seg) {
+    const local = progress / seg;
+    inset1 = SCROLL_PHOTO1_INSET * (1 - local);
+    opacity1 = 1;
+    opacity2 = 0;
+    opacity3 = 0;
+  } else if (progress <= seg * 2) {
+    const local = (progress - seg) / seg;
+    inset1 = 0;
+    opacity1 = 1 - local;
+    opacity2 = local;
+    opacity3 = 0;
+  } else {
+    const local = (progress - seg * 2) / seg;
+    inset1 = 0;
+    opacity1 = 0;
+    opacity2 = 1 - local;
+    opacity3 = local;
+  }
+
+  scrollPhoto1.style.setProperty('--photo1-inset', `${inset1}px`);
+  scrollPhoto1.style.opacity = opacity1;
+  scrollPhoto2.style.opacity = opacity2;
+  scrollPhoto3.style.opacity = opacity3;
+}
+
+function updateScrollSection() {
+  const progress = getScrollProgress();
+  updateScrollThumb(progress);
+  updateScrollPhotos(progress);
+}
+
+window.addEventListener('scroll', updateScrollSection);
+window.addEventListener('resize', updateScrollSection);
+updateScrollSection();
