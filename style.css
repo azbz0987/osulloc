@@ -594,3 +594,39 @@
     text-underline-offset: 4px;
     text-transform: lowercase;
   }
+
+  /* ---------- Scroll indicator ---------- */
+  .scroll {
+    position: relative;
+    width: 100%;
+    margin-top: var(--section-gap);
+    padding: 0 var(--grid-margin);
+    box-sizing: border-box;
+    min-height: 1200px; /* 임시 값: 이후 섹션 본문 콘텐츠가 채워지면 실제 높이로 자연스럽게 대체됨 */
+  }
+
+  .scroll_indicator {
+    position: sticky;
+    top: calc(50vh - 310px); /* 620px 트랙을 화면 세로 중앙에 고정 */
+    width: 94px; /* 그리드 1컬럼 */
+    height: 620px;
+  }
+
+  .scroll_track {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 620px;
+    background: #000;
+  }
+
+  .scroll_thumb {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+  }

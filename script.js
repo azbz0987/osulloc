@@ -89,3 +89,21 @@ document.getElementById('jejuPhotoPrev').addEventListener('click', () => setJeju
 document.getElementById('jejuPhotoNext').addEventListener('click', () => setJejuSlide(jejuIndex + 1));
 
 setJejuSlide(0);
+
+// ---------- Scroll 인디케이터 (섹션 스크롤 진행률에 따라 thumb 이동) ----------
+const scrollSection = document.getElementById('scrollSection');
+const scrollThumb = document.getElementById('scrollThumb');
+const SCROLL_TRACK_HEIGHT = 620;
+const SCROLL_THUMB_SIZE = 60;
+
+function updateScrollThumb() {
+  const scrollableRange = scrollSection.offsetHeight - window.innerHeight;
+  const progress = scrollableRange > 0
+    ? Math.min(1, Math.max(0, (window.scrollY - scrollSection.offsetTop) / scrollableRange))
+    : 0;
+  scrollThumb.style.top = `${progress * (SCROLL_TRACK_HEIGHT - SCROLL_THUMB_SIZE)}px`;
+}
+
+window.addEventListener('scroll', updateScrollThumb);
+window.addEventListener('resize', updateScrollThumb);
+updateScrollThumb();
