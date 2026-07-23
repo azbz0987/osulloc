@@ -98,7 +98,7 @@ const scrollPhoto2 = document.getElementById('scrollPhoto2');
 const scrollPhoto3 = document.getElementById('scrollPhoto3');
 const SCROLL_TRACK_HEIGHT = 660;
 const SCROLL_THUMB_SIZE = 60;
-const SCROLL_PHOTO1_INSET = 60; // photo1이 처음에 갖고 있는 여백(px), 스크롤에 따라 0으로 줄어듦
+const SCROLL_PHOTO1_INSET = 264; // photo1 시작 여백 = 그리드 여백(--grid-margin)과 동일, 스크롤에 따라 0(화면 전체 너비)으로 줄어듦
 
 function getScrollProgress() {
   const scrollableRange = scrollSection.offsetHeight - window.innerHeight;
