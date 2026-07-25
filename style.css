@@ -749,9 +749,7 @@
     z-index: 1;
   }
 
-  .story_shape1,
-  .story_shape2,
-  .story_shape3 {
+  .story_shape2 {
     background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.84));
   }
 
@@ -759,6 +757,7 @@
   .story_shape3 {
     left: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
     width: 1783px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.2));
   }
 
   .story_shape1 {
