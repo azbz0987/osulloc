@@ -602,7 +602,7 @@
     margin-top: var(--section-gap);
     padding: 0 var(--grid-margin);
     box-sizing: border-box;
-    min-height: 2700px; /* 카카오식 3단계 스크롤 연출(여백 축소 → 페이드 → 페이드) 위한 스크롤 구간 확보 */
+    min-height: 4200px; /* 카카오식 3단계 스크롤 연출(여백 축소 → 페이드 → 페이드) 위한 스크롤 구간 확보, 텍스트 읽을 시간 확보를 위해 넉넉하게 */
   }
 
   .scroll_pinned {
