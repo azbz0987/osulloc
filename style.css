@@ -750,10 +750,15 @@
   }
 
   .story_shape1,
+  .story_shape2,
   .story_shape3 {
-    left: -122.5px; /* 둥근 모서리(245px)의 절반만 화면 밖으로 */
-    width: 1660.5px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
     background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.84));
+  }
+
+  .story_shape1,
+  .story_shape3 {
+    left: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
+    width: 1783px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
   }
 
   .story_shape1 {
@@ -766,7 +771,6 @@
 
   .story_shape2 {
     left: 382px; /* 2컬럼 시작 지점 */
-    right: -122.5px; /* 둥근 모서리(245px)의 절반만 화면 밖으로 */
+    right: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
     top: 858px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.2));
   }
