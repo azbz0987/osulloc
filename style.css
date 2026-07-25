@@ -689,7 +689,9 @@
     position: absolute;
     right: var(--grid-margin);
     bottom: 60px;
-    max-width: 450px; /* photo1 시작 너비(오른쪽 배치) 안에 항상 들어오도록 */
+    width: 450px; /* photo1 시작 너비(오른쪽 배치) 안에 항상 들어오도록 */
+    height: 160px; /* 캡션 길이가 달라도 항상 동일한 영역을 차지하도록 고정 */
+    max-width: 450px;
     color: #fff;
     text-align: left;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
