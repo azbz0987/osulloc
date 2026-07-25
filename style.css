@@ -773,3 +773,29 @@
     right: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
     top: 858px;
   }
+
+  .story_product {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    object-fit: contain;
+    z-index: 2;
+  }
+
+  .story_product1,
+  .story_product3 {
+    left: calc(var(--grid-margin) + 40px); /* 그리드 왼쪽 여백 안, 사각형의 진한(왼쪽) 쪽 */
+  }
+
+  .story_product1 {
+    top: 254px; /* shape1 top(220) + (468-400)/2 */
+  }
+
+  .story_product3 {
+    top: 1530px; /* shape3 top(1496) + (468-400)/2 */
+  }
+
+  .story_product2 {
+    left: 1216px; /* 그리드 오른쪽 여백(1656px) 안, 사각형의 진한(오른쪽) 쪽 */
+    top: 892px; /* shape2 top(858) + (468-400)/2 */
+  }
