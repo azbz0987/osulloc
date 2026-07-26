@@ -799,3 +799,47 @@
     left: 1116px; /* 오른쪽 끝(1616px)에 맞춰 고정, 사각형의 진한(오른쪽) 쪽 */
     top: 842px; /* shape2 top(858) + (468-500)/2 */
   }
+
+  .story_info {
+    position: absolute;
+    color: #fff;
+    text-align: left;
+  }
+
+  .story_info1 {
+    left: 844px; /* product1 오른쪽(804) + 40px */
+    width: 654px; /* shape1 안쪽 여백(1538 - 40)까지 */
+    top: 454px; /* shape1 세로 중앙 (220 + 468/2) */
+    transform: translateY(-50%);
+  }
+
+  .story_infoTitle {
+    font-size: 40px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .story_infoSubtitle {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 30px;
+  }
+
+  .story_infoBody {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    margin-bottom: 50px;
+  }
+
+  .story_infoButton {
+    display: inline-block;
+    padding: 18px 40px;
+    border: 1px solid #fff;
+    border-radius: 245px;
+    background: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+  }
