@@ -813,6 +813,13 @@
     transform: translateY(-50%);
   }
 
+  .story_info2 {
+    left: 422px; /* shape2 안쪽 여백(382 + 40)부터 */
+    width: 654px; /* product2 왼쪽(1116) - 40px까지 */
+    top: 1092px; /* shape2 세로 중앙 (858 + 468/2) */
+    transform: translateY(-50%);
+  }
+
   .story_infoTitle {
     font-size: 40px;
     font-weight: 600;
