@@ -820,6 +820,13 @@
     transform: translateY(-50%);
   }
 
+  .story_info3 {
+    left: 844px; /* product3 오른쪽(804) + 40px */
+    width: 654px; /* shape3 안쪽 여백(1538 - 40)까지 */
+    top: 1730px; /* shape3 세로 중앙 (1496 + 468/2) */
+    transform: translateY(-50%);
+  }
+
   .story_infoTitle {
     font-size: 40px;
     font-weight: 600;
