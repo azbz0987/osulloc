@@ -872,5 +872,6 @@
   .visual_image {
     display: block;
     width: 1062px; /* 1컬럼 시작(264px) ~ 10컬럼 시작 전(1326px) */
-    height: auto;
+    height: 736px;
+    object-fit: cover;
   }
