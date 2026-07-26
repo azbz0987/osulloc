@@ -860,3 +860,17 @@
     font-weight: 500;
     cursor: pointer;
   }
+
+  /* ---------- Visual ---------- */
+  .visual {
+    width: 100%;
+    margin-top: var(--section-gap);
+    padding-left: var(--grid-margin);
+    box-sizing: border-box;
+  }
+
+  .visual_image {
+    display: block;
+    width: 1062px; /* 1컬럼 시작(264px) ~ 10컬럼 시작 전(1326px) */
+    height: auto;
+  }
