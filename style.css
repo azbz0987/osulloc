@@ -796,7 +796,7 @@
   }
 
   .story_product2 {
-    left: 304px; /* 1,3번과 동일하게 왼쪽 정렬 */
+    left: 1116px; /* 오른쪽 끝(1616px)에 맞춰 고정, 사각형의 진한(오른쪽) 쪽 */
     top: 842px; /* shape2 top(858) + (468-500)/2 */
   }
 
@@ -814,8 +814,8 @@
   }
 
   .story_info2 {
-    left: 844px; /* product2 오른쪽(804) + 40px, 1,3번과 동일 */
-    width: 654px;
+    left: 422px; /* shape2 안쪽 여백(382 + 40)부터 */
+    width: 654px; /* product2 왼쪽(1116) - 40px까지 */
     top: 1092px; /* shape2 세로 중앙 (858 + 468/2) */
     transform: translateY(-50%);
   }
