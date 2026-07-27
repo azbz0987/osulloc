@@ -742,89 +742,73 @@
     background: rgba(0, 0, 0, 0.62);
   }
 
-  .story_shape {
+  .story_group {
     position: absolute;
-    height: 468px;
-    border-radius: 245px;
-    z-index: 1;
+    left: 0;
+    width: 100%;
+    height: 468px; /* 사각형 높이만큼 = 그룹 내 상대 좌표의 기준 */
   }
 
-  .story_shape2 {
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.84));
-  }
-
-  .story_shape1,
-  .story_shape3 {
-    left: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
-    width: 1783px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.2));
-  }
-
-  .story_shape1 {
+  .story_group1 {
     top: 220px;
   }
 
-  .story_shape3 {
+  .story_group2 {
+    top: 858px;
+  }
+
+  .story_group3 {
     top: 1496px;
   }
 
-  .story_shape2 {
+  .story_shape {
+    position: absolute;
+    top: 0;
+    left: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
+    width: 1783px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
+    height: 468px;
+    border-radius: 245px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.2));
+    z-index: 1;
+  }
+
+  .story_group2 .story_shape {
     left: 382px; /* 2컬럼 시작 지점 */
     right: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
-    top: 858px;
+    width: auto;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.84));
   }
 
   .story_product {
     position: absolute;
+    top: -16px; /* 사각형(468) 대비 제품 이미지(500) 세로 중앙 정렬 */
+    left: calc(var(--grid-margin) + 40px); /* 그리드 왼쪽 여백 안, 사각형의 진한(왼쪽) 쪽 */
     width: 500px;
     height: 500px;
     object-fit: contain;
     z-index: 2;
   }
 
-  .story_product1,
-  .story_product3 {
-    left: calc(var(--grid-margin) + 40px); /* 그리드 왼쪽 여백 안, 사각형의 진한(왼쪽) 쪽 */
-  }
-
-  .story_product1 {
-    top: 204px; /* shape1 top(220) + (468-500)/2 */
-  }
-
-  .story_product3 {
-    top: 1513px; /* 이미지 안 실제 제품이 위쪽에 치우쳐 있어 시각적 중앙에 맞게 아래로 보정 */
-  }
-
-  .story_product2 {
+  .story_group2 .story_product {
     left: 1116px; /* 오른쪽 끝(1616px)에 맞춰 고정, 사각형의 진한(오른쪽) 쪽 */
-    top: 842px; /* shape2 top(858) + (468-500)/2 */
+  }
+
+  .story_productLow {
+    top: 17px; /* 이미지 안 실제 제품이 위쪽에 치우쳐 있어 시각적 중앙에 맞게 아래로 보정 */
   }
 
   .story_info {
     position: absolute;
+    top: 50%;
+    left: 844px; /* product 오른쪽(804) + 40px */
+    width: 654px; /* 사각형 안쪽 여백까지 */
+    transform: translateY(-50%);
     color: #fff;
     text-align: left;
   }
 
-  .story_info1 {
-    left: 844px; /* product1 오른쪽(804) + 40px */
-    width: 654px; /* shape1 안쪽 여백(1538 - 40)까지 */
-    top: 454px; /* shape1 세로 중앙 (220 + 468/2) */
-    transform: translateY(-50%);
-  }
-
-  .story_info2 {
-    left: 422px; /* shape2 안쪽 여백(382 + 40)부터 */
-    width: 654px; /* product2 왼쪽(1116) - 40px까지 */
-    top: 1092px; /* shape2 세로 중앙 (858 + 468/2) */
-    transform: translateY(-50%);
-  }
-
-  .story_info3 {
-    left: 844px; /* product3 오른쪽(804) + 40px */
-    width: 654px; /* shape3 안쪽 여백(1538 - 40)까지 */
-    top: 1730px; /* shape3 세로 중앙 (1496 + 468/2) */
-    transform: translateY(-50%);
+  .story_group2 .story_info {
+    left: 422px; /* 사각형 안쪽 여백(382 + 40)부터 */
   }
 
   .story_infoTitle {
