@@ -881,6 +881,7 @@ body {
 
 /* ---------- Visual ---------- */
 .visual {
+  position: relative;
   width: 100%;
   margin-top: var(--section-gap);
   padding-left: var(--grid-margin);
@@ -892,6 +893,16 @@ body {
   width: 1062px; /* 1컬럼 시작(264px) ~ 10컬럼 시작 전(1326px) */
   height: 736px;
   object-fit: cover;
+}
+
+.visual_image2 {
+  position: absolute;
+  left: 890px; /* 사진 오른쪽 끝(1326px) + 40px 겹침 - 476px */
+  top: 300px; /* 사진 아래쪽 끝(736px) + 40px 겹침 - 476px */
+  width: 476px;
+  height: 476px;
+  object-fit: cover;
+  z-index: 2;
 }
 
 .visual_text {
