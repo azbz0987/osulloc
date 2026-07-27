@@ -59,8 +59,8 @@
   }
 
   .logo img {
-    height: 24px;
-    width: auto;
+    height: 30px;
+    width: 200px;
     display: block;
   }
 
@@ -808,7 +808,8 @@
   }
 
   .story_group2 .story_info {
-    left: 422px; /* 사각형 안쪽 여백(382 + 40)부터 */
+    left: 462px; /* 사각형 둥근 모서리에서 더 안쪽으로, product와의 여백(40px)은 유지 */
+    width: 614px;
   }
 
   .story_infoTitle {
