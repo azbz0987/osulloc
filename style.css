@@ -1,898 +1,931 @@
+:root {
+  --color-bg: #ffffff;
+  --color-text: #1c1c1c;
+  --color-line: #e5e3de;
+  --color-accent: #2f4a3c; /* 오설록 딥 그린 톤 */
+  --header-height: 84px;
+  --side-padding: 60px;
+  --section-gap: 250px;
+  --grid-margin: 264px; /* 1920 캔버스 12컬럼(94px)/gutter(24px) 기준 좌우 여백 */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.mediaCover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+body {
+  font-family:
+    "Pretendard",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  color: var(--color-text);
+  background: #faf9f6; /* 전체 배경색 고정 */
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  z-index: 100;
+}
+
+.header_inner {
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 var(--side-padding);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  column-gap: 24px;
+}
+
+.header_utility {
+  justify-self: end;
+}
+
+/* ---------- Logo ---------- */
+.logo {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.logo img {
+  height: 30px;
+  width: 200px;
+  display: block;
+}
+
+/* ---------- Navigation ---------- */
+.gnb {
+  display: flex;
+  align-items: center;
+}
+
+.gnb_list {
+  display: flex;
+  list-style: none;
+  gap: 48px;
+}
+
+.gnb_link {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.gnb_link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0%;
+  height: 1px;
+  background: var(--color-accent);
+  transition: width 0.25s ease;
+}
+
+.gnb_link:hover::after,
+.gnb_link:focus-visible::after {
+  width: 100%;
+}
+
+.gnb_link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* ---------- Mobile menu toggle (틀만) ---------- */
+.menuToggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.menuToggle span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--color-text);
+  margin: 5px 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
   :root {
-    --color-bg: #ffffff;
-    --color-text: #1c1c1c;
-    --color-line: #e5e3de;
-    --color-accent: #2f4a3c; /* 오설록 딥 그린 톤 */
-    --header-height: 84px;
-    --side-padding: 60px;
-    --section-gap: 250px;
-    --grid-margin: 264px; /* 1920 캔버스 12컬럼(94px)/gutter(24px) 기준 좌우 여백 */
+    --side-padding: 20px;
+    --header-height: 64px;
   }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  .mediaCover {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  body {
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
-    color: var(--color-text);
-    background: #faf9f6; /* 전체 배경색 고정 */
-  }
-
-  /* ---------- Header ---------- */
-  .header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: var(--header-height);
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-line);
-    z-index: 100;
-  }
-
-  .header_inner {
-    max-width: 1440px;
-    height: 100%;
-    margin: 0 auto;
-    padding: 0 var(--side-padding);
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    column-gap: 24px;
-  }
-
-  .header_utility {
-    justify-self: end;
-  }
-
-  /* ---------- Logo ---------- */
-  .logo {
-    display: inline-flex;
-    align-items: center;
-    white-space: nowrap;
-  }
-
-  .logo img {
-    height: 30px;
-    width: 200px;
-    display: block;
-  }
-
-  /* ---------- Navigation ---------- */
-  .gnb {
-    display: flex;
-    align-items: center;
-  }
-
   .gnb_list {
-    display: flex;
-    list-style: none;
-    gap: 48px;
-  }
-
-  .gnb_link {
-    font-size: 15px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--color-text);
-    text-decoration: none;
-    position: relative;
-    padding-bottom: 4px;
-  }
-
-  .gnb_link::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0%;
-    height: 1px;
-    background: var(--color-accent);
-    transition: width 0.25s ease;
-  }
-
-  .gnb_link:hover::after,
-  .gnb_link:focus-visible::after {
-    width: 100%;
-  }
-
-  .gnb_link:focus-visible {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 4px;
-  }
-
-  /* ---------- Mobile menu toggle (틀만) ---------- */
-  .menuToggle {
     display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
   }
-
-  .menuToggle span {
+  .menuToggle {
     display: block;
-    width: 22px;
-    height: 1px;
-    background: var(--color-text);
-    margin: 5px 0;
   }
+}
 
-  /* ---------- Responsive ---------- */
-  @media (max-width: 480px) {
-    :root {
-      --side-padding: 20px;
-      --header-height: 64px;
-    }
-    .gnb_list { display: none; }
-    .menuToggle { display: block; }
-  }
+/* ---------- Hero video ---------- */
+.hero {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - var(--header-height));
+  overflow: hidden;
+  background: #000;
+}
 
-  /* ---------- Hero video ---------- */
-  .hero {
-    position: relative;
-    width: 100%;
-    height: calc(100vh - var(--header-height));
-    overflow: hidden;
-    background: #000;
-  }
+/* ---------- Intro (logo + text) ---------- */
+.intro {
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--side-padding);
+  margin-top: var(--section-gap);
+}
 
-  /* ---------- Intro (logo + text) ---------- */
-  .intro {
-    display: flex;
-    justify-content: center;
-    padding: 0 var(--side-padding);
-    margin-top: var(--section-gap);
-  }
+.intro_inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
 
-  .intro_inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+.intro_logo {
+  height: 30px;
+  width: 200px;
+  margin-bottom: 40px;
+}
 
-  .intro_logo {
-    height: 30px;
-    width: auto;
-    margin-bottom: 40px;
-  }
+.intro_eyebrow {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: #222;
+  margin-bottom: 20px;
+}
 
-  .intro_eyebrow {
-    font-size: 20px;
-    font-weight: 500;
-    letter-spacing: 0.22em;
-    color: #222;
-    margin-bottom: 20px;
-  }
+.intro_body {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  color: #222;
+  max-width: 560px;
+  margin-bottom: 40px;
+}
 
-  .intro_body {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1.7;
-    letter-spacing: -0.01em;
-    color: #222;
-    max-width: 560px;
-    margin-bottom: 40px;
-  }
+.intro_divider {
+  width: 1px;
+  height: 150px;
+  background: #d9d9d9;
+}
 
-  .intro_divider {
-    width: 1px;
-    height: 150px;
-    background: #D9D9D9;
-  }
-
-  /* ---------- About (slide + info box) ---------- */
-  /* 그리드 기준: 1920px 캔버스 / 12 columns / gutter 24px / column 94px
+/* ---------- About (slide + info box) ---------- */
+/* 그리드 기준: 1920px 캔버스 / 12 columns / gutter 24px / column 94px
      좌우 여백 = (1920 - (12*94 + 11*24)) / 2 = 264px
      박스 = 1열~7열 = 7*94 + 6*24 = 802px */
-  .about {
-    position: relative;
-    width: 100%;
-    margin-top: var(--section-gap);
-    background: #faf9f6;
-    cursor: grab;
-    user-select: none;
-  }
-
-  .about.isDragging {
-    cursor: grabbing;
-  }
-
-  .about_box {
-    width: 802px;
-    max-width: 100%;
-    box-sizing: border-box;
-    background: #15301a;
-    padding: 60px 50px 60px 264px;
-    color: #fff;
-  }
-
-  .about_slideViewport {
-    margin-top: -60px; /* 박스 하단 여백(padding-bottom 60px)만큼 끌어올려, more 버튼 아래 여백 부분만 겹치도록 */
-    width: 100%;
-    height: 654px;
-    padding-top: 24px;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-
-  .about_slideTrack {
-    display: flex;
-    gap: 24px;
-    height: 100%;
-    will-change: transform;
-  }
-
-  .about_slide {
-    position: relative;
-    flex: 0 0 450px;
-    width: 450px;
-    height: 630px;
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .about_slide:hover {
-    transform: translateY(-20px);
-  }
-
-  .about_slide img {
-    pointer-events: none;
-    -webkit-user-drag: none;
-    transition: transform 0.5s ease;
-  }
-
-  .about_slide:hover img {
-    transform: scale(1.06);
-  }
-
-  .about_slideCaption {
-    position: absolute;
-    left: 50%;
-    bottom: 45px;
-    transform: translateX(-50%);
-    font-size: 24px;
-    font-weight: 400;
-    color: #fff;
-    text-align: center;
-    white-space: nowrap;
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  .about_title {
-    font-size: 40px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 30px;
-  }
-
-  .about_subtitle {
-    font-size: 24px;
-    font-weight: 500;
-    color: #fff;
-    margin-bottom: 20px;
-  }
-
-  .about_body {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1.7;
-    color: #fff;
-    margin-bottom: 50px;
-  }
-
-  .about_more {
-    display: inline-block;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    text-transform: lowercase;
-    color: #fff;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  /* ---------- Tea Life ---------- */
-  .tealife {
-    position: relative;
-    width: 100%;
-    margin-top: var(--section-gap);
-    padding: 375px var(--grid-margin) 0; /* 텍스트를 사진 맨 위 선 기준 375px 아래로 */
-    box-sizing: border-box;
-    text-align: left;
-    min-height: 675px; /* 사진 높이만큼 섹션 높이 확보 (absolute 요소는 부모 높이에 포함 안 됨) */
-  }
-
-  .tealife_title {
-    font-size: 40px;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 20px;
-  }
-
-  .tealife_subtitle {
-    font-size: 24px;
-    font-weight: 500;
-    color: var(--color-text);
-    margin-bottom: 20px;
-  }
-
-  .tealife_subhead {
-    font-size: 22px;
-    font-weight: 400;
-    color: var(--color-text);
-    margin-bottom: 30px;
-  }
-
-  .tealife_body {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 24px;
-    color: var(--color-text);
-  }
-
-  .tealife_photo {
-    position: absolute;
-    top: 0; /* 슬라이드 섹션과의 250px 여백(섹션 margin-top)이 끝나는 지점 */
-    left: 712px; /* 캔버스 기준 컬럼4 끝 지점 */
-    width: 944px;
-    height: 675px;
-    z-index: 2;
-  }
-
-  .tealife_photoBg {
-    position: absolute;
-    top: 86px; /* 사진 top(0) + 86px = 사진 bottom(675) + 90px에서 역산 */
-    left: 982px; /* 사진 left(712) + 270px = 사진 right(1656) + 90px에서 역산 */
-    width: 764px;
-    height: 679px;
-    background: #15301a;
-    z-index: 1;
-  }
-
-  /* ---------- Jeju & Osulloc ---------- */
-  .jeju {
-    width: 100%;
-    margin-top: var(--section-gap);
-    padding: 0 var(--grid-margin);
-    box-sizing: border-box;
-  }
-
-  .jeju_row {
-    display: flex;
-    align-items: center;
-    text-align: left;
-  }
-
-  .jeju_photoWrap {
-    position: relative;
-    margin-top: 50px;
-    height: 929px; /* 사진마다 크기가 달라도 높이를 img.jpg 기준으로 통일 */
-  }
-
-  .jeju_slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-
-  .jeju_slide.isActive {
-    opacity: 1;
-    z-index: 1;
-  }
-
-  .jeju_photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    filter: saturate(70%);
-  }
-
-  .jeju_photoIcon {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: auto;
-    height: 64px;
-    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.5));
-    transition: opacity 0.6s ease;
-    z-index: 2;
-  }
-
-  .jeju_photoOverlay {
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
-    width: 500px;
-    height: 230px;
-    padding: 30px;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 2;
-  }
-
-  .jeju_photoOverlayText {
-    color: #fff;
-    text-align: left;
-    word-break: keep-all;
-    transition: opacity 0.6s ease;
-  }
-
-  .jeju_photoOverlayTitle {
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 24px;
-    margin-bottom: 30px;
-  }
-
-  .jeju_photoOverlaySubtitle {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 24px;
-  }
-
-  .jeju_photoOverlayBody {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 24px;
-    margin-top: 10px;
-  }
-
-  .jeju_indicator {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-top: 50px;
-  }
-
-  .jeju_indicatorItem.expandGap {
-    margin-right: 32px;
-  }
-
-  .jeju_indicatorLine {
-    position: absolute;
-    top: 50%;
-    width: 32px;
-    height: 1px;
-    background: #999999;
-    transform: translate(-50%, -50%);
-    transition: left 0.3s ease;
-  }
-
-  .jeju_indicatorItem {
-    font-family: inherit;
-    font-size: 26px;
-    font-weight: 500;
-    color: var(--color-text);
-    background: none;
-    border: none;
-    cursor: pointer;
-    transition: color 0.25s ease;
-  }
-
-  .jeju_indicatorItem.isActive {
-    color: #15301a;
-    text-decoration: underline;
-    text-underline-offset: 6px;
-  }
-
-  .jeju_photoNav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 56px;
-    height: 56px;
-    border: none;
-    background: none;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 3;
-  }
-
-  .jeju_photoNavPrev {
-    left: 20px;
-  }
-
-  .jeju_photoNavNext {
-    right: 20px;
-  }
-
-  .jeju_title {
-    flex-shrink: 0;
-    font-size: 40px;
-    font-weight: 500;
-    color: var(--color-text);
-    white-space: nowrap;
-  }
-
-  .jeju_line {
-    flex: 1 1 auto;
-    height: 1px;
-    margin: 0 40px;
-    background: #d9d9d9;
-  }
-
-  .jeju_body {
-    flex-shrink: 0;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--color-text);
-  }
-
-  /* ---------- Banner ---------- */
-  .banner {
-    position: relative;
-    width: 100%;
-    margin-top: var(--section-gap);
-  }
-
-  .banner_image {
-    width: 100%;
-    height: 549px;
-    object-fit: cover;
-    display: block;
-  }
-
-  .banner_text {
-    position: absolute;
-    top: 50%;
-    left: var(--grid-margin);
-    right: var(--grid-margin);
-    transform: translateY(-50%);
-    max-width: 600px;
-    text-align: left;
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-  }
-
-  .banner_title {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 24px;
-    margin-bottom: 30px;
-  }
-
-  .banner_subtitle {
-    display: block;
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 24px;
-  }
-
-  .banner_body {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px;
-    margin-top: 10px;
-  }
-
-  .banner_more {
-    display: inline-block;
-    margin-top: 50px;
-    font-size: 18px;
-    font-weight: 500;
-    color: #fff;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-transform: lowercase;
-  }
-
-  /* ---------- Scroll indicator ---------- */
-  .scroll {
-    position: relative;
-    width: 100%;
-    margin-top: var(--section-gap);
-    padding: 0 var(--grid-margin);
-    box-sizing: border-box;
-    min-height: 4200px; /* 카카오식 3단계 스크롤 연출(여백 축소 → 페이드 → 페이드) 위한 스크롤 구간 확보, 텍스트 읽을 시간 확보를 위해 넉넉하게 */
-  }
-
-  .scroll_pinned {
-    position: sticky;
-    top: calc(50vh - 400px); /* 800px 사진 영역을 화면 세로 중앙에 고정 */
-    height: 800px;
-  }
-
-  .scroll_indicator {
-    position: absolute;
-    top: 70px; /* (800px - 660px) / 2, 사진 영역 안에서 세로 중앙 정렬 */
-    left: 0;
-    width: 94px; /* 그리드 1컬럼 */
-    height: 660px;
-    z-index: 2; /* 사진이 화면 전체로 커져도 인디케이터가 항상 위에 보이도록 */
-  }
-
-  .scroll_track {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 5px;
-    height: 660px;
-    background: #000;
-  }
-
-  .scroll_thumb {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%) translateY(var(--thumb-progress, 0));
-    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-    width: 60px;
-    height: 60px;
-  }
-
-  .scroll_photoArea {
-    position: absolute;
-    top: 0;
-    left: calc(-1 * var(--grid-margin)); /* 부모(.scroll)의 좌측 그리드 여백을 상쇄해 화면 왼쪽 끝까지 확장 */
-    width: calc(100% + 2 * var(--grid-margin)); /* 좌우 그리드 여백을 더해 화면 전체 너비(뷰포트 폭)를 채움 */
-    height: 800px;
-    overflow: hidden;
-    z-index: 1; /* 인디케이터보다 아래에 위치 */
-  }
-
-  .scroll_photoWrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-
-  .scroll_photo {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  .scroll_photo1Frame {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: var(--photo1-left, 1120px); /* 오른쪽에 고정, 왼쪽 여백이 줄면서 화면 전체로 커짐 */
-    overflow: hidden;
-    opacity: 1;
-    z-index: 3;
-    transition: opacity 0.4s ease;
-  }
-
-  .scroll_photo1Img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .scroll_photoText {
-    position: absolute;
-    right: var(--grid-margin);
-    bottom: 60px;
-    width: 450px; /* photo1 시작 너비(오른쪽 배치) 안에 항상 들어오도록 */
-    height: 160px; /* 캡션 길이가 달라도 항상 동일한 영역을 차지하도록 고정 */
-    max-width: 450px;
-    color: #fff;
-    text-align: left;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
-    word-break: keep-all;
-    z-index: 4;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  .scroll_photoTitle {
-    font-size: 32px;
-    font-weight: 600;
-    line-height: 24px;
-    margin-bottom: 10px;
-  }
-
-  .scroll_photoBody {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 24px;
-  }
-
-  /* ---------- Story ---------- */
-  .story {
-    position: relative;
-    width: 100%;
-    height: 2184px;
-    margin-top: var(--section-gap);
-    overflow: hidden;
-  }
-
-  .story_bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  .story_overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.62);
-  }
-
-  .story_group {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 468px; /* 사각형 높이만큼 = 그룹 내 상대 좌표의 기준 */
-  }
-
-  .story_group1 {
-    top: 220px;
-  }
-
-  .story_group2 {
-    top: 858px;
-  }
-
-  .story_group3 {
-    top: 1496px;
-  }
-
-  .story_shape {
-    position: absolute;
-    top: 0;
-    left: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
-    width: 1783px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
-    height: 468px;
-    border-radius: 245px;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.2));
-    z-index: 1;
-  }
-
-  .story_group2 .story_shape {
-    left: 382px; /* 2컬럼 시작 지점 */
-    right: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
-    width: auto;
-    background: linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.84));
-  }
-
-  .story_product {
-    position: absolute;
-    top: -16px; /* 사각형(468) 대비 제품 이미지(500) 세로 중앙 정렬 */
-    left: calc(var(--grid-margin) + 40px); /* 그리드 왼쪽 여백 안, 사각형의 진한(왼쪽) 쪽 */
-    width: 500px;
-    height: 500px;
-    object-fit: contain;
-    z-index: 2;
-  }
-
-  .story_group2 .story_product {
-    left: 1116px; /* 오른쪽 끝(1616px)에 맞춰 고정, 사각형의 진한(오른쪽) 쪽 */
-  }
-
-  .story_productLow {
-    top: 17px; /* 이미지 안 실제 제품이 위쪽에 치우쳐 있어 시각적 중앙에 맞게 아래로 보정 */
-  }
-
-  .story_info {
-    position: absolute;
-    top: 50%;
-    left: 844px; /* product 오른쪽(804) + 40px */
-    width: 654px; /* 사각형 안쪽 여백까지 */
-    transform: translateY(-50%);
-    color: #fff;
-    text-align: left;
-  }
-
-  .story_group2 .story_info {
-    left: 462px; /* 사각형 둥근 모서리에서 더 안쪽으로, product와의 여백(40px)은 유지 */
-    width: 614px;
-  }
-
-  .story_infoTitle {
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: 20px;
-  }
-
-  .story_infoSubtitle {
-    font-size: 24px;
-    font-weight: 500;
-    margin-bottom: 30px;
-  }
-
-  .story_infoBody {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 1.6;
-    margin-bottom: 50px;
-  }
-
-  .story_infoButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 150px;
-    height: 40px;
-    border: 1px solid #fff;
-    border-radius: 245px;
-    background: none;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 500;
-    cursor: pointer;
-  }
-
-  /* ---------- Visual ---------- */
-  .visual {
-    width: 100%;
-    margin-top: var(--section-gap);
-    padding-left: var(--grid-margin);
-    box-sizing: border-box;
-  }
-
-  .visual_image {
-    display: block;
-    width: 1062px; /* 1컬럼 시작(264px) ~ 10컬럼 시작 전(1326px) */
-    height: 736px;
-    object-fit: cover;
-  }
-
-  .visual_text {
-    margin-top: 90px;
-    color: var(--color-text);
-    text-align: left;
-  }
-
-  .visual_title {
-    font-size: 40px;
-    font-weight: 600;
-    margin-bottom: 30px;
-  }
-
-  .visual_subtitle {
-    font-size: 24px;
-    font-weight: 500;
-    line-height: 24px;
-  }
-
-  .visual_body {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 24px;
-    margin-top: 10px;
-  }
-
-  .visual_more {
-    display: inline-block;
-    margin-top: 50px;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--color-text);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-transform: lowercase;
-  }
+.about {
+  position: relative;
+  width: 100%;
+  margin-top: var(--section-gap);
+  background: #faf9f6;
+  cursor: grab;
+  user-select: none;
+}
+
+.about.isDragging {
+  cursor: grabbing;
+}
+
+.about_box {
+  width: 802px;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: #15301a;
+  padding: 60px 50px 60px 264px;
+  color: #fff;
+}
+
+.about_slideViewport {
+  margin-top: -60px; /* 박스 하단 여백(padding-bottom 60px)만큼 끌어올려, more 버튼 아래 여백 부분만 겹치도록 */
+  width: 100%;
+  height: 654px;
+  padding-top: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.about_slideTrack {
+  display: flex;
+  gap: 24px;
+  height: 100%;
+  will-change: transform;
+}
+
+.about_slide {
+  position: relative;
+  flex: 0 0 450px;
+  width: 450px;
+  height: 630px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.about_slide:hover {
+  transform: translateY(-20px);
+}
+
+.about_slide img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  transition: transform 0.5s ease;
+}
+
+.about_slide:hover img {
+  transform: scale(1.06);
+}
+
+.about_slideCaption {
+  position: absolute;
+  left: 50%;
+  bottom: 45px;
+  transform: translateX(-50%);
+  font-size: 24px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.about_title {
+  font-size: 40px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.about_subtitle {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.about_body {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.7;
+  color: #fff;
+  margin-bottom: 50px;
+}
+
+.about_more {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: lowercase;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* ---------- Tea Life ---------- */
+.tealife {
+  position: relative;
+  width: 100%;
+  margin-top: var(--section-gap);
+  padding: 375px var(--grid-margin) 0; /* 텍스트를 사진 맨 위 선 기준 375px 아래로 */
+  box-sizing: border-box;
+  text-align: left;
+  min-height: 675px; /* 사진 높이만큼 섹션 높이 확보 (absolute 요소는 부모 높이에 포함 안 됨) */
+}
+
+.tealife_title {
+  font-size: 40px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.tealife_subtitle {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 20px;
+}
+
+.tealife_subhead {
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--color-text);
+  margin-bottom: 30px;
+}
+
+.tealife_body {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--color-text);
+}
+
+.tealife_photo {
+  position: absolute;
+  top: 0; /* 슬라이드 섹션과의 250px 여백(섹션 margin-top)이 끝나는 지점 */
+  left: 712px; /* 캔버스 기준 컬럼4 끝 지점 */
+  width: 944px;
+  height: 675px;
+  z-index: 2;
+}
+
+.tealife_photoBg {
+  position: absolute;
+  top: 86px; /* 사진 top(0) + 86px = 사진 bottom(675) + 90px에서 역산 */
+  left: 982px; /* 사진 left(712) + 270px = 사진 right(1656) + 90px에서 역산 */
+  width: 764px;
+  height: 679px;
+  background: #15301a;
+  z-index: 1;
+}
+
+/* ---------- Jeju & Osulloc ---------- */
+.jeju {
+  width: 100%;
+  margin-top: var(--section-gap);
+  padding: 0 var(--grid-margin);
+  box-sizing: border-box;
+}
+
+.jeju_row {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.jeju_photoWrap {
+  position: relative;
+  margin-top: 50px;
+  height: 929px; /* 사진마다 크기가 달라도 높이를 img.jpg 기준으로 통일 */
+}
+
+.jeju_slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.jeju_slide.isActive {
+  opacity: 1;
+  z-index: 1;
+}
+
+.jeju_photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(70%);
+}
+
+.jeju_photoIcon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: auto;
+  height: 64px;
+  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.5));
+  transition: opacity 0.6s ease;
+  z-index: 2;
+}
+
+.jeju_photoOverlay {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 500px;
+  height: 230px;
+  padding: 30px;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.jeju_photoOverlayText {
+  color: #fff;
+  text-align: left;
+  word-break: keep-all;
+  transition: opacity 0.6s ease;
+}
+
+.jeju_photoOverlayTitle {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+
+.jeju_photoOverlaySubtitle {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.jeju_photoOverlayBody {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 10px;
+}
+
+.jeju_indicator {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-top: 50px;
+}
+
+.jeju_indicatorItem.expandGap {
+  margin-right: 32px;
+}
+
+.jeju_indicatorLine {
+  position: absolute;
+  top: 50%;
+  width: 32px;
+  height: 1px;
+  background: #999999;
+  transform: translate(-50%, -50%);
+  transition: left 0.3s ease;
+}
+
+.jeju_indicatorItem {
+  font-family: inherit;
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--color-text);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.jeju_indicatorItem.isActive {
+  color: #15301a;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.jeju_photoNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+}
+
+.jeju_photoNavPrev {
+  left: 20px;
+}
+
+.jeju_photoNavNext {
+  right: 20px;
+}
+
+.jeju_title {
+  flex-shrink: 0;
+  font-size: 40px;
+  font-weight: 500;
+  color: var(--color-text);
+  white-space: nowrap;
+}
+
+.jeju_line {
+  flex: 1 1 auto;
+  height: 1px;
+  margin: 0 40px;
+  background: #d9d9d9;
+}
+
+.jeju_body {
+  flex-shrink: 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* ---------- Banner ---------- */
+.banner {
+  position: relative;
+  width: 100%;
+  margin-top: var(--section-gap);
+}
+
+.banner_image {
+  width: 100%;
+  height: 549px;
+  object-fit: cover;
+  display: block;
+}
+
+.banner_text {
+  position: absolute;
+  top: 50%;
+  left: var(--grid-margin);
+  right: var(--grid-margin);
+  transform: translateY(-50%);
+  max-width: 600px;
+  text-align: left;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.banner_title {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 30px;
+}
+
+.banner_subtitle {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.banner_body {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 10px;
+}
+
+.banner_more {
+  display: inline-block;
+  margin-top: 50px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-transform: lowercase;
+}
+
+/* ---------- Scroll indicator ---------- */
+.scroll {
+  position: relative;
+  width: 100%;
+  margin-top: var(--section-gap);
+  padding: 0 var(--grid-margin);
+  box-sizing: border-box;
+  min-height: 4200px; /* 카카오식 3단계 스크롤 연출(여백 축소 → 페이드 → 페이드) 위한 스크롤 구간 확보, 텍스트 읽을 시간 확보를 위해 넉넉하게 */
+}
+
+.scroll_pinned {
+  position: sticky;
+  top: calc(50vh - 400px); /* 800px 사진 영역을 화면 세로 중앙에 고정 */
+  height: 800px;
+}
+
+.scroll_indicator {
+  position: absolute;
+  top: 70px; /* (800px - 660px) / 2, 사진 영역 안에서 세로 중앙 정렬 */
+  left: 0;
+  width: 94px; /* 그리드 1컬럼 */
+  height: 660px;
+  z-index: 2; /* 사진이 화면 전체로 커져도 인디케이터가 항상 위에 보이도록 */
+}
+
+.scroll_track {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 660px;
+  background: #000;
+}
+
+.scroll_thumb {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--thumb-progress, 0));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  width: 60px;
+  height: 60px;
+}
+
+.scroll_photoArea {
+  position: absolute;
+  top: 0;
+  left: calc(
+    -1 * var(--grid-margin)
+  ); /* 부모(.scroll)의 좌측 그리드 여백을 상쇄해 화면 왼쪽 끝까지 확장 */
+  width: calc(
+    100% + 2 * var(--grid-margin)
+  ); /* 좌우 그리드 여백을 더해 화면 전체 너비(뷰포트 폭)를 채움 */
+  height: 800px;
+  overflow: hidden;
+  z-index: 1; /* 인디케이터보다 아래에 위치 */
+}
+
+.scroll_photoWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.scroll_photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.scroll_photo1Frame {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: var(
+    --photo1-left,
+    1120px
+  ); /* 오른쪽에 고정, 왼쪽 여백이 줄면서 화면 전체로 커짐 */
+  overflow: hidden;
+  opacity: 1;
+  z-index: 3;
+  transition: opacity 0.4s ease;
+}
+
+.scroll_photo1Img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.scroll_photoText {
+  position: absolute;
+  right: var(--grid-margin);
+  bottom: 60px;
+  width: 450px; /* photo1 시작 너비(오른쪽 배치) 안에 항상 들어오도록 */
+  height: 160px; /* 캡션 길이가 달라도 항상 동일한 영역을 차지하도록 고정 */
+  max-width: 450px;
+  color: #fff;
+  text-align: left;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  word-break: keep-all;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.scroll_photoTitle {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 24px;
+  margin-bottom: 10px;
+}
+
+.scroll_photoBody {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+/* ---------- Story ---------- */
+.story {
+  position: relative;
+  width: 100%;
+  height: 2184px;
+  margin-top: var(--section-gap);
+  overflow: hidden;
+}
+
+.story_bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.story_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.story_group {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 468px; /* 사각형 높이만큼 = 그룹 내 상대 좌표의 기준 */
+}
+
+.story_group1 {
+  top: 220px;
+}
+
+.story_group2 {
+  top: 858px;
+}
+
+.story_group3 {
+  top: 1496px;
+}
+
+.story_shape {
+  position: absolute;
+  top: 0;
+  left: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
+  width: 1783px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
+  height: 468px;
+  border-radius: 245px;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.84),
+    rgba(255, 255, 255, 0.2)
+  );
+  z-index: 1;
+}
+
+.story_group2 .story_shape {
+  left: 382px; /* 2컬럼 시작 지점 */
+  right: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
+  width: auto;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.84)
+  );
+}
+
+.story_product {
+  position: absolute;
+  top: -16px; /* 사각형(468) 대비 제품 이미지(500) 세로 중앙 정렬 */
+  left: calc(
+    var(--grid-margin) + 40px
+  ); /* 그리드 왼쪽 여백 안, 사각형의 진한(왼쪽) 쪽 */
+  width: 500px;
+  height: 500px;
+  object-fit: contain;
+  z-index: 2;
+}
+
+.story_group2 .story_product {
+  left: 1116px; /* 오른쪽 끝(1616px)에 맞춰 고정, 사각형의 진한(오른쪽) 쪽 */
+}
+
+.story_productLow {
+  top: 17px; /* 이미지 안 실제 제품이 위쪽에 치우쳐 있어 시각적 중앙에 맞게 아래로 보정 */
+}
+
+.story_info {
+  position: absolute;
+  top: 50%;
+  left: 844px; /* product 오른쪽(804) + 40px */
+  width: 654px; /* 사각형 안쪽 여백까지 */
+  transform: translateY(-50%);
+  color: #fff;
+  text-align: left;
+}
+
+.story_group2 .story_info {
+  left: 422px; /* 사각형 안쪽 여백(382 + 40)부터 */
+  text-align: right; /* 둥근 모서리 쪽은 들쭉날쭉하게, product와 맞닿는 쪽을 가지런히 정렬 */
+}
+
+.story_group2 .story_infoButton {
+  margin-left: auto; /* flex 요소는 text-align의 영향을 받지 않으므로 별도로 오른쪽 정렬 */
+}
+
+.story_infoTitle {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.story_infoSubtitle {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.story_infoBody {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin-bottom: 50px;
+}
+
+.story_infoButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+  height: 40px;
+  border: 1px solid #fff;
+  border-radius: 245px;
+  background: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ---------- Visual ---------- */
+.visual {
+  width: 100%;
+  margin-top: var(--section-gap);
+  padding-left: var(--grid-margin);
+  box-sizing: border-box;
+}
+
+.visual_image {
+  display: block;
+  width: 1062px; /* 1컬럼 시작(264px) ~ 10컬럼 시작 전(1326px) */
+  height: 736px;
+  object-fit: cover;
+}
+
+.visual_text {
+  margin-top: 90px;
+  color: var(--color-text);
+  text-align: left;
+}
+
+.visual_title {
+  font-size: 40px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.visual_subtitle {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.visual_body {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-top: 10px;
+}
+
+.visual_more {
+  display: inline-block;
+  margin-top: 50px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-transform: lowercase;
+}
