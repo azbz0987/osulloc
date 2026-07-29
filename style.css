@@ -979,20 +979,33 @@ body {
   height: 548px;
 }
 
-.bento_box3 {
+.bento_box4 {
   top: 753px; /* box1 아래(339+390) + 24px */
   left: 264px; /* box1과 동일 (1컬럼 시작) */
   width: 920px; /* box1과 동일 (1~8컬럼) */
   height: 646px;
 }
 
-.bento_box2,
 .bento_box3 {
-  background: #fff;
+  top: 911px; /* box2 아래(339+548) + 24px */
+  left: 1208px; /* box2와 동일 (9컬럼 시작) */
+  width: 448px; /* box2와 동일 (9~12컬럼) */
+  height: 488px; /* box3 bottom(911+488=1399)이 box4 bottom(753+646=1399)과 일치 */
+  background: #c2cecc;
+}
+
+.bento_box2,
+.bento_box3,
+.bento_box4 {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.bento_box2,
+.bento_box4 {
+  background: #fff;
 }
 
 .bento_boxPhoto {
