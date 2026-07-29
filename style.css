@@ -898,7 +898,7 @@ body {
 .visual_image2 {
   position: absolute;
   left: 1180px; /* 오른쪽 끝이 그리드 끝(1656px)에 오도록 = 1656 - 476 */
-  top: 646px; /* 사진 아래쪽 끝(736px)과 90px 겹치도록 */
+  top: 346px; /* 사진 아래쪽 끝(736px)과 90px 겹치도록 */
   width: 476px;
   height: 476px;
   object-fit: cover;
