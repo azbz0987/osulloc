@@ -164,13 +164,30 @@ updateScrollSection();
 // ---------- Bento box1 상품 사진 슬라이드 ----------
 const bentoBox1Photo = document.getElementById('bentoBox1Photo');
 const bentoBox1Text = document.getElementById('bentoBox1Text');
-const bentoBox1Slides = ['img/bento1.jpg', 'img/bento1-2.jpg'];
+const bentoBox1TextLine1 = document.getElementById('bentoBox1TextLine1');
+const bentoBox1TextLine2 = document.getElementById('bentoBox1TextLine2');
+const bentoBox1Slides = [
+  { image: 'img/bento1.jpg', line1: '데일리로 즐기는', line2: '오설록 블렌디드티 20입', color: '#3a797e' },
+  { image: 'img/bento1-2.jpg' },
+  { image: 'img/bento1-3.jpg', line1: '카페인 걱정 없이<br>순하고 맛있는', line2: '오설록 허브티', color: '#6d7bc7' },
+  { image: 'img/bento1-4.jpg', line1: '간편하고 시원하게<br>마실 수 있는', line2: '콜드브루, 콤부차', color: '#4caf50' },
+  { image: 'img/bento1-5.jpg', line1: '거래처, 임직원 선물<br>부담 없이 호불호 적은', line2: '프리미엄 티 컬렉션 10종', color: '#149696' },
+];
 let bentoBox1Index = 0;
 
 function setBentoBox1Slide(index) {
   bentoBox1Index = (index + bentoBox1Slides.length) % bentoBox1Slides.length;
-  bentoBox1Photo.src = bentoBox1Slides[bentoBox1Index];
-  bentoBox1Text.style.display = bentoBox1Index === 0 ? '' : 'none';
+  const slide = bentoBox1Slides[bentoBox1Index];
+  bentoBox1Photo.src = slide.image;
+
+  if (slide.line1) {
+    bentoBox1TextLine1.innerHTML = slide.line1;
+    bentoBox1TextLine2.textContent = slide.line2;
+    bentoBox1TextLine2.style.color = slide.color;
+    bentoBox1Text.style.display = '';
+  } else {
+    bentoBox1Text.style.display = 'none';
+  }
 }
 
 document.getElementById('bentoBox1Prev').addEventListener('click', () => setBentoBox1Slide(bentoBox1Index - 1));
