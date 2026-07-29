@@ -959,3 +959,21 @@ body {
   height: 73px;
   display: block;
 }
+
+.bento_box {
+  position: absolute;
+  top: 339px; /* 로고 아래(222+73) + 44px 여백 */
+  height: 472px;
+  border-radius: 15px;
+  object-fit: cover;
+}
+
+.bento_box1 {
+  left: 264px; /* 1컬럼 시작 */
+  width: 920px; /* 1~8컬럼 = 8*94 + 7*24 */
+}
+
+.bento_box2 {
+  left: 1208px; /* 9컬럼 시작 */
+  width: 448px; /* 9~12컬럼 = 4*94 + 3*24 */
+}
