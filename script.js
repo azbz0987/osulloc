@@ -160,3 +160,18 @@ function updateScrollSection() {
 window.addEventListener('scroll', updateScrollSection);
 window.addEventListener('resize', updateScrollSection);
 updateScrollSection();
+
+// ---------- Bento box1 상품 사진 슬라이드 ----------
+const bentoBox1Photo = document.getElementById('bentoBox1Photo');
+const bentoBox1Text = document.getElementById('bentoBox1Text');
+const bentoBox1Slides = ['img/bento1.jpg', 'img/bento1-2.jpg'];
+let bentoBox1Index = 0;
+
+function setBentoBox1Slide(index) {
+  bentoBox1Index = (index + bentoBox1Slides.length) % bentoBox1Slides.length;
+  bentoBox1Photo.src = bentoBox1Slides[bentoBox1Index];
+  bentoBox1Text.style.display = bentoBox1Index === 0 ? '' : 'none';
+}
+
+document.getElementById('bentoBox1Prev').addEventListener('click', () => setBentoBox1Slide(bentoBox1Index - 1));
+document.getElementById('bentoBox1Next').addEventListener('click', () => setBentoBox1Slide(bentoBox1Index + 1));
