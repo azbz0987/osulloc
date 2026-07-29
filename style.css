@@ -988,7 +988,7 @@ body {
 .bento_box1Text {
   position: absolute;
   top: 50%;
-  left: 40px;
+  left: 80px;
   transform: translateY(-50%);
   text-align: left;
   z-index: 2;
