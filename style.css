@@ -940,3 +940,11 @@ body {
   text-underline-offset: 4px;
   text-transform: lowercase;
 }
+
+/* ---------- Bento ---------- */
+.bento {
+  width: 100%;
+  height: 1729px;
+  margin-top: var(--section-gap);
+  background: #f2f2f2;
+}
