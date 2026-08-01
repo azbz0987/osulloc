@@ -1140,6 +1140,19 @@ body {
   text-decoration: none;
 }
 
+.footer_social {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer_socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .footer_info {
   margin-top: 30px;
   font-size: 14px;
