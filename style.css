@@ -1110,3 +1110,18 @@ body {
   font-weight: 600;
   color: var(--color-text);
 }
+
+/* ---------- Footer ---------- */
+.footer {
+  width: 100%;
+  height: 1730px;
+  background: #222;
+  text-align: center;
+}
+
+.footer_logo {
+  margin-top: 110px;
+  width: 200px;
+  height: 30px;
+  filter: brightness(0) invert(1); /* 어두운 로고를 어두운 배경(#222)에서 보이도록 흰색으로 반전 */
+}
