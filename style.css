@@ -1130,7 +1130,6 @@ body {
   margin-top: 40px;
   display: flex;
   justify-content: center;
-  gap: 32px;
 }
 
 .footer_link {
@@ -1138,6 +1137,12 @@ body {
   font-weight: 400;
   color: #fff;
   text-decoration: none;
+}
+
+.footer_link:not(:last-child)::after {
+  content: "|";
+  margin: 0 16px;
+  color: #fff;
 }
 
 .footer_social {
