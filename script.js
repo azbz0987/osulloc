@@ -1,3 +1,18 @@
+// ---------- Intro 등장 애니메이션 (스크롤 진입 시 1회) ----------
+const introInner = document.querySelector('.intro_inner');
+const introObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        introInner.classList.add('isVisible');
+        introObserver.unobserve(introInner);
+      }
+    });
+  },
+  { threshold: 0.3 }
+);
+introObserver.observe(introInner);
+
 // ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
 const pageScaleOuter = document.querySelector('.pageScaleOuter');
 const pageScale = document.getElementById('pageScale');
@@ -115,6 +130,7 @@ const scrollText3 = document.getElementById('scrollText3');
 const SCROLL_TRACK_HEIGHT = 660;
 const SCROLL_THUMB_SIZE = 60;
 const SCROLL_PHOTO1_START_LEFT = 1120; // photo1이 오른쪽에 자리한 시작 위치(왼쪽 여백), 스크롤에 따라 0(화면 전체 너비)으로 줄어듦
+const SCROLL_TEXT1_COVER_THRESHOLD = 850; // scrollText1 오른쪽 끝(398+450+2) 지점 - photo1 왼쪽 끝이 이 값 이하로 줄면 텍스트가 사진에 덮임
 
 function getScrollProgress() {
   const scrollableRange = scrollSection.offsetHeight - window.innerHeight;
@@ -159,6 +175,7 @@ function updateScrollPhotos(progress) {
   scrollPhoto2.style.opacity = opacity2;
   scrollPhoto3.style.opacity = opacity3;
 
+  scrollText1.classList.toggle('isCovered', left1 <= SCROLL_TEXT1_COVER_THRESHOLD);
   scrollText1.style.opacity = opacity1;
   scrollText2.style.opacity = opacity2;
   scrollText3.style.opacity = opacity3;
