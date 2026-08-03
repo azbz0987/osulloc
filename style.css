@@ -771,8 +771,9 @@ body {
 
 .scroll_photoText {
   position: absolute;
-  right: var(--grid-margin);
-  bottom: 60px;
+  left: 398px; /* 인디케이터(264+94) 오른쪽 + 40px 여백, 사진1의 왼쪽 여백 공간과 동일한 위치 */
+  top: 50%;
+  transform: translateY(-50%);
   width: 450px; /* photo1 시작 너비(오른쪽 배치) 안에 항상 들어오도록 */
   height: 160px; /* 캡션 길이가 달라도 항상 동일한 영역을 차지하도록 고정 */
   max-width: 450px;
@@ -786,11 +787,6 @@ body {
 }
 
 .scroll_photoText1 {
-  right: auto;
-  bottom: auto;
-  left: 398px; /* 인디케이터(264+94) 오른쪽 + 40px 여백, 사진1의 왼쪽 여백 공간 안 */
-  top: 50%;
-  transform: translateY(-50%);
   color: #000;
   text-shadow: none;
   transition:
