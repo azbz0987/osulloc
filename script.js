@@ -1,12 +1,9 @@
-// ---------- 섹션 등장 애니메이션 (스크롤 진입 시 1회, 화면에 절반 이상 들어왔을 때 재생) ----------
+// ---------- 섹션 등장 애니메이션 (화면에 들어올 때마다 재생, 벗어나면 초기화) ----------
 function revealOnScroll(el) {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          el.classList.add('isVisible');
-          observer.unobserve(el);
-        }
+        el.classList.toggle('isVisible', entry.isIntersecting);
       });
     },
     { threshold: 0.4, rootMargin: '0px 0px -10% 0px' }
