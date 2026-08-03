@@ -32,6 +32,21 @@ body {
   background: #faf9f6; /* 전체 배경색 고정 */
 }
 
+/* ---------- Page scale (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ---------- */
+.pageScaleOuter {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.pageScale {
+  width: 1920px;
+  flex-shrink: 0;
+  transform-origin: top center;
+}
+
 /* ---------- Header ---------- */
 .header {
   position: sticky;

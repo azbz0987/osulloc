@@ -1,3 +1,16 @@
+// ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
+const pageScaleOuter = document.querySelector('.pageScaleOuter');
+const pageScale = document.getElementById('pageScale');
+
+function updatePageScale() {
+  const scale = document.documentElement.clientWidth / 1920; /* clientWidth는 스크롤바 폭을 제외해 .pageScaleOuter의 실제 너비(100%)와 기준이 일치함 */
+  pageScale.style.transform = `scale(${scale})`;
+  pageScaleOuter.style.height = `${pageScale.offsetHeight * scale}px`;
+}
+
+window.addEventListener('resize', updatePageScale);
+updatePageScale();
+
 // ---------- 드래그 슬라이드 캐러셀 (공통) ----------
 function initDragSlider(dragZone, track, startInset, viewport = dragZone) {
   let isDragging = false;
