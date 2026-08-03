@@ -35,16 +35,11 @@ body {
 /* ---------- Page scale (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ---------- */
 .pageScaleOuter {
   width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
 }
 
 .pageScale {
   width: 1920px;
-  flex-shrink: 0;
-  transform-origin: top center;
+  margin: 0 auto;
 }
 
 /* ---------- Header ---------- */
@@ -371,6 +366,8 @@ body {
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 20px;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.1s;
 }
 
 .tealife_subtitle {
@@ -378,6 +375,8 @@ body {
   font-weight: 500;
   color: var(--color-text);
   margin-bottom: 20px;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.2s;
 }
 
 .tealife_subhead {
@@ -385,6 +384,8 @@ body {
   font-weight: 400;
   color: var(--color-text);
   margin-bottom: 30px;
+  opacity: 0;
+  transition: opacity 0.8s ease 0.3s;
 }
 
 .tealife_body {
@@ -392,6 +393,8 @@ body {
   font-weight: 400;
   line-height: 24px;
   color: var(--color-text);
+  opacity: 0;
+  transition: opacity 0.8s ease 0.4s;
 }
 
 .tealife_photo {
@@ -401,6 +404,11 @@ body {
   width: 944px;
   height: 675px;
   z-index: 2;
+  opacity: 0;
+  transform: translateX(80px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s ease;
 }
 
 .tealife_photoBg {
@@ -411,6 +419,21 @@ body {
   height: 679px;
   background: #15301a;
   z-index: 1;
+  opacity: 0;
+  transition: opacity 0.9s ease 0.15s;
+}
+
+.tealife.isVisible .tealife_title,
+.tealife.isVisible .tealife_subtitle,
+.tealife.isVisible .tealife_subhead,
+.tealife.isVisible .tealife_body,
+.tealife.isVisible .tealife_photoBg {
+  opacity: 1;
+}
+
+.tealife.isVisible .tealife_photo {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* ---------- Jeju & Osulloc ---------- */
@@ -936,6 +959,7 @@ body {
   color: #fff;
   font-size: 18px;
   font-weight: 500;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -953,6 +977,11 @@ body {
   width: 1062px; /* 1컬럼 시작(264px) ~ 10컬럼 시작 전(1326px) */
   height: 736px;
   object-fit: cover;
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 1s ease,
+    transform 1s ease;
 }
 
 .visual_image2 {
@@ -963,6 +992,11 @@ body {
   height: 476px;
   object-fit: cover;
   z-index: 2;
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 1s ease 0.2s,
+    transform 1s ease 0.2s;
 }
 
 .visual_text {
@@ -975,12 +1009,22 @@ body {
   font-size: 40px;
   font-weight: 600;
   margin-bottom: 30px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity 0.8s ease 0.3s,
+    transform 0.8s ease 0.3s;
 }
 
 .visual_subtitle {
   font-size: 24px;
   font-weight: 500;
   line-height: 24px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity 0.8s ease 0.4s,
+    transform 0.8s ease 0.4s;
 }
 
 .visual_body {
@@ -988,6 +1032,11 @@ body {
   font-weight: 400;
   line-height: 24px;
   margin-top: 10px;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity 0.8s ease 0.5s,
+    transform 0.8s ease 0.5s;
 }
 
 .visual_more {
@@ -999,6 +1048,25 @@ body {
   text-decoration: underline;
   text-underline-offset: 4px;
   text-transform: lowercase;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition:
+    opacity 0.8s ease 0.6s,
+    transform 0.8s ease 0.6s;
+}
+
+.visual.isVisible .visual_image,
+.visual.isVisible .visual_image2 {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.visual.isVisible .visual_title,
+.visual.isVisible .visual_subtitle,
+.visual.isVisible .visual_body,
+.visual.isVisible .visual_more {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* ---------- Bento ---------- */

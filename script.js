@@ -1,26 +1,39 @@
-// ---------- Intro 등장 애니메이션 (스크롤 진입 시 1회) ----------
-const introInner = document.querySelector('.intro_inner');
-const introObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        introInner.classList.add('isVisible');
-        introObserver.unobserve(introInner);
-      }
-    });
-  },
-  { threshold: 0.3 }
-);
-introObserver.observe(introInner);
+// ---------- 섹션 등장 애니메이션 (스크롤 진입 시 1회, 화면에 절반 이상 들어왔을 때 재생) ----------
+function revealOnScroll(el) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          el.classList.add('isVisible');
+          observer.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.4, rootMargin: '0px 0px -10% 0px' }
+  );
+  observer.observe(el);
+}
+
+revealOnScroll(document.querySelector('.intro_inner'));
+revealOnScroll(document.querySelector('.tealife'));
+revealOnScroll(document.querySelector('.visual'));
 
 // ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
 const pageScaleOuter = document.querySelector('.pageScaleOuter');
 const pageScale = document.getElementById('pageScale');
+const heroSection = document.querySelector('.hero');
+const headerEl = document.querySelector('.header');
+let currentPageScale = 1; /* .pageScale 내부는 offsetTop/offsetHeight가 로컬(1920 기준) 좌표라, 실제 화면 좌표로 바꿀 때 이 값으로 곱/나눗셈 필요 */
 
 function updatePageScale() {
-  const scale = document.documentElement.clientWidth / 1920; /* clientWidth는 스크롤바 폭을 제외해 .pageScaleOuter의 실제 너비(100%)와 기준이 일치함 */
-  pageScale.style.transform = `scale(${scale})`;
-  pageScaleOuter.style.height = `${pageScale.offsetHeight * scale}px`;
+  /* transform:scale은 position:sticky를 깨뜨리므로(.scroll_pinned 등) zoom을 사용
+     zoom은 실제 레이아웃 크기 자체를 바꿔 sticky가 정상 동작함 (offsetTop/offsetHeight는 여전히 로컬 좌표) */
+  currentPageScale = document.documentElement.clientWidth / 1920; /* clientWidth는 스크롤바 폭을 제외해 실제 너비(100%)와 기준이 일치함 */
+  pageScale.style.zoom = currentPageScale;
+
+  /* .hero는 100vh 기준인데, zoom 안에서는 vh가 실제 뷰포트가 아니라 축소된 값으로 계산되므로
+     실제 남은 화면 높이(뷰포트 - 헤더)를 scale로 나눈 값을 직접 px로 지정해 보정 */
+  heroSection.style.height = `${(window.innerHeight - headerEl.offsetHeight) / currentPageScale}px`;
 }
 
 window.addEventListener('resize', updatePageScale);
@@ -59,7 +72,8 @@ function initDragSlider(dragZone, track, startInset, viewport = dragZone) {
 
   function onDragMove(e) {
     if (!isDragging) return;
-    const delta = getClientX(e) - dragStartX;
+    /* 마우스 이동량은 실제 화면 px, translateX는 페이지 스케일(zoom) 내부 로컬 px이므로 scale로 보정 */
+    const delta = (getClientX(e) - dragStartX) / currentPageScale;
     setTranslate(dragStartTranslate + delta);
   }
 
@@ -89,7 +103,6 @@ initDragSlider(
 
 // ---------- Jeju 사진 슬라이드 (인디케이터 + 좌우 버튼) ----------
 const jejuSlides = document.querySelectorAll('#jejuPhotoWrap .jeju_slide');
-const jejuIndicator = document.getElementById('jejuIndicator');
 const jejuIndicatorLine = document.getElementById('jejuIndicatorLine');
 const jejuIndicatorItems = document.querySelectorAll('#jejuIndicator .jeju_indicatorItem');
 let jejuIndex = 0;
@@ -103,10 +116,12 @@ function setJejuSlide(index) {
   const gapIndex = Math.min(jejuIndex, jejuIndicatorItems.length - 2);
   jejuIndicatorItems.forEach((el, i) => el.classList.toggle('expandGap', i === gapIndex));
 
-  const leftRect = jejuIndicatorItems[gapIndex].getBoundingClientRect();
-  const rightRect = jejuIndicatorItems[gapIndex + 1].getBoundingClientRect();
-  const indicatorRect = jejuIndicator.getBoundingClientRect();
-  jejuIndicatorLine.style.left = `${(leftRect.right + rightRect.left) / 2 - indicatorRect.left}px`;
+  /* getBoundingClientRect(실제 렌더링 좌표) 대신 offsetLeft/offsetWidth(레이아웃 좌표)를 사용해야
+     페이지 스케일(zoom)이 걸려도 항상 .jeju_indicator 기준의 올바른 위치가 계산됨 */
+  const leftItem = jejuIndicatorItems[gapIndex];
+  const rightItem = jejuIndicatorItems[gapIndex + 1];
+  const centerLocal = (leftItem.offsetLeft + leftItem.offsetWidth + rightItem.offsetLeft) / 2;
+  jejuIndicatorLine.style.left = `${centerLocal}px`;
 }
 
 jejuIndicatorItems.forEach((item, i) => {
@@ -133,9 +148,14 @@ const SCROLL_PHOTO1_START_LEFT = 1120; // photo1이 오른쪽에 자리한 시�
 const SCROLL_TEXT1_COVER_THRESHOLD = 850; // scrollText1 오른쪽 끝(398+450+2) 지점 - photo1 왼쪽 끝이 이 값 이하로 줄면 텍스트가 사진에 덮임
 
 function getScrollProgress() {
-  const scrollableRange = scrollSection.offsetHeight - window.innerHeight;
+  /* scrollSection.offsetTop/offsetHeight는 .pageScale 내부 로컬(1920 기준) 좌표이므로
+     실제 화면(scrollY) 기준으로 비교하려면 헤더 높이(스케일 없음) + 로컬값*scale 로 환산해야 함 */
+  const headerHeight = headerEl.offsetHeight;
+  const realOffsetTop = headerHeight + (scrollSection.offsetTop - headerHeight) * currentPageScale;
+  const realOffsetHeight = scrollSection.offsetHeight * currentPageScale;
+  const scrollableRange = realOffsetHeight - window.innerHeight;
   return scrollableRange > 0
-    ? Math.min(1, Math.max(0, (window.scrollY - scrollSection.offsetTop) / scrollableRange))
+    ? Math.min(1, Math.max(0, (window.scrollY - realOffsetTop) / scrollableRange))
     : 0;
 }
 
