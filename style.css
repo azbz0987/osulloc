@@ -1146,6 +1146,17 @@ body {
   color: #3a797e;
 }
 
+.bento_box1More {
+  display: inline-block;
+  margin-top: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-transform: lowercase;
+}
+
 .bento_box1Slide3 .bento_box1TextLine2 {
   color: #6d7bc7;
 }
