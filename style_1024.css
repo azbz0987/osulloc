@@ -1,0 +1,335 @@
+@media all and (max-width:1440px){
+
+  /* 767px~1024px(태블릿) 대응. 트리거 지점을 1440px로 잡은 이유는 세로 스크롤바/브라우저 여백을 감안한 여유값.
+     이 구간에서는 script.js가 .pageScale의 zoom을 끄기 때문에(1024 이하 실제 크기로 렌더링),
+     아래 규칙들은 1920 캔버스가 아니라 이 구간 자체의 실제 px 기준으로 다시 짠 값들임.
+     변경이 필요 없는 규칙(색상/리셋/트랜지션 타이밍 등)은 주석 처리해서 style.css 값을 그대로 사용함. */
+
+  :root {
+    --grid-margin: 40px; /* 264px → 좌우 여백을 컬럼 폭 대신 일반 사이드 패딩 개념으로 축소 */
+    --section-gap: 100px; /* 250px → 섹션 간 여백 축소 */
+    --side-padding: 24px; /* 60px */
+    --header-height: 72px; /* 84px */
+  }
+
+  /* * { ... } 변경 없음 */
+  /* .mediaCover { ... } 변경 없음 */
+  /* body { ... } 변경 없음 — overflow-x:hidden을 html/body에 걸면 position:sticky(헤더, scroll_pinned)가 깨짐 */
+
+  /* ---------- Page scale ---------- */
+  /* 이 구간에서는 zoom을 끄고 1920 고정 캔버스 대신 뷰포트 폭을 그대로 사용 */
+  .pageScale {
+    width: 100%;
+  }
+
+  /* ---------- Header ---------- */
+  /* .header { ... } 변경 없음 */
+
+  .header_inner {
+    max-width: 100%;
+  }
+
+  .gnb_list {
+    gap: 28px;
+  }
+
+  .gnb_link {
+    font-size: 16px;
+  }
+
+  /* .logo img { ... } 변경 없음 */
+
+  /* ---------- Hero video ---------- */
+  /* .hero { ... } height:calc(100vh - header-height)는 zoom이 꺼져 있으므로 그대로 정상 동작, 변경 없음 */
+
+  /* ---------- Intro ---------- */
+  /* .intro / .intro_inner 는 이미 flex 중앙 정렬 + max-width라 폭 변경 불필요 */
+
+  .intro_body {
+    max-width: 480px;
+    font-size: 16px;
+  }
+
+  .intro_eyebrow {
+    font-size: 16px;
+  }
+
+  /* ---------- About ---------- */
+  .about_box {
+    width: 100%;
+    padding: 50px var(--side-padding);
+  }
+
+  .about_slideViewport {
+    padding-left: var(--side-padding);
+  }
+
+  .about_slide {
+    flex: 0 0 340px;
+    width: 340px;
+    height: 480px;
+  }
+
+  .about_title {
+    font-size: 32px;
+  }
+
+  /* .about_subtitle / .about_body 등 나머지는 변경 없음 */
+
+  /* ---------- Tea Life ---------- */
+  /* 텍스트-사진 절대좌표 2단 배치 → 세로 스택으로 전환 */
+  .tealife {
+    padding: 60px var(--grid-margin) 0;
+    min-height: 0;
+  }
+
+  .tealife_title {
+    font-size: 32px;
+  }
+
+  .tealife_photo {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    margin-top: 40px;
+    height: 420px;
+  }
+
+  .tealife_photoBg {
+    display: none; /* 절대좌표 프레임 장식용 사각형 - 스택 레이아웃에서는 생략 */
+  }
+
+  /* ---------- Jeju & Osulloc ---------- */
+  .jeju_row {
+    flex-wrap: wrap;
+    row-gap: 16px;
+  }
+
+  .jeju_title {
+    font-size: 28px;
+  }
+
+  .jeju_line {
+    margin: 0 24px;
+  }
+
+  .jeju_body {
+    font-size: 16px;
+    white-space: normal;
+  }
+
+  .jeju_photoWrap {
+    height: 560px;
+  }
+
+  .jeju_photoOverlay {
+    width: 380px;
+    padding: 20px;
+  }
+
+  .jeju_photoOverlayTitle {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+
+  .jeju_photoOverlayBody {
+    font-size: 15px;
+  }
+
+  .jeju_indicatorItem {
+    font-size: 18px;
+  }
+
+  /* ---------- Banner ---------- */
+  .banner_image {
+    height: 380px;
+  }
+
+  .banner_text {
+    max-width: 420px;
+  }
+
+  .banner_title {
+    font-size: 26px;
+  }
+
+  /* ---------- Scroll indicator ---------- */
+  .scroll {
+    min-height: 2600px; /* 4200px → 태블릿에서는 스크롤 구간을 짧게 */
+  }
+
+  .scroll_pinned {
+    top: calc(50vh - 280px);
+    height: 560px;
+  }
+
+  .scroll_photoArea {
+    height: 560px;
+  }
+
+  .scroll_photoText {
+    left: 150px; /* 인디케이터(94px 폭) + 여백만큼 왼쪽에서 시작 */
+    width: 340px;
+  }
+
+  .scroll_photoTitle {
+    font-size: 24px;
+  }
+
+  .scroll_photoBody {
+    font-size: 15px;
+  }
+
+  /* ---------- Story ---------- */
+  /* 1920 캔버스 전용 3단 절대좌표 그라데이션 카드 레이아웃 → 세로 스택 카드로 전환 */
+  .story {
+    height: auto;
+    padding: 80px var(--grid-margin);
+  }
+
+  .story_group {
+    position: relative;
+    top: auto !important;
+    left: auto;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 60px;
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 24px;
+    padding: 40px 24px;
+  }
+
+  .story_group:last-child {
+    margin-bottom: 0;
+  }
+
+  .story_shape {
+    display: none; /* 넓은 화면 전용 배경 장식 도형 - 카드 배경색으로 대체 */
+  }
+
+  .story_product,
+  .story_group2 .story_product {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 260px;
+    height: 260px;
+  }
+
+  .story_info,
+  .story_group2 .story_info {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    max-width: 420px;
+    transform: none;
+    text-align: center;
+    margin-top: 24px;
+  }
+
+  .story_group2 .story_infoButton {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .story_infoTitle {
+    font-size: 28px;
+  }
+
+  /* ---------- Visual ---------- */
+  .visual {
+    padding: 0 var(--grid-margin);
+  }
+
+  .visual_image {
+    width: 100%;
+    height: 420px;
+  }
+
+  .visual_image2 {
+    left: auto;
+    right: var(--grid-margin);
+    top: auto;
+    bottom: -60px;
+    width: 220px;
+    height: 220px;
+  }
+
+  .visual_title {
+    font-size: 30px;
+  }
+
+  /* ---------- Bento ---------- */
+  /* 12컬럼 절대좌표 그리드 → 세로 스택 */
+  .bento {
+    height: auto;
+    padding-bottom: 60px;
+  }
+
+  .bento_logo {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 60px auto 0;
+  }
+
+  .bento_box {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    margin: 24px auto 0;
+  }
+
+  .bento_box1,
+  .bento_box2,
+  .bento_box3,
+  .bento_box4 {
+    width: calc(100% - 2 * var(--grid-margin));
+    max-width: 640px;
+  }
+
+  .bento_box1 {
+    height: 320px;
+  }
+
+  .bento_box2 {
+    height: 420px;
+  }
+
+  .bento_box3 {
+    height: 380px;
+  }
+
+  .bento_box4 {
+    height: 480px;
+  }
+
+  .bento_box1TextLine2 {
+    font-size: 28px;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    height: auto;
+    padding: 60px var(--grid-margin) 40px;
+  }
+
+  .footer_logo {
+    margin-top: 0;
+  }
+
+  .footer_links {
+    flex-wrap: wrap;
+    row-gap: 8px;
+  }
+
+  .footer_info {
+    padding: 0 20px;
+  }
+}

@@ -22,10 +22,22 @@ const heroSection = document.querySelector('.hero');
 const headerEl = document.querySelector('.header');
 let currentPageScale = 1; /* .pageScale 내부는 offsetTop/offsetHeight가 로컬(1920 기준) 좌표라, 실제 화면 좌표로 바꿀 때 이 값으로 곱/나눗셈 필요 */
 
+const PAGE_SCALE_BREAKPOINT = 1440; /* 이 너비 이하에서는 style_1024.css의 실제 반응형 규칙이 적용되므로 비례 축소를 끔 */
+
 function updatePageScale() {
+  const viewportWidth = document.documentElement.clientWidth; /* 스크롤바 폭 제외한 실제 너비 */
+
+  if (viewportWidth <= PAGE_SCALE_BREAKPOINT) {
+    /* 반응형 브레이크포인트 구간: zoom을 끄고 style_1024.css가 정의한 실제 크기로 렌더링 */
+    currentPageScale = 1;
+    pageScale.style.zoom = 1;
+    heroSection.style.height = '';
+    return;
+  }
+
   /* transform:scale은 position:sticky를 깨뜨리므로(.scroll_pinned 등) zoom을 사용
      zoom은 실제 레이아웃 크기 자체를 바꿔 sticky가 정상 동작함 (offsetTop/offsetHeight는 여전히 로컬 좌표) */
-  currentPageScale = document.documentElement.clientWidth / 1920; /* clientWidth는 스크롤바 폭을 제외해 실제 너비(100%)와 기준이 일치함 */
+  currentPageScale = viewportWidth / 1920;
   pageScale.style.zoom = currentPageScale;
 
   /* .hero는 100vh 기준인데, zoom 안에서는 vh가 실제 뷰포트가 아니라 축소된 값으로 계산되므로
@@ -139,10 +151,19 @@ const scrollPhoto3 = document.getElementById('scrollPhoto3');
 const scrollText1 = document.getElementById('scrollText1');
 const scrollText2 = document.getElementById('scrollText2');
 const scrollText3 = document.getElementById('scrollText3');
+const scrollPhotoArea = document.querySelector('.scroll_photoArea');
 const SCROLL_TRACK_HEIGHT = 660;
 const SCROLL_THUMB_SIZE = 60;
-const SCROLL_PHOTO1_START_LEFT = 1120; // photo1이 오른쪽에 자리한 시작 위치(왼쪽 여백), 스크롤에 따라 0(화면 전체 너비)으로 줄어듦
-const SCROLL_TEXT1_COVER_THRESHOLD = 850; // scrollText1 오른쪽 끝(398+450+2) 지점 - photo1 왼쪽 끝이 이 값 이하로 줄면 텍스트가 사진에 덮임
+
+/* 1920px 기준 photo1 시작 여백(1120px)과 텍스트 커버 기준(850px)의 비율을 유지하되,
+   1440px 이하(zoom 꺼짐)에서는 photoArea의 실제 너비를 기준으로 다시 계산 — 하드코딩된 px는 좁은 화면에서 깨짐 */
+function getScrollPhoto1StartLeft() {
+  return currentPageScale === 1 ? scrollPhotoArea.clientWidth * (1120 / 1920) : 1120;
+}
+
+function getScrollText1CoverThreshold() {
+  return currentPageScale === 1 ? scrollPhotoArea.clientWidth * (850 / 1920) : 850;
+}
 
 function getScrollProgress() {
   /* scrollSection.offsetTop/offsetHeight는 .pageScale 내부 로컬(1920 기준) 좌표이므로
@@ -162,6 +183,7 @@ function updateScrollThumb(progress) {
 
 function updateScrollPhotos(progress) {
   const seg = 1 / 3;
+  const photo1StartLeft = getScrollPhoto1StartLeft();
   let left1;
   let opacity1;
   let opacity2;
@@ -169,7 +191,7 @@ function updateScrollPhotos(progress) {
 
   if (progress <= seg) {
     const local = progress / seg;
-    left1 = SCROLL_PHOTO1_START_LEFT * (1 - local);
+    left1 = photo1StartLeft * (1 - local);
     opacity1 = 1;
     opacity2 = 0;
     opacity3 = 0;
@@ -192,7 +214,7 @@ function updateScrollPhotos(progress) {
   scrollPhoto2.style.opacity = opacity2;
   scrollPhoto3.style.opacity = opacity3;
 
-  scrollText1.classList.toggle('isCovered', left1 <= SCROLL_TEXT1_COVER_THRESHOLD);
+  scrollText1.classList.toggle('isCovered', left1 <= getScrollText1CoverThreshold());
   scrollText1.style.opacity = opacity1;
   scrollText2.style.opacity = opacity2;
   scrollText3.style.opacity = opacity3;
