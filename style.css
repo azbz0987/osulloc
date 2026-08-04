@@ -69,6 +69,32 @@ body {
   justify-self: end;
 }
 
+.headerMenuBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.headerMenuBtn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--color-text);
+}
+
 /* ---------- Logo ---------- */
 .logo {
   display: inline-flex;
