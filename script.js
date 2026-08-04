@@ -14,6 +14,7 @@ function revealOnScroll(el) {
 revealOnScroll(document.querySelector('.intro_inner'));
 revealOnScroll(document.querySelector('.tealife'));
 revealOnScroll(document.querySelector('.visual'));
+document.querySelectorAll('.story_group').forEach(revealOnScroll);
 
 // ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
 const pageScaleOuter = document.querySelector('.pageScaleOuter');
