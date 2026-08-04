@@ -90,6 +90,7 @@ body {
 
 .headerMenuBtn span {
   display: block;
+  flex-shrink: 0; /* flex 컬럼에서 미세한 오차로 줄 하나가 찌그러져 두꺼워 보이는 것 방지 */
   width: 24px;
   height: 2px;
   background: var(--color-text);
