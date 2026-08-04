@@ -77,10 +77,8 @@ body {
   width: 40px;
   height: 40px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 7px;
   background: none;
   border: none;
   padding: 0;
@@ -88,13 +86,8 @@ body {
   z-index: 10;
 }
 
-.headerMenuBtn span {
-  display: block;
-  flex-shrink: 0; /* flex 컬럼에서 미세한 오차로 줄 하나가 찌그러져 두꺼워 보이는 것 방지 */
-  width: 24px;
-  height: 2px;
-  background: var(--color-text);
-}
+/* 3개의 div/span으로 만들면 DPR(예: 125% 배율)에 따라 줄마다 서브픽셀 반올림이 달라져 한 줄만 두꺼워 보이는 문제가 있어
+   다른 아이콘들처럼 SVG 하나로 통일 — 벡터 하나로 렌더링되어 항상 동일하게 그려짐 */
 
 /* ---------- Logo ---------- */
 .logo {
