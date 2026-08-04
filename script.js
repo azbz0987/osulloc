@@ -117,6 +117,17 @@ const jejuIndicatorLine = document.getElementById('jejuIndicatorLine');
 const jejuIndicatorItems = document.querySelectorAll('#jejuIndicator .jeju_indicatorItem');
 let jejuIndex = 0;
 
+function updateJejuIndicatorLine() {
+  const gapIndex = Math.min(jejuIndex, jejuIndicatorItems.length - 2);
+
+  /* getBoundingClientRect(실제 렌더링 좌표) 대신 offsetLeft/offsetWidth(레이아웃 좌표)를 사용해야
+     페이지 스케일(zoom)이 걸려도 항상 .jeju_indicator 기준의 올바른 위치가 계산됨 */
+  const leftItem = jejuIndicatorItems[gapIndex];
+  const rightItem = jejuIndicatorItems[gapIndex + 1];
+  const centerLocal = (leftItem.offsetLeft + leftItem.offsetWidth + rightItem.offsetLeft) / 2;
+  jejuIndicatorLine.style.left = `${centerLocal}px`;
+}
+
 function setJejuSlide(index) {
   jejuIndex = (index + jejuSlides.length) % jejuSlides.length;
 
@@ -126,12 +137,7 @@ function setJejuSlide(index) {
   const gapIndex = Math.min(jejuIndex, jejuIndicatorItems.length - 2);
   jejuIndicatorItems.forEach((el, i) => el.classList.toggle('expandGap', i === gapIndex));
 
-  /* getBoundingClientRect(실제 렌더링 좌표) 대신 offsetLeft/offsetWidth(레이아웃 좌표)를 사용해야
-     페이지 스케일(zoom)이 걸려도 항상 .jeju_indicator 기준의 올바른 위치가 계산됨 */
-  const leftItem = jejuIndicatorItems[gapIndex];
-  const rightItem = jejuIndicatorItems[gapIndex + 1];
-  const centerLocal = (leftItem.offsetLeft + leftItem.offsetWidth + rightItem.offsetLeft) / 2;
-  jejuIndicatorLine.style.left = `${centerLocal}px`;
+  updateJejuIndicatorLine();
 }
 
 jejuIndicatorItems.forEach((item, i) => {
@@ -142,6 +148,8 @@ document.getElementById('jejuPhotoPrev').addEventListener('click', () => setJeju
 document.getElementById('jejuPhotoNext').addEventListener('click', () => setJejuSlide(jejuIndex + 1));
 
 setJejuSlide(0);
+/* 창 크기가 바뀌어 인디케이터 항목 위치/간격이 달라지면(예: 1024px 반응형 구간 진입) 획선도 다시 계산 */
+window.addEventListener('resize', updateJejuIndicatorLine);
 
 // ---------- Scroll 인디케이터 + 사진 3단 전환 (섹션 스크롤 진행률 기반) ----------
 const scrollSection = document.getElementById('scrollSection');
