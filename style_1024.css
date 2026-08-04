@@ -8,7 +8,7 @@
   :root {
     --grid-margin: 40px; /* 264px → 좌우 여백을 컬럼 폭 대신 일반 사이드 패딩 개념으로 축소 */
     --section-gap: 100px; /* 250px → 섹션 간 여백 축소 */
-    --side-padding: 24px; /* 60px */
+    --side-padding: 5.46875%; /* 56px / 1024px — 컨텐츠 912px + 양쪽 여백 56px씩 = 1024px 기준 */
     --header-height: 72px; /* 84px */
   }
 
