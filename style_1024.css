@@ -55,13 +55,15 @@
   }
 
   /* ---------- About ---------- */
+  /* 1024 기준 그리드(컨텐츠 912px, 여백 56px, 12컬럼): 컬럼폭 61.586px, 거터 15.724px (1920의 94:24 비율 유지)
+     1~10열(11열 시작 전까지) = 10*61.586 + 9*15.724 = 757.4px → 757.4/1024 = 73.963% */
   .about_box {
-    width: 100%;
-    padding: 50px var(--side-padding);
+    width: 73.963%;
+    padding: 60px 50px 60px var(--grid-margin); /* 텍스트 배치(상하좌우 여백 구조)는 1920과 동일, 왼쪽만 그리드 여백에 맞춤 */
   }
 
   .about_slideViewport {
-    padding-left: var(--side-padding);
+    padding-left: var(--grid-margin); /* about_box 텍스트 시작 지점과 동일한 기준으로 정렬 */
   }
 
   .about_slide {
