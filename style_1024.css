@@ -6,13 +6,13 @@
      변경이 필요 없는 규칙(색상/리셋/트랜지션 타이밍 등)은 주석 처리해서 style.css 값을 그대로 사용함. */
 
   :root {
-    /* 1024 기준 그리드: 컨텐츠 912px + 양쪽 여백 56px씩 = 1024px. 컬럼:거터 비율은 1920(94:24)과 동일하게 유지
-       컬럼폭 = 94 * (912/1392) = 61.586px, 거터 = 24 * (912/1392) = 15.724px
+    /* 1024 기준 그리드(사용자 지정): margin 56px, gutter 24px(1920과 동일하게 고정, 축소 안 함), 12컬럼
+       컬럼폭 = (1024 - 56*2 - 24*11) / 12 = (912 - 264) / 12 = 54px
        zoom이 꺼진 구간이라 실제 창 너비 어디서든 비율이 맞도록 전부 %로 표기 */
     --grid-margin: 5.46875%; /* 56px / 1024px */
-    --column-width: 6.0143%; /* 61.586px / 1024px */
-    --gutter: 1.5356%; /* 15.724px / 1024px */
-    --section-gap: 100px; /* 250px → 섹션 간 여백 축소 */
+    --column-width: 5.2734%; /* 54px / 1024px */
+    --gutter: 2.34375%; /* 24px / 1024px — 1920과 동일한 고정값, 비율 축소하지 않음 */
+    /* --section-gap, 텍스트 간 여백(margin-bottom 등)은 1920과 동일하게 유지 — 그리드(여백/폭) 관련 값만 반응형으로 조정 */
     --side-padding: 5.46875%; /* 56px / 1024px — 컨텐츠 912px + 양쪽 여백 56px씩 = 1024px 기준 */
     --header-height: 72px; /* 84px */
   }
@@ -90,12 +90,16 @@
     font-size: 32px;
   }
 
+  /* tealife_photo는 1컬럼 끝(그리드 여백+컬럼1폭) ~ 12컬럼 시작 전(10컬럼+11거터=804px) 위치
+     % 기준은 .tealife의 컨텐츠 박스 폭(그리드 여백 제외한 912px)이므로 그 기준으로 재계산:
+     margin-left = 컬럼1폭(54px)/912 = 5.92105%, width = 804px/912 = 88.15789% */
   .tealife_photo {
     position: relative;
     top: auto;
     left: auto;
-    width: 100%;
-    margin-top: 40px;
+    margin-left: 5.92105%;
+    width: 88.15789%;
+    margin-top: 50px; /* 텍스트와의 여백 50px */
     height: 420px;
   }
 
@@ -132,8 +136,7 @@
   }
 
   .jeju_photoOverlayTitle {
-    font-size: 20px;
-    margin-bottom: 16px;
+    font-size: 20px; /* margin-bottom(30px)은 1920과 동일하게 유지, 폰트 크기만 축소 */
   }
 
   .jeju_photoOverlayBody {
