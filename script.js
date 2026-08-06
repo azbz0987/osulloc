@@ -309,8 +309,9 @@ function updateScrollIndicatorPosition() {
 window.addEventListener('resize', updateScrollIndicatorPosition);
 updateScrollIndicatorPosition();
 
-/* 1024 반응형 구간에서 scroll_photoText를 photo1의 rest 시작 위치 위(오른쪽으로 살짝 안쪽)에 겹쳐서 배치 —
-   1920과 동일하게 텍스트가 사진 위에 올라가는 방식을 유지하되, 겹치는 지점만 컬럼2 시작점 기준으로 재계산 */
+/* 1024 반응형 구간에서 scroll_photoText(카드 캡션)를 photo1의 rest 시작 위치와 왼쪽 끝을 맞춰서 배치.
+   사진은 가로로만 성장하는 애니메이션이라 캡션(사진 아래 고정)의 좌표는 rest 시작점 기준으로 고정해두면
+   스크롤 중에도 사진과 나란한 위치를 유지함 */
 function updateScrollTextPosition() {
   const texts = document.querySelectorAll('.scroll_photoText');
   if (!texts.length) return;
@@ -318,7 +319,7 @@ function updateScrollTextPosition() {
     texts.forEach((el) => { el.style.left = ''; });
     return;
   }
-  const left = `${getScrollPhoto1StartLeft() + 24}px`;
+  const left = `${getScrollPhoto1StartLeft()}px`;
   texts.forEach((el) => { el.style.left = left; });
 }
 window.addEventListener('resize', updateScrollTextPosition);

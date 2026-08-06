@@ -167,9 +167,10 @@
     min-height: 2600px; /* 4200px → 태블릿에서는 스크롤 구간을 짧게 */
   }
 
+  /* photo(414px) + 여백(40px) + 캡션 영역(가장 긴 본문 기준 166px) 만큼 pinned 높이 확보 */
   .scroll_pinned {
-    top: calc(50vh - 207px);
-    height: 414px;
+    top: calc(50vh - 310px);
+    height: 620px;
   }
 
   .scroll_photoArea {
@@ -181,24 +182,41 @@
      scroll_indicator와 scroll_photo1Frame의 containing block 폭이 서로 달라(퍼센트 기준이 어긋남) % calc로는 정확히 맞출 수 없음 */
   .scroll_indicator {
     top: 0;
-    height: 660px;
+    height: 414px;
   }
 
   .scroll_track {
     height: 414px;
   }
 
-  /* rest 상태에서 이미 이미지가 컬럼2 지점까지 차 있어 텍스트가 사진과 겹치지 않을 공간이 없음 →
-     1920과 동일하게 텍스트를 사진 위에 배치(흰 글자+그림자로 항상 표시). left는 script.js의
-     updateScrollTextPosition()이 photo1의 rest 시작 위치를 기준으로 인라인 지정 */
+  /* 사진 성장 애니메이션(스크롤에 따른 가로 확장)은 유지하되, rest 모양은 카드형으로 변경:
+     번호(01/02/03)+제목+인용문 스타일 본문을 사진 위에 겹치지 않고 사진 아래에 배치.
+     사진은 가로로만 커지고 세로 위치/높이는 항상 고정이라 캡션은 사진에 가려지지 않음.
+     left는 script.js의 updateScrollTextPosition()이 photo1의 rest 시작 위치 기준으로 인라인 지정 */
   .scroll_photoText {
-    width: 340px;
+    top: 454px; /* 사진 높이(414px) + 여백(40px) */
+    transform: none;
+    width: auto;
+    right: var(--grid-margin);
+    max-width: none;
+    height: auto;
+    color: var(--color-text);
+    text-shadow: none;
   }
 
-  .scroll_photoText1 {
-    /* 처음부터 사진 위에 올라가 있으므로 검정 글자로 시작할 필요 없이 항상 흰 글자로 표시 */
-    color: #fff;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  .scroll_photoText1,
+  .scroll_photoText1.isCovered {
+    /* 더 이상 사진 위에 겹치지 않으므로 흰 글자로 전환할 필요 없음 */
+    color: var(--color-text);
+    text-shadow: none;
+  }
+
+  .scroll_photoNumber {
+    display: block;
+    font-size: 36px;
+    font-weight: 600;
+    color: #c9beb4;
+    margin-bottom: 10px;
   }
 
   .scroll_photoTitle {
@@ -207,6 +225,16 @@
 
   .scroll_photoBody {
     font-size: 15px;
+    color: #6b6b6b;
+    font-style: italic;
+  }
+
+  .scroll_photoBody::before {
+    content: '"';
+  }
+
+  .scroll_photoBody::after {
+    content: '"';
   }
 
   /* ---------- Story ---------- */
@@ -238,21 +266,22 @@
     left: calc(var(--grid-margin) + var(--column-width));
   }
 
-  /* product 이미지도 1024 폭에 맞게 축소(500→260) — 그룹 높이(468) 대비 세로 중앙 정렬 재계산 */
+  /* info 폭(약 500px)을 우선 확보하고, product는 남는 공간에 맞춰 축소(500→240) —
+     그룹 높이(468) 대비 세로 중앙 정렬 재계산 */
   .story_product {
-    width: 260px;
-    height: 260px;
-    top: 104px; /* (468 - 260) / 2 */
+    width: 240px;
+    height: 240px;
+    top: 114px; /* (468 - 240) / 2 */
   }
 
   .story_productLow {
-    top: 137px; /* 기본(104px) 대비 1920과 동일한 보정폭(+33px) 유지 */
+    top: 147px; /* 기본(114px) 대비 1920과 동일한 보정폭(+33px) 유지 */
   }
 
-  /* info는 product(260) 기준 위치·폭 재계산: left = 그리드여백 + 안쪽여백(40) + product폭(260) + 여백(40) */
+  /* info는 product(240) 기준 위치·폭 재계산: left = 그리드여백 + 안쪽여백(40) + product폭(240) + 여백(40) */
   .story_info {
-    left: calc(var(--grid-margin) + 340px);
-    width: 478px; /* 사각형 오른쪽 끝(12컬럼 시작 지점)까지, 안쪽 여백 40px 제외 */
+    left: calc(var(--grid-margin) + 320px);
+    width: calc(554px - var(--grid-margin)); /* 사각형 오른쪽 끝(12컬럼 시작 지점, 안쪽 여백 40px 제외)까지 = 약 498px */
   }
 
   .story_group2 .story_info {
