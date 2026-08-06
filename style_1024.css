@@ -120,9 +120,7 @@
     font-size: 28px;
   }
 
-  .jeju_line {
-    margin: 0 24px;
-  }
+  /* jeju_line 좌우 여백(40px)은 제목-본문 사이 텍스트 여백이라 1920과 동일하게 유지 */
 
   .jeju_body {
     font-size: 16px;
@@ -130,11 +128,12 @@
   }
 
   .jeju_photoWrap {
-    height: 560px;
+    height: 700px; /* jeju_slide(100% 상속)가 912*700이 되도록 */
   }
 
   .jeju_photoOverlay {
-    width: 380px;
+    width: 522px;
+    height: 197px;
     padding: 20px;
   }
 
