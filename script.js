@@ -172,6 +172,29 @@ setJejuSlide(0);
 /* 창 크기가 바뀌어 인디케이터 항목 위치/간격이 달라지면(예: 1024px 반응형 구간 진입) 획선도 다시 계산 */
 window.addEventListener('resize', updateJejuIndicatorLine);
 
+// ---------- Tealife photoBg 위치 (1024px 반응형 구간에서만, photo 기준 오른쪽/아래로 78px씩 보이도록) ----------
+function updateTealifePhotoBg() {
+  const photo = document.querySelector('.tealife_photo');
+  const photoBg = document.querySelector('.tealife_photoBg');
+  if (!photo || !photoBg) return;
+
+  if (document.documentElement.clientWidth > 1440) {
+    /* 1920 구간에서는 style.css의 고정 left/top(982px/86px)이 그대로 적용되도록 인라인 값 제거 */
+    photoBg.style.left = '';
+    photoBg.style.top = '';
+    return;
+  }
+
+  /* photo가 position:relative(정상 흐름)라서 텍스트 길이에 따라 세로 위치가 달라짐 →
+     offsetLeft/offsetTop(레이아웃 좌표, photoBg와 동일한 offsetParent인 .tealife 기준)로 실측해서 계산 */
+  const photoRight = photo.offsetLeft + photo.offsetWidth;
+  const photoBottom = photo.offsetTop + photo.offsetHeight;
+  photoBg.style.left = `${photoRight + 78 - 786}px`;
+  photoBg.style.top = `${photoBottom + 78 - 570}px`;
+}
+window.addEventListener('resize', updateTealifePhotoBg);
+updateTealifePhotoBg();
+
 // ---------- Scroll 인디케이터 + 사진 3단 전환 (섹션 스크롤 진행률 기반) ----------
 const scrollSection = document.getElementById('scrollSection');
 const scrollThumb = document.getElementById('scrollThumb');
