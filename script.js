@@ -205,8 +205,13 @@ const scrollText1 = document.getElementById('scrollText1');
 const scrollText2 = document.getElementById('scrollText2');
 const scrollText3 = document.getElementById('scrollText3');
 const scrollPhotoArea = document.querySelector('.scroll_photoArea');
-const SCROLL_TRACK_HEIGHT = 660;
 const SCROLL_THUMB_SIZE = 60;
+
+/* 1440px 이하(1024 반응형 구간)에서는 인디케이터/트랙 높이가 414px(사진 높이와 동일)로 줄어들므로
+   썸네일 이동 거리도 그에 맞춰 계산해야 함 */
+function getScrollTrackHeight() {
+  return document.documentElement.clientWidth <= PAGE_SCALE_BREAKPOINT ? 414 : 660;
+}
 
 /* 1440px 초과(zoom 켜짐): 1920 캔버스 기준 로컬 좌표(1120px) 그대로 사용.
    1440px 이하(zoom 꺼짐, 1024 반응형 구간): photo1 rest 위치를 컬럼2 시작점(그리드 여백+컬럼1폭+거터)으로 계산 —
@@ -235,7 +240,7 @@ function getScrollProgress() {
 }
 
 function updateScrollThumb(progress) {
-  scrollThumb.style.setProperty('--thumb-progress', `${progress * (SCROLL_TRACK_HEIGHT - SCROLL_THUMB_SIZE)}px`);
+  scrollThumb.style.setProperty('--thumb-progress', `${progress * (getScrollTrackHeight() - SCROLL_THUMB_SIZE)}px`);
 }
 
 function updateScrollPhotos(progress) {
@@ -285,6 +290,40 @@ function updateScrollSection() {
 
 window.addEventListener('scroll', updateScrollSection);
 window.addEventListener('resize', updateScrollSection);
+
+/* 1024 반응형 구간에서 scroll_indicator의 시작점을 scroll_photo1Frame의 rest 시작점(컬럼2 시작점)과 맞춤.
+   scroll_indicator(.scroll_pinned 기준)와 scroll_photo1Frame(.scroll_photoArea 기준, 뷰포트 엣지투엣지)은
+   containing block이 서로 달라, 같은 grid 변수를 각자 % calc로 재계산하면 서브픽셀/스크롤바 오차로 어긋날 수 있음 →
+   photoArea의 실제 렌더링 위치(getBoundingClientRect)를 기준으로 실측해서 맞춤 */
+function updateScrollIndicatorPosition() {
+  const indicator = document.querySelector('.scroll_indicator');
+  const pinned = document.querySelector('.scroll_pinned');
+  if (!indicator || !pinned) return;
+  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
+    indicator.style.left = '';
+    return;
+  }
+  const photo1TargetRealLeft = scrollPhotoArea.getBoundingClientRect().left + getScrollPhoto1StartLeft();
+  indicator.style.left = `${photo1TargetRealLeft - pinned.getBoundingClientRect().left}px`;
+}
+window.addEventListener('resize', updateScrollIndicatorPosition);
+updateScrollIndicatorPosition();
+
+/* 1024 반응형 구간에서 scroll_photoText를 photo1의 rest 시작 위치 위(오른쪽으로 살짝 안쪽)에 겹쳐서 배치 —
+   1920과 동일하게 텍스트가 사진 위에 올라가는 방식을 유지하되, 겹치는 지점만 컬럼2 시작점 기준으로 재계산 */
+function updateScrollTextPosition() {
+  const texts = document.querySelectorAll('.scroll_photoText');
+  if (!texts.length) return;
+  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
+    texts.forEach((el) => { el.style.left = ''; });
+    return;
+  }
+  const left = `${getScrollPhoto1StartLeft() + 24}px`;
+  texts.forEach((el) => { el.style.left = left; });
+}
+window.addEventListener('resize', updateScrollTextPosition);
+updateScrollTextPosition();
+
 updateScrollSection();
 
 // ---------- Bento box1 상품 사진 슬라이드 ----------
