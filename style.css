@@ -930,7 +930,8 @@ body {
 }
 
 .story_group2 .story_product {
-  left: 1116px; /* 오른쪽 끝(1616px)에 맞춰 고정, 사각형의 진한(오른쪽) 쪽 */
+  left: auto;
+  right: calc(var(--grid-margin) + 40px); /* 그리드 오른쪽 여백 안, 사각형의 진한(오른쪽) 쪽 */
 }
 
 .story_productLow {

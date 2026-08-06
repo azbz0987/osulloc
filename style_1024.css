@@ -181,7 +181,7 @@
      scroll_indicator와 scroll_photo1Frame의 containing block 폭이 서로 달라(퍼센트 기준이 어긋남) % calc로는 정확히 맞출 수 없음 */
   .scroll_indicator {
     top: 0;
-    height: 414px;
+    height: 660px;
   }
 
   .scroll_track {
@@ -210,59 +210,53 @@
   }
 
   /* ---------- Story ---------- */
-  /* 1920 캔버스 전용 3단 절대좌표 그라데이션 카드 레이아웃 → 세로 스택 카드로 전환 */
+  /* 1920과 동일한 절대좌표 3단 그라데이션 카드 레이아웃 유지, 배경/그룹 높이·간격·도형 폭만 1024 그리드에 맞게 재계산.
+     170(위) + 468*3(그룹) + 100*2(그룹간 여백) + 170(아래) = 1944px */
   .story {
-    height: auto;
-    padding: 80px var(--grid-margin);
+    height: 1944px;
   }
 
-  .story_group {
-    position: relative;
-    top: auto !important;
-    left: auto;
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 60px;
-    background: rgba(255, 255, 255, 0.14);
-    border-radius: 24px;
-    padding: 40px 24px;
+  .story_group1 {
+    top: 170px;
   }
 
-  .story_group:last-child {
-    margin-bottom: 0;
+  .story_group2 {
+    top: 738px; /* 170 + 468 + 100 */
   }
 
+  .story_group3 {
+    top: 1306px; /* 738 + 468 + 100 */
+  }
+
+  /* 오른쪽 끝이 12컬럼 시작 지점(그리드 여백 + 11*(컬럼+거터))에 오도록 */
   .story_shape {
-    display: none; /* 넓은 화면 전용 배경 장식 도형 - 카드 배경색으로 대체 */
+    width: calc(var(--grid-margin) + 11 * (var(--column-width) + var(--gutter)) + 245px);
   }
 
-  .story_product,
-  .story_group2 .story_product {
-    position: relative;
-    top: auto;
-    left: auto;
+  /* 1컬럼이 끝나는 지점(그리드 여백 + 컬럼폭)부터 시작 */
+  .story_group2 .story_shape {
+    left: calc(var(--grid-margin) + var(--column-width));
+  }
+
+  /* product 이미지도 1024 폭에 맞게 축소(500→260) — 그룹 높이(468) 대비 세로 중앙 정렬 재계산 */
+  .story_product {
     width: 260px;
     height: 260px;
+    top: 104px; /* (468 - 260) / 2 */
   }
 
-  .story_info,
+  .story_productLow {
+    top: 137px; /* 기본(104px) 대비 1920과 동일한 보정폭(+33px) 유지 */
+  }
+
+  /* info는 product(260) 기준 위치·폭 재계산: left = 그리드여백 + 안쪽여백(40) + product폭(260) + 여백(40) */
+  .story_info {
+    left: calc(var(--grid-margin) + 340px);
+    width: 478px; /* 사각형 오른쪽 끝(12컬럼 시작 지점)까지, 안쪽 여백 40px 제외 */
+  }
+
   .story_group2 .story_info {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 100%;
-    max-width: 420px;
-    transform: none;
-    text-align: center;
-    margin-top: 24px;
-  }
-
-  .story_group2 .story_infoButton {
-    margin-left: auto;
-    margin-right: auto;
+    left: calc(var(--grid-margin) + var(--column-width) + 40px); /* 사각형 안쪽 여백(1컬럼 끝 + 40px)부터 */
   }
 
   .story_infoTitle {
