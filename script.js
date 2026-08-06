@@ -208,10 +208,14 @@ const scrollPhotoArea = document.querySelector('.scroll_photoArea');
 const SCROLL_TRACK_HEIGHT = 660;
 const SCROLL_THUMB_SIZE = 60;
 
-/* 1920px 기준 photo1 시작 여백(1120px)과 텍스트 커버 기준(850px)의 비율을 유지하되,
-   1440px 이하(zoom 꺼짐)에서는 photoArea의 실제 너비를 기준으로 다시 계산 — 하드코딩된 px는 좁은 화면에서 깨짐 */
+/* 1440px 초과(zoom 켜짐): 1920 캔버스 기준 로컬 좌표(1120px) 그대로 사용.
+   1440px 이하(zoom 꺼짐, 1024 반응형 구간): photo1 rest 위치를 컬럼2 시작점(그리드 여백+컬럼1폭+거터)으로 계산 —
+   이 구간에서는 텍스트가 사진과 겹치지 않고 사진 아래에 배치되므로 1920의 1120px 비율을 따를 필요 없음 */
 function getScrollPhoto1StartLeft() {
-  return currentPageScale === 1 ? scrollPhotoArea.clientWidth * (1120 / 1920) : 1120;
+  if (document.documentElement.clientWidth <= PAGE_SCALE_BREAKPOINT) {
+    return resolveGridLength('--grid-margin') + resolveGridLength('--column-width') + resolveGridLength('--gutter');
+  }
+  return 1120;
 }
 
 function getScrollText1CoverThreshold() {
