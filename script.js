@@ -50,10 +50,11 @@ window.addEventListener('resize', updatePageScale);
 updatePageScale();
 
 // ---------- 드래그 슬라이드 캐러셀 (공통) ----------
-function initDragSlider(dragZone, track, startInset, viewport = dragZone) {
+function initDragSlider(dragZone, track, getStartInset, viewport = dragZone) {
   let isDragging = false;
   let dragStartX = 0;
   let dragStartTranslate = 0;
+  let startInset = getStartInset();
   let translateX = startInset;
 
   function getMinTranslate() {
@@ -101,13 +102,33 @@ function initDragSlider(dragZone, track, startInset, viewport = dragZone) {
   dragZone.addEventListener('touchend', onDragEnd);
 
   setTranslate(startInset);
+
+  /* 창 크기가 바뀌면(예: 1024px 반응형 구간 진입) 시작 위치(2컬럼 시작 지점)도 다시 계산 */
+  window.addEventListener('resize', () => {
+    startInset = getStartInset();
+    if (!isDragging) setTranslate(startInset);
+  });
 }
 
-// 두 번째 컬럼 시작 지점 = 264(여백) + 94(1열) + 24(gutter) — 첫 슬라이드의 기본 위치
+/* --grid-margin/--column-width/--gutter는 breakpoint에 따라 px 또는 %로 정의되므로,
+   %일 때는 실제 창 너비 기준으로 px로 환산 (커스텀 프로퍼티는 getComputedStyle이 자동으로 px 변환해주지 않음) */
+function resolveGridLength(varName) {
+  const raw = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+  if (raw.endsWith('%')) {
+    return (parseFloat(raw) / 100) * document.documentElement.clientWidth;
+  }
+  return parseFloat(raw);
+}
+
+function getAboutStartInset() {
+  // 두 번째 컬럼 시작 지점 = 그리드 여백 + 1열 폭 + gutter — 첫 슬라이드의 기본 위치
+  return resolveGridLength('--grid-margin') + resolveGridLength('--column-width') + resolveGridLength('--gutter');
+}
+
 initDragSlider(
   document.getElementById('aboutSection'),
   document.getElementById('aboutSlideTrack'),
-  382,
+  getAboutStartInset,
   document.getElementById('aboutSlideViewport')
 );
 

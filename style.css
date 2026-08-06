@@ -7,6 +7,8 @@
   --side-padding: 3.125%; /* 60px / 1920px — 헤더는 zoom 대상이 아니라서 px 대신 %로 둬야 실제 창 너비에서도 비율이 맞음 */
   --section-gap: 250px;
   --grid-margin: 264px; /* 1920 캔버스 12컬럼(94px)/gutter(24px) 기준 좌우 여백 */
+  --column-width: 94px;
+  --gutter: 24px;
 }
 
 * {
