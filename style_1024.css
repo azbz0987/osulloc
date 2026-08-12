@@ -290,22 +290,20 @@
   }
 
   /* ---------- Visual ---------- */
-  .visual {
-    padding: 0 var(--grid-margin);
-  }
+  /* 1920과 동일한 배치(사진 왼쪽 정렬 + image2가 사진 아래쪽에 겹침) 유지, 그리드 컬럼 기준만 재계산 */
 
+  /* 1컬럼 시작 ~ 10컬럼 시작 전 = 9*(컬럼+거터) = 702px(1024 기준).
+     .visual_image는 .visual의 padding-left 안쪽(콘텐츠 박스) 자식이라 %(--column-width 등)이
+     뷰포트가 아니라 그 좁아진 콘텐츠 박스 기준으로 풀려버림 → vw로 직접 지정해서 우회 */
   .visual_image {
-    width: 100%;
-    height: 420px;
+    width: 68.5547vw; /* 702px / 1024px */
+    height: 504px;
   }
 
   .visual_image2 {
-    left: auto;
-    right: var(--grid-margin);
-    top: auto;
-    bottom: -60px;
-    width: 220px;
-    height: 220px;
+    width: 386px;
+    height: 386px;
+    top: 350px; /* 사진 아래쪽 끝(504px)과 154px 겹치도록(1920의 190px 겹침을 image2 크기 비율(386/476)로 재계산) */
   }
 
   .visual_title {
