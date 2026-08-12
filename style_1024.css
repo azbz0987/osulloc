@@ -127,7 +127,7 @@
   }
 
   .jeju_photoOverlayTitle {
-    font-size: 20px;
+    font-size: 20px; /* margin-bottom(30px)은 1920과 동일하게 유지, 폰트 크기만 축소 */
   }
 
   .jeju_photoOverlayBody {
