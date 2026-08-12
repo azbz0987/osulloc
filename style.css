@@ -32,7 +32,6 @@ body {
     sans-serif;
   color: var(--color-text);
   background: #faf9f6; /* 전체 배경색 고정 */
-  word-break: keep-all; /* 줄바꿈을 글자 단위가 아니라 단어(어절) 단위로 */
 }
 
 /* ---------- Page scale (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ---------- */
@@ -665,7 +664,7 @@ body {
 }
 
 .banner_title {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 600;
   line-height: 24px;
   margin-bottom: 30px;
@@ -795,11 +794,11 @@ body {
 
 .scroll_photoText {
   position: absolute;
-  left: 398px; /* 인디케이터(264+94) 오른쪽 + 40px 여백, 사진1의 왼쪽 여백 공간과 동일한 위치 */
+  left: 398px; 
   top: 50%;
   transform: translateY(-50%);
-  width: 450px; /* photo1 시작 너비(오른쪽 배치) 안에 항상 들어오도록 */
-  height: 160px; /* 캡션 길이가 달라도 항상 동일한 영역을 차지하도록 고정 */
+  width: 450px; 
+  height: 160px;
   max-width: 450px;
   color: #fff;
   text-align: left;
@@ -824,10 +823,10 @@ body {
 }
 
 .scroll_photoTitle {
-  font-size: 32px;
+  font-size: 40px;
   font-weight: 600;
   line-height: 24px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .scroll_photoBody {
@@ -974,7 +973,7 @@ body {
 .story_infoBody {
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 24px;
   margin-bottom: 50px;
 }
 
@@ -1039,7 +1038,7 @@ body {
 .visual_title {
   font-size: 40px;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   opacity: 0;
   transform: translateX(-30px);
   transition:
@@ -1062,7 +1061,7 @@ body {
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
-  margin-top: 10px;
+  margin-top: 30px;
   opacity: 0;
   transform: translateX(-30px);
   transition:
