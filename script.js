@@ -17,7 +17,7 @@ revealOnScroll(document.querySelector('.intro_inner'));
    더 낮은 threshold로 화면에 조금만 들어와도 바로 재생되도록 함 */
 revealOnScroll(document.querySelector('.tealife'), { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
 revealOnScroll(document.querySelector('.visual'));
-document.querySelectorAll('.story_group').forEach(revealOnScroll);
+document.querySelectorAll('.story_group').forEach((group) => revealOnScroll(group));
 
 // ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
 const pageScaleOuter = document.querySelector('.pageScaleOuter');
