@@ -1,18 +1,21 @@
 // ---------- 섹션 등장 애니메이션 (화면에 들어올 때마다 재생, 벗어나면 초기화) ----------
-function revealOnScroll(el) {
+function revealOnScroll(el, options) {
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         el.classList.toggle('isVisible', entry.isIntersecting);
       });
     },
-    { threshold: 0.4, rootMargin: '0px 0px -10% 0px' }
+    options || { threshold: 0.4, rootMargin: '0px 0px -10% 0px' }
   );
   observer.observe(el);
 }
 
 revealOnScroll(document.querySelector('.intro_inner'));
-revealOnScroll(document.querySelector('.tealife'));
+/* tealife는 padding-top(375px)+min-height(675px)로 세로 길이가 길어서 threshold:0.4를 쓰면
+   섹션이 40% 보일 때까지 스크롤을 훨씬 많이 해야 해서 애니메이션이 느리게 나타나는 것처럼 보임 →
+   더 낮은 threshold로 화면에 조금만 들어와도 바로 재생되도록 함 */
+revealOnScroll(document.querySelector('.tealife'), { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
 revealOnScroll(document.querySelector('.visual'));
 document.querySelectorAll('.story_group').forEach(revealOnScroll);
 
