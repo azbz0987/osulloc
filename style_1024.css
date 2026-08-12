@@ -348,23 +348,23 @@
 
   /* .bento_box1Text left는 base(style.css)의 %값(사진 폭 대비 비율)이 그대로 적용되므로 여기서 재정의하지 않음 */
 
-  /* 텍스트 크기/줄간격/여백은 1920과 동일한 고정값 유지 — vw로 잡으면 좁은 화면에서 너무 작아짐.
-     line-height는 사이트 전반의 고정 24px 컨벤션(예: story_infoSubtitle 24px/24px, tealife_body 18px/24px)에 맞춤 */
+  /* box1은 사진 폭 자체가 그리드 컬럼 기준으로 좁아지므로, 텍스트도 1920과 동일한 구조로 보이도록
+     고정값이 아니라 1920 대비 비율(vw)로 스케일 — 다른 박스(bento_boxLabel)는 고정값 유지, box1만 해당 */
   .bento_box1TextLine1 {
-    font-size: 30px;
-    line-height: 24px;
+    font-size: 1.5625vw; /* 30px */
+    line-height: 1.25vw; /* 24px */
   }
 
   .bento_box1TextLine2 {
-    margin-top: 8px;
-    font-size: 35px;
-    line-height: 24px;
+    margin-top: 0.4167vw; /* 8px */
+    font-size: 1.8229vw; /* 35px */
+    line-height: 1.25vw; /* 24px */
   }
 
   .bento_box1More {
-    margin-top: 24px;
-    font-size: 18px;
-    line-height: 24px;
+    margin-top: 1.25vw; /* 24px */
+    font-size: 0.9375vw; /* 18px */
+    line-height: 1.25vw; /* 24px */
   }
 
   .bento_box1Nav {
