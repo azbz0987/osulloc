@@ -86,13 +86,6 @@
     min-height: 0;
   }
 
-  .tealife_title {
-    font-size: 32px;
-  }
-
-  /* tealife_photo는 1컬럼 끝(그리드 여백+컬럼1폭) ~ 12컬럼 시작 전(10컬럼+11거터=804px) 위치
-     % 기준은 .tealife의 컨텐츠 박스 폭(그리드 여백 제외한 912px)이므로 그 기준으로 재계산:
-     margin-left = 컬럼1폭(54px)/912 = 5.92105%, width = 804px/912 = 88.15789% */
   .tealife_photo {
     position: relative;
     top: auto;
@@ -102,9 +95,6 @@
     margin-top: 50px; /* 텍스트와의 여백 50px */
     height: 580px;
   }
-
-  /* photo 기준 오른쪽/아래로 78px씩 보이도록 배치 (그리드를 벗어나도 무방).
-     실제 left/top은 photo의 렌더링 결과에 따라 달라지므로 script.js의 updateTealifePhotoBg()가 계산해서 인라인으로 지정함. */
   .tealife_photoBg {
     width: 786px;
     height: 570px;
@@ -120,15 +110,14 @@
     font-size: 28px;
   }
 
-  /* jeju_line 좌우 여백(40px)은 제목-본문 사이 텍스트 여백이라 1920과 동일하게 유지 */
-
   .jeju_body {
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 24px;
     white-space: normal;
   }
 
   .jeju_photoWrap {
-    height: 700px; /* jeju_slide(100% 상속)가 912*700이 되도록 */
+    height: 700px;
   }
 
   .jeju_photoOverlay {
@@ -138,7 +127,7 @@
   }
 
   .jeju_photoOverlayTitle {
-    font-size: 20px; /* margin-bottom(30px)은 1920과 동일하게 유지, 폰트 크기만 축소 */
+    font-size: 20px;
   }
 
   .jeju_photoOverlayBody {
