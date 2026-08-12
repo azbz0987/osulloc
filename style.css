@@ -32,6 +32,7 @@ body {
     sans-serif;
   color: var(--color-text);
   background: #faf9f6; /* 전체 배경색 고정 */
+  word-break: keep-all; /* 줄바꿈을 글자 단위가 아니라 단어(어절) 단위로 */
 }
 
 /* ---------- Page scale (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ---------- */
