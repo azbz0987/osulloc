@@ -346,9 +346,7 @@
     height: 25.4167vw; /* 488px */
   }
 
-  .bento_box1Text {
-    left: 4.1667vw; /* 80px */
-  }
+  /* .bento_box1Text left는 base(style.css)의 %값(사진 폭 대비 비율)이 그대로 적용되므로 여기서 재정의하지 않음 */
 
   /* 텍스트 크기/줄간격/여백은 1920과 동일한 고정값 유지 — vw로 잡으면 좁은 화면에서 너무 작아짐.
      line-height는 사이트 전반의 고정 24px 컨벤션(예: story_infoSubtitle 24px/24px, tealife_body 18px/24px)에 맞춤 */

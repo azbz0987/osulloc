@@ -1161,7 +1161,7 @@ body {
 .bento_box1Text {
   position: absolute;
   top: 50%;
-  left: 80px;
+  left: 8.6957%; /* 80px / 920px — 사진(box1) 자체 폭 대비 비율이라 사진 크기가 바뀌어도 여백이 항상 비례해서 유지됨 */
   transform: translateY(-50%);
   text-align: left;
   z-index: 2;
