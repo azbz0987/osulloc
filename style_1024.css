@@ -163,133 +163,130 @@
   }
 
   /* ---------- Scroll indicator ---------- */
+  /* 1920과 동일한 형태(사진이 스크롤에 따라 가로로 커지며 텍스트가 그 위에 겹치는 방식)를 그대로 유지하되,
+     모든 px 값을 1920 캔버스 대비 비율(vw)로 재계산 — zoom이 꺼진 구간에서도 zoom과 동일한 효과를 냄 */
   .scroll {
-    min-height: 2600px; /* 4200px → 태블릿에서는 스크롤 구간을 짧게 */
+    min-height: 2600px; /* 4200px → 태블릿에서는 스크롤 구간(읽는 시간)만 짧게, 비율 대상 아님 */
   }
 
-  /* photo(414px) + 여백(40px) + 캡션 영역(가장 긴 본문 기준 166px) 만큼 pinned 높이 확보 */
   .scroll_pinned {
-    top: calc(50vh - 310px);
-    height: 620px;
+    top: calc(50vh - 20.8333vw); /* 400px */
+    height: 41.6667vw; /* 800px */
   }
 
-  .scroll_photoArea {
-    height: 414px;
-  }
-
-  /* 인디케이터 시작점 = 사진(photo1) rest 시작점(컬럼2 시작점)과 동일하게, 높이도 사진과 동일하게.
-     left는 script.js의 updateScrollIndicatorPosition()이 인라인으로 지정함 —
-     scroll_indicator와 scroll_photo1Frame의 containing block 폭이 서로 달라(퍼센트 기준이 어긋남) % calc로는 정확히 맞출 수 없음 */
   .scroll_indicator {
-    top: 0;
-    height: 414px;
+    top: 3.6458vw; /* 70px */
+    width: 4.8958vw; /* 94px, 그리드 1컬럼과 동일 비율 */
+    height: 34.375vw; /* 660px */
   }
 
   .scroll_track {
-    height: 414px;
+    width: 0.2604vw; /* 5px */
+    height: 34.375vw; /* 660px */
   }
 
-  /* 사진 성장 애니메이션(스크롤에 따른 가로 확장)은 유지하되, rest 모양은 카드형으로 변경:
-     번호(01/02/03)+제목+인용문 스타일 본문을 사진 위에 겹치지 않고 사진 아래에 배치.
-     사진은 가로로만 커지고 세로 위치/높이는 항상 고정이라 캡션은 사진에 가려지지 않음.
-     left는 script.js의 updateScrollTextPosition()이 photo1의 rest 시작 위치 기준으로 인라인 지정 */
+  .scroll_thumb {
+    width: 3.125vw; /* 60px */
+    height: 3.125vw; /* 60px */
+  }
+
+  .scroll_photoArea {
+    height: 41.6667vw; /* 800px, pinned과 동일 */
+  }
+
   .scroll_photoText {
-    top: 454px; /* 사진 높이(414px) + 여백(40px) */
-    transform: none;
-    width: auto;
-    right: var(--grid-margin);
-    max-width: none;
-    height: auto;
-    color: var(--color-text);
-    text-shadow: none;
-  }
-
-  .scroll_photoText1,
-  .scroll_photoText1.isCovered {
-    /* 더 이상 사진 위에 겹치지 않으므로 흰 글자로 전환할 필요 없음 */
-    color: var(--color-text);
-    text-shadow: none;
-  }
-
-  .scroll_photoNumber {
-    display: block;
-    font-size: 36px;
-    font-weight: 600;
-    color: #c9beb4;
-    margin-bottom: 10px;
+    left: 20.7292vw; /* 398px */
+    width: 23.4375vw; /* 450px */
+    max-width: 23.4375vw;
+    height: 8.3333vw; /* 160px */
   }
 
   .scroll_photoTitle {
-    font-size: 24px;
+    font-size: 1.6667vw; /* 32px */
+    margin-bottom: 0.5208vw; /* 10px */
   }
 
   .scroll_photoBody {
-    font-size: 15px;
-    color: #6b6b6b;
-    font-style: italic;
-  }
-
-  .scroll_photoBody::before {
-    content: '"';
-  }
-
-  .scroll_photoBody::after {
-    content: '"';
+    font-size: 0.9375vw; /* 18px */
   }
 
   /* ---------- Story ---------- */
-  /* 1920과 동일한 절대좌표 3단 그라데이션 카드 레이아웃 유지, 배경/그룹 높이·간격·도형 폭만 1024 그리드에 맞게 재계산.
-     170(위) + 468*3(그룹) + 100*2(그룹간 여백) + 170(아래) = 1944px */
+  /* 1920과 완전히 동일하게 보이도록, px 값을 전부 1920 캔버스 대비 비율(vw)로 재계산 (zoom과 동일한 효과) */
   .story {
-    height: 1944px;
+    height: 113.75vw; /* 2184px */
+  }
+
+  .story_group {
+    height: 24.375vw; /* 468px */
   }
 
   .story_group1 {
-    top: 170px;
+    top: 11.4583vw; /* 220px */
   }
 
   .story_group2 {
-    top: 738px; /* 170 + 468 + 100 */
+    top: 44.6875vw; /* 858px */
   }
 
   .story_group3 {
-    top: 1306px; /* 738 + 468 + 100 */
+    top: 77.9167vw; /* 1496px */
   }
 
-  /* 오른쪽 끝이 12컬럼 시작 지점(그리드 여백 + 11*(컬럼+거터))에 오도록 */
   .story_shape {
-    width: calc(var(--grid-margin) + 11 * (var(--column-width) + var(--gutter)) + 245px);
+    left: -12.7604vw; /* -245px */
+    width: 92.8646vw; /* 1783px */
+    height: 24.375vw; /* 468px */
   }
 
-  /* 1컬럼이 끝나는 지점(그리드 여백 + 컬럼폭)부터 시작 */
   .story_group2 .story_shape {
-    left: calc(var(--grid-margin) + var(--column-width));
+    left: 19.8958vw; /* 382px */
+    right: -12.7604vw; /* -245px */
   }
 
-  /* info 폭(약 500px)을 우선 확보하고, product는 남는 공간에 맞춰 축소(500→240) —
-     그룹 높이(468) 대비 세로 중앙 정렬 재계산 */
   .story_product {
-    width: 240px;
-    height: 240px;
-    top: 114px; /* (468 - 240) / 2 */
+    top: -0.8333vw; /* -16px */
+    left: calc(var(--grid-margin) + 2.0833vw); /* 그리드 여백 + 40px */
+    width: 26.0417vw; /* 500px */
+    height: 26.0417vw;
+  }
+
+  .story_group2 .story_product {
+    left: auto;
+    right: calc(var(--grid-margin) + 2.0833vw); /* 그리드 여백 + 40px */
   }
 
   .story_productLow {
-    top: 147px; /* 기본(114px) 대비 1920과 동일한 보정폭(+33px) 유지 */
+    top: 0.8854vw; /* 17px */
   }
 
-  /* info는 product(240) 기준 위치·폭 재계산: left = 그리드여백 + 안쪽여백(40) + product폭(240) + 여백(40) */
   .story_info {
-    left: calc(var(--grid-margin) + 320px);
-    width: calc(554px - var(--grid-margin)); /* 사각형 오른쪽 끝(12컬럼 시작 지점, 안쪽 여백 40px 제외)까지 = 약 498px */
+    left: 43.9583vw; /* 844px */
+    width: 34.0625vw; /* 654px */
   }
 
   .story_group2 .story_info {
-    left: calc(var(--grid-margin) + var(--column-width) + 40px); /* 사각형 안쪽 여백(1컬럼 끝 + 40px)부터 */
+    left: 21.9792vw; /* 422px */
   }
 
   .story_infoTitle {
-    font-size: 28px;
+    font-size: 2.0833vw; /* 40px */
+    margin-bottom: 1.0417vw; /* 20px */
+  }
+
+  .story_infoSubtitle {
+    font-size: 1.25vw; /* 24px */
+    margin-bottom: 1.5625vw; /* 30px */
+  }
+
+  .story_infoBody {
+    font-size: 0.9375vw; /* 18px */
+    margin-bottom: 2.6042vw; /* 50px */
+  }
+
+  .story_infoButton {
+    width: 7.8125vw; /* 150px */
+    height: 2.0833vw; /* 40px */
+    font-size: 0.9375vw; /* 18px */
   }
 
   /* ---------- Visual ---------- */

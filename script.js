@@ -205,26 +205,23 @@ const scrollText1 = document.getElementById('scrollText1');
 const scrollText2 = document.getElementById('scrollText2');
 const scrollText3 = document.getElementById('scrollText3');
 const scrollPhotoArea = document.querySelector('.scroll_photoArea');
+const scrollIndicatorEl = document.querySelector('.scroll_indicator');
 const SCROLL_THUMB_SIZE = 60;
 
-/* 1440px 이하(1024 반응형 구간)에서는 인디케이터/트랙 높이가 414px(사진 높이와 동일)로 줄어들므로
-   썸네일 이동 거리도 그에 맞춰 계산해야 함 */
-function getScrollTrackHeight() {
-  return document.documentElement.clientWidth <= PAGE_SCALE_BREAKPOINT ? 414 : 660;
-}
-
-/* 1440px 초과(zoom 켜짐): 1920 캔버스 기준 로컬 좌표(1120px) 그대로 사용.
-   1440px 이하(zoom 꺼짐, 1024 반응형 구간): photo1 rest 위치를 컬럼2 시작점(그리드 여백+컬럼1폭+거터)으로 계산 —
-   이 구간에서는 텍스트가 사진과 겹치지 않고 사진 아래에 배치되므로 1920의 1120px 비율을 따를 필요 없음 */
+/* 1920px 기준 photo1 시작 여백(1120px)과 텍스트 커버 기준(850px)의 비율을 유지하되,
+   1440px 이하(zoom 꺼짐)에서는 photoArea의 실제 너비를 기준으로 다시 계산 — 하드코딩된 px는 좁은 화면에서 깨짐 */
 function getScrollPhoto1StartLeft() {
-  if (document.documentElement.clientWidth <= PAGE_SCALE_BREAKPOINT) {
-    return resolveGridLength('--grid-margin') + resolveGridLength('--column-width') + resolveGridLength('--gutter');
-  }
-  return 1120;
+  return currentPageScale === 1 ? scrollPhotoArea.clientWidth * (1120 / 1920) : 1120;
 }
 
 function getScrollText1CoverThreshold() {
   return currentPageScale === 1 ? scrollPhotoArea.clientWidth * (850 / 1920) : 850;
+}
+
+/* 인디케이터/트랙 높이도 1920 비율(vw 기반)로 뷰포트에 맞춰 늘어나므로,
+   하드코딩된 상수 대신 실제 렌더링된 높이를 읽어서 썸네일 이동 거리를 맞춤 */
+function getScrollTrackHeight() {
+  return scrollIndicatorEl.clientHeight;
 }
 
 function getScrollProgress() {
@@ -290,40 +287,6 @@ function updateScrollSection() {
 
 window.addEventListener('scroll', updateScrollSection);
 window.addEventListener('resize', updateScrollSection);
-
-/* 1024 반응형 구간에서 scroll_indicator의 시작점을 scroll_photo1Frame의 rest 시작점(컬럼2 시작점)과 맞춤.
-   scroll_indicator(.scroll_pinned 기준)와 scroll_photo1Frame(.scroll_photoArea 기준, 뷰포트 엣지투엣지)은
-   containing block이 서로 달라, 같은 grid 변수를 각자 % calc로 재계산하면 서브픽셀/스크롤바 오차로 어긋날 수 있음 →
-   photoArea의 실제 렌더링 위치(getBoundingClientRect)를 기준으로 실측해서 맞춤 */
-function updateScrollIndicatorPosition() {
-  const indicator = document.querySelector('.scroll_indicator');
-  const pinned = document.querySelector('.scroll_pinned');
-  if (!indicator || !pinned) return;
-  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
-    indicator.style.left = '';
-    return;
-  }
-  const photo1TargetRealLeft = scrollPhotoArea.getBoundingClientRect().left + getScrollPhoto1StartLeft();
-  indicator.style.left = `${photo1TargetRealLeft - pinned.getBoundingClientRect().left}px`;
-}
-window.addEventListener('resize', updateScrollIndicatorPosition);
-updateScrollIndicatorPosition();
-
-/* 1024 반응형 구간에서 scroll_photoText(카드 캡션)를 photo1의 rest 시작 위치와 왼쪽 끝을 맞춰서 배치.
-   사진은 가로로만 성장하는 애니메이션이라 캡션(사진 아래 고정)의 좌표는 rest 시작점 기준으로 고정해두면
-   스크롤 중에도 사진과 나란한 위치를 유지함 */
-function updateScrollTextPosition() {
-  const texts = document.querySelectorAll('.scroll_photoText');
-  if (!texts.length) return;
-  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
-    texts.forEach((el) => { el.style.left = ''; });
-    return;
-  }
-  const left = `${getScrollPhoto1StartLeft()}px`;
-  texts.forEach((el) => { el.style.left = left; });
-}
-window.addEventListener('resize', updateScrollTextPosition);
-updateScrollTextPosition();
 
 updateScrollSection();
 
