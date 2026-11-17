@@ -286,7 +286,7 @@ body {
   max-width: 100%;
   box-sizing: border-box;
   background: #15301a;
-  padding: 60px 50px 60px var(--grid-margin);
+  padding: 60px var(--grid-margin) 60px var(--grid-margin); /* 본문 오른쪽 여백도 왼쪽(그리드 여백)과 같게 — 그만큼 줄바꿈됨 */
   color: #fff;
 }
 
