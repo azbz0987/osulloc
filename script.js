@@ -28,25 +28,11 @@ let currentPageScale = 1; /* .pageScale 내부는 offsetTop/offsetHeight가 로�
 
 const PAGE_SCALE_BREAKPOINT = 1440; /* 이 너비 이하에서는 style_1024.css의 실제 반응형 규칙이 적용되므로 비례 축소를 끔 */
 
+/* 화면 너비에 맞춰 페이지를 줄이는 zoom은 끔(PC에서 글자가 작게 나오는 문제) — 모든 너비에서 실제 크기로 렌더링 */
 function updatePageScale() {
-  const viewportWidth = document.documentElement.clientWidth; /* 스크롤바 폭 제외한 실제 너비 */
-
-  if (viewportWidth <= PAGE_SCALE_BREAKPOINT) {
-    /* 반응형 브레이크포인트 구간: zoom을 끄고 style_1024.css가 정의한 실제 크기로 렌더링 */
-    currentPageScale = 1;
-    pageScale.style.zoom = 1;
-    heroSection.style.height = '';
-    return;
-  }
-
-  /* transform:scale은 position:sticky를 깨뜨리므로(.scroll_pinned 등) zoom을 사용
-     zoom은 실제 레이아웃 크기 자체를 바꿔 sticky가 정상 동작함 (offsetTop/offsetHeight는 여전히 로컬 좌표) */
-  currentPageScale = viewportWidth / 1920;
-  pageScale.style.zoom = currentPageScale;
-
-  /* .hero는 100vh 기준인데, zoom 안에서는 vh가 실제 뷰포트가 아니라 축소된 값으로 계산되므로
-     실제 남은 화면 높이(뷰포트 - 헤더)를 scale로 나눈 값을 직접 px로 지정해 보정 */
-  heroSection.style.height = `${(window.innerHeight - headerEl.offsetHeight) / currentPageScale}px`;
+  currentPageScale = 1;
+  pageScale.style.zoom = 1;
+  heroSection.style.height = '';
 }
 
 window.addEventListener('resize', updatePageScale);
