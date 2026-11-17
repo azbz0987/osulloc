@@ -63,7 +63,7 @@ body {
   max-width: 1440px;
   height: 100%;
   margin: 0 auto;
-  padding: 0 var(--side-padding);
+  padding: 0 24px; /* PC: 컨텐츠 프레임(1440, 좌우 여백 24px)과 로고/메뉴가 같은 끝선에 오도록. 1440 이하는 style_1024.css에서 %로 */
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -77,7 +77,7 @@ body {
 .headerMenuBtn {
   position: absolute;
   top: 50%;
-  left: 83.802%; /* 12번째 컬럼 중앙(1609px / 1920px) — 헤더는 zoom 대상이 아니라 %로 둬야 1920px가 아닌 실제 창 너비에서도 같은 위치에 옴 */
+  left: calc(var(--grid-margin) + 1345px); /* 12번째 컬럼 중앙(1920에서 1609px) — 컨텐츠 프레임 기준. 1440 이하는 style_1024.css에서 % */
   transform: translate(-50%, -50%);
   width: 40px;
   height: 40px;
