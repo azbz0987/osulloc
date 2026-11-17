@@ -139,16 +139,10 @@
   }
 
   /* ---------- Banner ---------- */
+  /* 1920과 동일한 구조(사진 위 텍스트, 왼쪽 그리드 여백 기준). 이미지 높이만 비율(vw)로 환산하고
+     텍스트 크기/줄간격/여백/max-width는 1920과 동일한 고정값 유지 */
   .banner_image {
-    height: 380px;
-  }
-  
-  .banner_text {
-    max-width: 420px;
-  }
-
-  .banner_title {
-    font-size: 26px;
+    height: 28.5938vw; /* 549px */
   }
 
   /* ---------- Scroll indicator ---------- */
@@ -351,7 +345,7 @@
   /* box1은 사진 폭 자체가 그리드 컬럼 기준으로 좁아지므로, 텍스트도 1920과 동일한 구조로 보이도록
      고정값이 아니라 1920 대비 비율(vw)로 스케일 — 다른 박스(bento_boxLabel)는 고정값 유지, box1만 해당 */
   .bento_box1TextLine1 {
-    font-size: 1.5625vw; /* 30px */
+    font-size: 28px; /* 30px */
     line-height: 1.25vw; /* 24px */
   }
 
@@ -387,21 +381,5 @@
   }
 
   /* ---------- Footer ---------- */
-  .footer {
-    height: auto;
-    padding: 60px var(--grid-margin) 40px;
-  }
-
-  .footer_logo {
-    margin-top: 0;
-  }
-
-  .footer_links {
-    flex-wrap: wrap;
-    row-gap: 8px;
-  }
-
-  .footer_info {
-    padding: 0 20px;
-  }
+  /* 1920과 동일한 구조(높이 450px, 가운데 정렬 세로 배치)를 그대로 유지 — 별도 재정의 없음 */
 }
