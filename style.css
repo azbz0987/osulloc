@@ -365,6 +365,11 @@ body {
   margin-bottom: 30px;
 }
 
+/* 줄바꿈 고정용 <br>: PC(1920 등)에서는 지금처럼 자연스럽게 흐르고, 1440 이하에서만 style_1024.css에서 켬 */
+.about_br {
+  display: none;
+}
+
 .about_more {
   display: inline-block;
   font-size: 18px;

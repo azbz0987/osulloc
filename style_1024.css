@@ -87,6 +87,11 @@
     font-size: 32px;
   }
 
+  /* 1440 이하에서는 창 폭에 따라 줄바꿈이 달라지지 않도록 본문 줄바꿈 위치를 고정(4줄) */
+  .about_br {
+    display: inline;
+  }
+
   /* 본문 텍스트는 768~1440 구간에서 모두 16px / line-height 24px */
   .about_body,
   .tealife_body,
