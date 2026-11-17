@@ -182,48 +182,43 @@
     height: 41.6667vw; /* 800px, pinned과 동일 */
   }
 
+  /* 텍스트는 고정 크기라 1920 비율 박스(450x160)에는 안 들어감 → 사진1 시작 위치(56.9792vw) 앞 40px까지 폭을 쓰고 높이는 내용에 맞춤 */
   .scroll_photoText {
     left: 20.7292vw; /* 398px */
-    width: 23.4375vw; /* 450px */
-    max-width: 23.4375vw;
-    height: 8.3333vw; /* 160px */
+    width: calc(36.25vw - 40px);
+    max-width: none;
+    height: auto;
   }
 
-  .scroll_photoTitle {
-    font-size: 1.6667vw; /* 32px */
-    margin-bottom: 0.5208vw; /* 10px */
-  }
-
-  .scroll_photoBody {
-    font-size: 0.9375vw; /* 18px */
-  }
+  /* scroll/story 텍스트(크기·줄간격·여백)와 버튼은 다른 영역처럼 1920과 동일한 고정값(style.css) 사용 */
 
   /* ---------- Story ---------- */
   /* 1920과 완전히 동일하게 보이도록, px 값을 전부 1920 캔버스 대비 비율(vw)로 재계산 (zoom과 동일한 효과) */
+  /* 텍스트가 고정 크기라 그룹 높이는 1920과 같은 468px 고정(170 + 468*3 + 100*2 + 170 = 1944px) */
   .story {
-    height: 113.75vw; /* 2184px */
+    height: 1944px;
   }
 
   .story_group {
-    height: 24.375vw; /* 468px */
+    height: 468px;
   }
 
   .story_group1 {
-    top: 11.4583vw; /* 220px */
+    top: 170px;
   }
 
   .story_group2 {
-    top: 44.6875vw; /* 858px */
+    top: 738px; /* 170 + 468 + 100 */
   }
 
   .story_group3 {
-    top: 77.9167vw; /* 1496px */
+    top: 1306px; /* 738 + 468 + 100 */
   }
 
   .story_shape {
     left: -12.7604vw; /* -245px */
     width: 92.8646vw; /* 1783px */
-    height: 24.375vw; /* 468px */
+    height: 468px;
   }
 
   .story_group2 .story_shape {
@@ -232,7 +227,7 @@
   }
 
   .story_product {
-    top: -0.8333vw; /* -16px */
+    top: calc((468px - 26.0417vw) / 2); /* 그룹(468px) 세로 중앙 */
     left: calc(var(--grid-margin) + 2.0833vw); /* 그리드 여백 + 40px */
     width: 26.0417vw; /* 500px */
     height: 26.0417vw;
@@ -244,37 +239,19 @@
   }
 
   .story_productLow {
-    top: 0.8854vw; /* 17px */
+    top: calc((468px - 26.0417vw) / 2 + 33px); /* 1920과 같은 보정폭(+33px) */
   }
 
+  /* 고정 크기 텍스트가 들어가도록 폭을 사진~사각형 안쪽 여백(40px) 사이 전체로 확보 */
   .story_info {
-    left: 43.9583vw; /* 844px */
-    width: 34.0625vw; /* 654px */
+    left: calc(var(--grid-margin) + 28.125vw + 40px); /* product 오른쪽 + 40px */
+    right: calc(100% - 80.1042vw + 40px); /* 사각형 오른쪽 끝(1538/1920) 안쪽 40px */
+    width: auto;
   }
 
   .story_group2 .story_info {
-    left: 21.9792vw; /* 422px */
-  }
-
-  .story_infoTitle {
-    font-size: 2.0833vw; /* 40px */
-    margin-bottom: 1.0417vw; /* 20px */
-  }
-
-  .story_infoSubtitle {
-    font-size: 1.25vw; /* 24px */
-    margin-bottom: 1.5625vw; /* 30px */
-  }
-
-  .story_infoBody {
-    font-size: 0.9375vw; /* 18px */
-    margin-bottom: 2.6042vw; /* 50px */
-  }
-
-  .story_infoButton {
-    width: 7.8125vw; /* 150px */
-    height: 2.0833vw; /* 40px */
-    font-size: 0.9375vw; /* 18px */
+    left: calc(19.8958vw + 40px); /* 사각형 왼쪽 끝 + 40px */
+    right: calc(var(--grid-margin) + 28.125vw + 40px); /* product 왼쪽 - 40px */
   }
 
   /* ---------- Visual ---------- */
