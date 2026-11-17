@@ -87,13 +87,19 @@
     font-size: 32px;
   }
 
-  /* 1440 이하에서는 창 폭에 따라 줄바꿈이 달라지지 않도록 본문 줄바꿈 위치를 고정(4줄) */
+  /* 1440 이하에서도 1920과 같은 2줄(긴 줄 + 짧은 줄)을 유지: 줄바꿈 위치를 고정하고 한 줄이 박스 안에 들어가도록
+     글자 크기를 화면 폭에 맞춰 줄임(16px 이하, 1143px 이상에서는 16px) */
   .about_br {
     display: inline;
   }
 
+  .about_body {
+    white-space: nowrap;
+    font-size: min(16px, 1.4vw);
+    line-height: 24px;
+  }
+
   /* 본문 텍스트는 768~1440 구간에서 모두 16px / line-height 24px */
-  .about_body,
   .tealife_body,
   .jeju_photoOverlayBody,
   .banner_body,
