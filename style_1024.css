@@ -332,13 +332,13 @@
      고정값이 아니라 1920 대비 비율(vw)로 스케일 — 다른 박스(bento_boxLabel)는 고정값 유지, box1만 해당 */
   .bento_box1TextLine1 {
     font-size: 28px; /* 30px */
-    line-height: 26px;
+    line-height: 1.4;
   }
 
   .bento_box1TextLine2 {
     margin-top: 0.4167vw; /* 8px */
     font-size: 1.8229vw; /* 35px */
-    line-height: 26px;
+    line-height: 1.3;
   }
 
   .bento_box1More {
