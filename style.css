@@ -233,7 +233,7 @@ body {
 .intro_body {
   font-size: 18px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 26px;
   letter-spacing: -0.01em;
   color: #222;
   max-width: 560px;
@@ -359,7 +359,7 @@ body {
 .about_body {
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
   color: #fff;
   margin-bottom: 30px;
 }
@@ -416,7 +416,7 @@ body {
 .tealife_body {
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
   color: var(--color-text);
   opacity: 0;
   transition: opacity 0.8s ease 0.4s;
@@ -464,7 +464,7 @@ body {
 /* ---------- Jeju & Osulloc ---------- */
 .jeju {
   width: 100%;
-  margin-top: var(--section-gap);
+  margin-top: calc(var(--section-gap) + 90px); /* tealife 초록 박스(photoBg)가 위 섹션 아래로 90px 튀어나와 있어, 눈에 보이는 간격이 250px가 되도록(여백끼리는 겹쳐져서 margin-bottom으로는 안 됨) */
   padding: 0 var(--grid-margin);
   box-sizing: border-box;
 }
@@ -537,20 +537,20 @@ body {
 .jeju_photoOverlayTitle {
   font-size: 24px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 26px;
   margin-bottom: 30px;
 }
 
 .jeju_photoOverlaySubtitle {
   font-size: 20px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 26px;
 }
 
 .jeju_photoOverlayBody {
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
   margin-top: 10px;
 }
 
@@ -635,7 +635,7 @@ body {
 .jeju_body {
   flex-shrink: 0;
   font-size: 20px;
-  line-height: 24px;
+  line-height: 26px;
   font-weight: 500;
   color: var(--color-text);
 }
@@ -669,7 +669,7 @@ body {
 .banner_title {
   font-size: 32px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 26px;
   margin-bottom: 30px;
 }
 
@@ -677,13 +677,13 @@ body {
   display: block;
   font-size: 18px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 26px;
 }
 
 .banner_body {
   font-size: 16px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
   margin-top: 10px;
 }
 
@@ -801,7 +801,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   width: 450px; 
-  height: 160px;
+  height: 190px; /* 가장 긴 본문이 line-height 26px로 들어가는 높이 */
   max-width: 450px;
   color: #fff;
   text-align: left;
@@ -828,14 +828,14 @@ body {
 .scroll_photoTitle {
   font-size: 40px;
   font-weight: 600;
-  line-height: 24px;
+  line-height: 26px;
   margin-bottom: 30px;
 }
 
 .scroll_photoBody {
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
 }
 
 /* ---------- Story ---------- */
@@ -977,7 +977,7 @@ body {
 .story_infoBody {
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
   margin-bottom: 50px;
 }
 
@@ -1053,7 +1053,7 @@ body {
 .visual_subtitle {
   font-size: 24px;
   font-weight: 500;
-  line-height: 24px;
+  line-height: 26px;
   opacity: 0;
   transform: translateX(-30px);
   transition:
@@ -1064,7 +1064,7 @@ body {
 .visual_body {
   font-size: 18px;
   font-weight: 400;
-  line-height: 24px;
+  line-height: 26px;
   margin-top: 30px;
   opacity: 0;
   transform: translateX(-30px);
@@ -1335,7 +1335,7 @@ body {
   margin-top: 30px;
   font-size: 14px;
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 26px;
   color: #fff;
 }
 

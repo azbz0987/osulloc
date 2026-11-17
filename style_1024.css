@@ -106,6 +106,10 @@
   }
 
   /* ---------- Jeju & Osulloc ---------- */
+  .jeju {
+    margin-top: calc(var(--section-gap) + 78px); /* 초록 박스가 위 섹션 아래로 78px 튀어나와 있어 눈에 보이는 간격이 250px가 되도록 */
+  }
+
   .jeju_row {
     flex-wrap: wrap;
     row-gap: 16px;
@@ -117,7 +121,7 @@
 
   .jeju_body {
     font-size: 18px;
-    line-height: 24px;
+    line-height: 26px;
     white-space: normal;
   }
 
@@ -328,19 +332,19 @@
      고정값이 아니라 1920 대비 비율(vw)로 스케일 — 다른 박스(bento_boxLabel)는 고정값 유지, box1만 해당 */
   .bento_box1TextLine1 {
     font-size: 28px; /* 30px */
-    line-height: 1.25vw; /* 24px */
+    line-height: 26px;
   }
 
   .bento_box1TextLine2 {
     margin-top: 0.4167vw; /* 8px */
     font-size: 1.8229vw; /* 35px */
-    line-height: 1.25vw; /* 24px */
+    line-height: 26px;
   }
 
   .bento_box1More {
     margin-top: 1.25vw; /* 24px */
     font-size: 0.9375vw; /* 18px */
-    line-height: 1.25vw; /* 24px */
+    line-height: 26px;
   }
 
   .bento_box1Nav {
@@ -359,7 +363,7 @@
   .bento_boxLabel {
     margin-top: 24px;
     font-size: 22px;
-    line-height: 24px;
+    line-height: 26px;
   }
 
   /* ---------- Footer ---------- */
