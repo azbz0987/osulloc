@@ -28,11 +28,26 @@ let currentPageScale = 1; /* .pageScale 내부는 offsetTop/offsetHeight가 로�
 
 const PAGE_SCALE_BREAKPOINT = 1440; /* 이 너비 이하에서는 style_1024.css의 실제 반응형 규칙이 적용되므로 비례 축소를 끔 */
 
-/* 화면 너비에 맞춰 페이지를 줄이는 zoom은 끔(PC에서 글자가 작게 나오는 문제) — 모든 너비에서 실제 크기로 렌더링 */
+/* 화면 너비에 맞춰 페이지를 줄이는 zoom은 끔(PC에서 글자가 작게 나오는 문제) — 모든 너비에서 실제 크기로 렌더링.
+   PC(1440 초과)는 컨텐츠 영역이 가운데 1440px(좌우 여백 24px)이므로 그리드 여백을 화면 폭에 맞춰 계산해서 지정.
+   1440 이하는 style_1024.css의 %값이 적용되도록 인라인 값을 제거 */
+const CONTENT_WIDTH = 1440;
+const CONTENT_SIDE_GAP = 24;
+
 function updatePageScale() {
   currentPageScale = 1;
   pageScale.style.zoom = 1;
   heroSection.style.height = '';
+
+  const viewportWidth = document.documentElement.clientWidth;
+  if (viewportWidth > PAGE_SCALE_BREAKPOINT) {
+    document.documentElement.style.setProperty(
+      '--grid-margin',
+      `${(viewportWidth - CONTENT_WIDTH) / 2 + CONTENT_SIDE_GAP}px`
+    );
+  } else {
+    document.documentElement.style.removeProperty('--grid-margin');
+  }
 }
 
 window.addEventListener('resize', updatePageScale);
@@ -200,11 +215,19 @@ const SCROLL_THUMB_SIZE = 60;
 /* 1920px 기준 photo1 시작 여백(1120px)과 텍스트 커버 기준(850px)의 비율을 유지하되,
    1440px 이하(zoom 꺼짐)에서는 photoArea의 실제 너비를 기준으로 다시 계산 — 하드코딩된 px는 좁은 화면에서 깨짐 */
 function getScrollPhoto1StartLeft() {
-  return currentPageScale === 1 ? scrollPhotoArea.clientWidth * (1120 / 1920) : 1120;
+  /* PC: 컨텐츠 왼쪽 끝(그리드 여백) 기준 +856px (1920에서 1120px) */
+  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
+    return resolveGridLength('--grid-margin') + 856;
+  }
+  return scrollPhotoArea.clientWidth * (1120 / 1920);
 }
 
 function getScrollText1CoverThreshold() {
-  return currentPageScale === 1 ? scrollPhotoArea.clientWidth * (850 / 1920) : 850;
+  /* PC: 그리드 여백 + 586px (1920에서 850px) */
+  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
+    return resolveGridLength('--grid-margin') + 586;
+  }
+  return scrollPhotoArea.clientWidth * (850 / 1920);
 }
 
 /* 인디케이터/트랙 높이도 1920 비율(vw 기반)로 뷰포트에 맞춰 늘어나므로,

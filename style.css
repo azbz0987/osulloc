@@ -39,9 +39,12 @@ body {
   width: 100%;
 }
 
+/* PC(1440 초과): 컨텐츠 영역은 가운데 1440px(좌우 여백 24px + 12컬럼 1392px)이고 배경은 화면 끝까지.
+   --grid-margin은 script.js가 화면 폭에 맞춰 (화면폭-1440)/2 + 24px로 계산해서 지정함(1920에서 264px).
+   컨텐츠는 모두 --grid-margin 기준으로 배치. 가로로 삐져나가는 배경/슬라이더는 clip으로 잘라냄(sticky 유지) */
 .pageScale {
-  width: 1920px;
-  margin: 0 auto;
+  width: 100%;
+  overflow-x: clip;
 }
 
 /* ---------- Header ---------- */
@@ -278,11 +281,11 @@ body {
 }
 
 .about_box {
-  width: 802px;
+  width: calc(var(--grid-margin) + 538px); /* 화면 왼쪽 끝부터 컨텐츠 1~7열까지(왼쪽 녹색은 컨텐츠 밖으로 나옴) */
   max-width: 100%;
   box-sizing: border-box;
   background: #15301a;
-  padding: 60px 50px 60px 264px;
+  padding: 60px 50px 60px var(--grid-margin);
   color: #fff;
 }
 
@@ -422,7 +425,7 @@ body {
 .tealife_photo {
   position: absolute;
   top: 0; /* 슬라이드 섹션과의 250px 여백(섹션 margin-top)이 끝나는 지점 */
-  left: 712px; /* 캔버스 기준 컬럼4 끝 지점 */
+  left: calc(var(--grid-margin) + 448px); /* 컬럼4 끝 지점 */
   width: 944px;
   height: 675px;
   z-index: 2;
@@ -436,7 +439,7 @@ body {
 .tealife_photoBg {
   position: absolute;
   top: 86px; /* 사진 top(0) + 86px = 사진 bottom(675) + 90px에서 역산 */
-  left: 982px; /* 사진 left(712) + 270px = 사진 right(1656) + 90px에서 역산 */
+  left: calc(var(--grid-margin) + 718px); /* 사진 left + 270px = 사진 right + 90px에서 역산 */
   width: 764px;
   height: 679px;
   background: #15301a;
@@ -794,7 +797,7 @@ body {
 
 .scroll_photoText {
   position: absolute;
-  left: 398px; 
+  left: calc(var(--grid-margin) + 134px); /* 인디케이터 오른쪽 + 40px */
   top: 50%;
   transform: translateY(-50%);
   width: 450px; 
@@ -896,7 +899,7 @@ body {
   position: absolute;
   top: 0;
   left: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
-  width: 1783px; /* 오른쪽 끝이 11컬럼 끝(1538px)에 오도록 */
+  width: calc(var(--grid-margin) + 1519px); /* 오른쪽 끝이 11컬럼 끝(그리드 여백+1274px)에 오도록. left -245 포함 */
   height: 468px;
   border-radius: 245px;
   background: linear-gradient(
@@ -908,7 +911,7 @@ body {
 }
 
 .story_group2 .story_shape {
-  left: 382px; /* 2컬럼 시작 지점 */
+  left: calc(var(--grid-margin) + 118px); /* 2컬럼 시작 지점 */
   right: -245px; /* 화면 밖 테두리가 전혀 보이지 않도록 모서리 반지름만큼 완전히 밀어냄 */
   width: auto;
   background: linear-gradient(
@@ -943,7 +946,7 @@ body {
 .story_info {
   position: absolute;
   top: 50%;
-  left: 844px; /* product 오른쪽(804) + 40px */
+  left: calc(var(--grid-margin) + 580px); /* product 오른쪽 + 40px */
   width: 654px; /* 사각형 안쪽 여백까지 */
   transform: translateY(-50%);
   color: #fff;
@@ -951,7 +954,7 @@ body {
 }
 
 .story_group2 .story_info {
-  left: 422px; /* 사각형 안쪽 여백(382 + 40)부터 */
+  left: calc(var(--grid-margin) + 158px); /* 사각형 안쪽 여백(2컬럼 시작 + 40)부터 */
   text-align: right; /* 둥근 모서리 쪽은 들쭉날쭉하게, product와 맞닿는 쪽을 가지런히 정렬 */
 }
 
@@ -1128,7 +1131,7 @@ body {
 
 .bento_box1 {
   position: relative;
-  left: 264px; /* 1컬럼 시작 */
+  left: var(--grid-margin); /* 1컬럼 시작 */
   width: 920px; /* 1~8컬럼 = 8*94 + 7*24 */
   height: 390px;
   overflow: hidden;
@@ -1229,21 +1232,21 @@ body {
 }
 
 .bento_box2 {
-  left: 1208px; /* 9컬럼 시작 */
+  left: calc(var(--grid-margin) + 944px); /* 9컬럼 시작 */
   width: 448px; /* 9~12컬럼 = 4*94 + 3*24 */
   height: 548px;
 }
 
 .bento_box4 {
   top: 753px; /* box1 아래(339+390) + 24px */
-  left: 264px; /* box1과 동일 (1컬럼 시작) */
+  left: var(--grid-margin); /* box1과 동일 (1컬럼 시작) */
   width: 920px; /* box1과 동일 (1~8컬럼) */
   height: 646px;
 }
 
 .bento_box3 {
   top: 911px; /* box2 아래(339+548) + 24px */
-  left: 1208px; /* box2와 동일 (9컬럼 시작) */
+  left: calc(var(--grid-margin) + 944px); /* box2와 동일 (9컬럼 시작) */
   width: 448px; /* box2와 동일 (9~12컬럼) */
   height: 488px; /* box3 bottom(911+488=1399)이 box4 bottom(753+646=1399)과 일치 */
   background: #c2cecc;
