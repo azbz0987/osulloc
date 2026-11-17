@@ -67,7 +67,7 @@
   /* ---------- About ---------- */
   .about_box {
     width: calc(10 * var(--column-width) + 9 * var(--gutter)); /* 1~10열(11열 시작 전까지) */
-    padding: 60px 50px 60px var(--grid-margin); /* 텍스트 배치(상하좌우 여백 구조)는 1920과 동일, 왼쪽만 그리드 여백에 맞춤 */
+    padding: 60px var(--grid-margin) 60px var(--grid-margin); /* 텍스트가 오른쪽 끝으로 너무 빠지지 않도록 오른쪽 안쪽 여백도 왼쪽(그리드 여백)과 동일하게 */
   }
 
   /* .about_slideViewport { ... } 1920과 동일하게 padding 없음 — 시작 위치는 track의 translateX(2컬럼 시작 지점)로만 결정 */
@@ -87,15 +87,17 @@
     font-size: 32px;
   }
 
-  /* 본문 텍스트는 768~1440 구간에서 모두 16px (line-height 26px은 그대로) */
+  /* 본문 텍스트는 768~1440 구간에서 모두 16px / line-height 24px */
   .about_body,
   .tealife_body,
   .jeju_photoOverlayBody,
   .banner_body,
   .scroll_photoBody,
   .story_infoBody,
-  .visual_body {
+  .visual_body,
+  .intro_body {
     font-size: 16px;
+    line-height: 24px;
   }
 
   /* ---------- Tea Life ---------- */
@@ -103,6 +105,11 @@
   .tealife {
     padding: 0 var(--grid-margin) 0; /* 위 패딩이 있으면 눈에 보이는 섹션 간격이 250px보다 커짐 */
     min-height: 0;
+  }
+
+  /* 안부, 위로, 비움은 <strong>(inline)이라 margin-bottom이 적용되지 않아 본문과 붙어 보임 → block으로 */
+  .tealife_subhead {
+    display: block;
   }
 
   .tealife_photo {
@@ -135,7 +142,7 @@
 
   .jeju_body {
     font-size: 16px;
-    line-height: 26px;
+    line-height: 24px;
     white-space: normal;
   }
 
@@ -162,6 +169,7 @@
      텍스트 크기/줄간격/여백/max-width는 1920과 동일한 고정값 유지 */
   .banner_image {
     height: 28.5938vw; /* 549px */
+    min-height: 320px; /* 창이 줄어도 텍스트가 들어갈 만큼은 유지 */
   }
 
   /* ---------- Scroll indicator ---------- */
@@ -171,20 +179,22 @@
     min-height: 2600px; /* 4200px → 태블릿에서는 스크롤 구간(읽는 시간)만 짧게, 비율 대상 아님 */
   }
 
+  /* 사진 영역은 창이 줄어도 480px 밑으로는 작아지지 않게 (pinned/photoArea 동일) */
   .scroll_pinned {
-    top: calc(50vh - 20.8333vw); /* 400px */
-    height: 41.6667vw; /* 800px */
+    top: calc(50vh - max(20.8333vw, 240px)); /* 높이의 절반 */
+    height: max(41.6667vw, 480px); /* 800px */
+    min-height: 480px;
   }
 
   .scroll_indicator {
     top: 3.6458vw; /* 70px */
     width: 4.8958vw; /* 94px, 그리드 1컬럼과 동일 비율 */
-    height: 34.375vw; /* 660px */
+    height: calc(100% - 7.2917vw); /* 영역 높이에서 위아래 70px(비율)씩 뺀 값(1920에서 660px) */
   }
 
   .scroll_track {
     width: 0.2604vw; /* 5px */
-    height: 34.375vw; /* 660px */
+    height: 100%;
   }
 
   .scroll_thumb {
@@ -193,7 +203,8 @@
   }
 
   .scroll_photoArea {
-    height: 41.6667vw; /* 800px, pinned과 동일 */
+    height: max(41.6667vw, 480px); /* 800px, pinned과 동일 */
+    min-height: 480px;
   }
 
   /* 텍스트는 고정 크기라 1920 비율 박스(450x160)에는 안 들어감 → 사진1 시작 위치(56.9792vw) 앞 40px까지 폭을 쓰고 높이는 내용에 맞춤 */
@@ -208,13 +219,13 @@
 
   /* ---------- Story ---------- */
   /* 1920과 완전히 동일하게 보이도록, px 값을 전부 1920 캔버스 대비 비율(vw)로 재계산 (zoom과 동일한 효과) */
-  /* 그룹 높이는 1920과 같은 468px 고정(170 + 468*3 + 100*2 + 170 = 1944px) */
+  /* 그룹 높이 420px (위 170 + 420*3 + 그룹간 100*2 + 아래 170 = 1800px) */
   .story {
-    height: 1944px;
+    height: 1800px;
   }
 
   .story_group {
-    height: 468px;
+    height: 420px;
   }
 
   .story_group1 {
@@ -222,18 +233,18 @@
   }
 
   .story_group2 {
-    top: 738px; /* 170 + 468 + 100 */
+    top: 690px; /* 170 + 420 + 100 */
   }
 
   .story_group3 {
-    top: 1306px; /* 738 + 468 + 100 */
+    top: 1210px; /* 690 + 420 + 100 */
   }
 
   /* 둥근 모서리(반지름 245px)가 화면 안에 보이지 않도록 화면 밖으로 밀어내는 값은 vw가 아니라 px 고정 */
   .story_shape {
     left: -245px;
     width: calc(80.1042vw + 245px); /* 오른쪽 끝은 11컬럼 끝(1538/1920) 그대로 */
-    height: 468px;
+    height: 420px;
   }
 
   .story_group2 .story_shape {
@@ -243,7 +254,7 @@
   }
 
   .story_product {
-    top: calc((468px - 26.0417vw) / 2); /* 그룹(468px) 세로 중앙 */
+    top: calc((420px - 26.0417vw) / 2); /* 그룹(420px) 세로 중앙 */
     left: calc(var(--grid-margin) + 2.0833vw); /* 그리드 여백 + 40px */
     width: 26.0417vw; /* 500px */
     height: 26.0417vw;
@@ -255,7 +266,7 @@
   }
 
   .story_productLow {
-    top: calc((468px - 26.0417vw) / 2 + 33px); /* 1920과 같은 보정폭(+33px) */
+    top: calc((420px - 26.0417vw) / 2 + 33px); /* 1920과 같은 보정폭(+33px) */
   }
 
   /* 고정 크기 텍스트가 들어가도록 폭을 사진~사각형 안쪽 여백(40px) 사이 전체로 확보 */
