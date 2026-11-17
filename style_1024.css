@@ -78,16 +78,30 @@
     height: 480px;
   }
 
+  /* 슬라이드 높이(480) + 위 패딩(24)만큼만 — 기본 654px 그대로면 슬라이드 아래에 빈 공간이 남아 다음 섹션과 간격이 커 보임 */
+  .about_slideViewport {
+    height: 504px;
+  }
+
   .about_title {
     font-size: 32px;
   }
 
-  /* .about_subtitle / .about_body 등 나머지는 변경 없음 */
+  /* 본문 텍스트는 768~1440 구간에서 모두 16px (line-height 26px은 그대로) */
+  .about_body,
+  .tealife_body,
+  .jeju_photoOverlayBody,
+  .banner_body,
+  .scroll_photoBody,
+  .story_infoBody,
+  .visual_body {
+    font-size: 16px;
+  }
 
   /* ---------- Tea Life ---------- */
   /* 텍스트-사진 절대좌표 2단 배치 → 세로 스택으로 전환 */
   .tealife {
-    padding: 60px var(--grid-margin) 0;
+    padding: 0 var(--grid-margin) 0; /* 위 패딩이 있으면 눈에 보이는 섹션 간격이 250px보다 커짐 */
     min-height: 0;
   }
 
@@ -120,7 +134,7 @@
   }
 
   .jeju_body {
-    font-size: 18px;
+    font-size: 16px;
     line-height: 26px;
     white-space: normal;
   }
@@ -137,10 +151,6 @@
 
   .jeju_photoOverlayTitle {
     font-size: 20px; /* margin-bottom(30px)은 1920과 동일하게 유지, 폰트 크기만 축소 */
-  }
-
-  .jeju_photoOverlayBody {
-    font-size: 15px;
   }
 
   .jeju_indicatorItem {
@@ -188,8 +198,8 @@
 
   /* 텍스트는 고정 크기라 1920 비율 박스(450x160)에는 안 들어감 → 사진1 시작 위치(56.9792vw) 앞 40px까지 폭을 쓰고 높이는 내용에 맞춤 */
   .scroll_photoText {
-    left: 20.7292vw; /* 398px */
-    width: calc(36.25vw - 40px);
+    left: calc(var(--grid-margin) + 4.8958vw + 40px); /* 인디케이터 오른쪽 + 40px (1920과 같은 관계) */
+    width: calc(52.0834vw - 80px - var(--grid-margin)); /* 오른쪽 끝은 사진1 시작 위치 앞 40px로 그대로 */
     max-width: none;
     height: auto;
   }
@@ -198,13 +208,13 @@
 
   /* ---------- Story ---------- */
   /* 1920과 완전히 동일하게 보이도록, px 값을 전부 1920 캔버스 대비 비율(vw)로 재계산 (zoom과 동일한 효과) */
-  /* 텍스트가 고정 크기라 그룹 높이는 1920과 같은 468px 고정(170 + 468*3 + 100*2 + 170 = 1944px) */
+  /* 텍스트 위아래 여백을 넓히기 위해 그룹 높이 560px (170 + 560*3 + 100*2 + 170 = 2220px) */
   .story {
-    height: 1944px;
+    height: 2220px;
   }
 
   .story_group {
-    height: 468px;
+    height: 560px;
   }
 
   .story_group1 {
@@ -212,26 +222,28 @@
   }
 
   .story_group2 {
-    top: 738px; /* 170 + 468 + 100 */
+    top: 830px; /* 170 + 560 + 100 */
   }
 
   .story_group3 {
-    top: 1306px; /* 738 + 468 + 100 */
+    top: 1490px; /* 830 + 560 + 100 */
   }
 
+  /* 둥근 모서리(반지름 245px)가 화면 안에 보이지 않도록 화면 밖으로 밀어내는 값은 vw가 아니라 px 고정 */
   .story_shape {
-    left: -12.7604vw; /* -245px */
-    width: 92.8646vw; /* 1783px */
-    height: 468px;
+    left: -245px;
+    width: calc(80.1042vw + 245px); /* 오른쪽 끝은 11컬럼 끝(1538/1920) 그대로 */
+    height: 560px;
   }
 
   .story_group2 .story_shape {
     left: 19.8958vw; /* 382px */
-    right: -12.7604vw; /* -245px */
+    right: -245px;
+    width: auto;
   }
 
   .story_product {
-    top: calc((468px - 26.0417vw) / 2); /* 그룹(468px) 세로 중앙 */
+    top: calc((560px - 26.0417vw) / 2); /* 그룹(560px) 세로 중앙 */
     left: calc(var(--grid-margin) + 2.0833vw); /* 그리드 여백 + 40px */
     width: 26.0417vw; /* 500px */
     height: 26.0417vw;
@@ -243,7 +255,7 @@
   }
 
   .story_productLow {
-    top: calc((468px - 26.0417vw) / 2 + 33px); /* 1920과 같은 보정폭(+33px) */
+    top: calc((560px - 26.0417vw) / 2 + 33px); /* 1920과 같은 보정폭(+33px) */
   }
 
   /* 고정 크기 텍스트가 들어가도록 폭을 사진~사각형 안쪽 여백(40px) 사이 전체로 확보 */
