@@ -57,10 +57,10 @@ function initReveal() {
 
 initReveal();
 
-// ---------- Hero 슬로건: 영상이 4초 이후부터 자연스럽게 나타나서 계속 유지 ----------
+// ---------- Hero 슬로건: 영상이 3초 이후부터 서서히 나타나서 계속 유지 ----------
 const heroVideo = document.getElementById('heroVideo');
 const heroSlogan = document.getElementById('heroSlogan');
-const HERO_SLOGAN_DELAY = 4;
+const HERO_SLOGAN_DELAY = 3;
 
 if (heroVideo && heroSlogan) {
   const showHeroSlogan = () => {
@@ -71,7 +71,7 @@ if (heroVideo && heroSlogan) {
     if (heroVideo.currentTime >= HERO_SLOGAN_DELAY) showHeroSlogan();
   }
   heroVideo.addEventListener('timeupdate', onHeroTimeUpdate);
-  /* 자동재생이 막혀 영상이 멈춰 있으면 timeupdate가 안 오므로 4초 뒤에 그대로 보여줌 */
+  /* 자동재생이 막혀 영상이 멈춰 있으면 timeupdate가 안 오므로 3초 뒤에 그대로 보여줌 */
   setTimeout(() => {
     if (heroVideo.paused) showHeroSlogan();
   }, HERO_SLOGAN_DELAY * 1000);
@@ -252,12 +252,12 @@ function updateTealifePhotoBg() {
      offsetLeft/offsetTop(레이아웃 좌표, photoBg와 동일한 offsetParent인 .tealife 기준)로 실측해서 계산 */
   const photoRight = photo.offsetLeft + photo.offsetWidth;
   const photoBottom = photo.offsetTop + photo.offsetHeight;
-  /* 1024 기준 사진 804px 대비 박스 폭 786px, 오른쪽으로 삐져나오는 양 78px — 사진 폭이 줄면 같은 비율로 줄임
-     (높이는 사진 높이가 고정이라 570px / 78px 그대로) */
-  const photoScale = photo.offsetWidth / 804;
-  const bgWidth = 786 * photoScale;
+  /* 박스 폭은 1024 기준 사진 804px 대비 786px 비율로 사진을 따라 줄이되, 보이는 부분(오른쪽/아래로 삐져나오는 양)은
+     오른쪽과 아래가 똑같이 78px가 되도록 고정 (사진 폭에 비례시키면 화면이 넓을 때 오른쪽만 더 넓어 보임) */
+  const OVERHANG = 78;
+  const bgWidth = (786 / 804) * photo.offsetWidth;
   photoBg.style.width = `${bgWidth}px`;
-  photoBg.style.left = `${photoRight + 78 * photoScale - bgWidth}px`;
+  photoBg.style.left = `${photoRight + OVERHANG - bgWidth}px`;
   photoBg.style.top = `${photoBottom + 78 - 570}px`;
 }
 window.addEventListener('resize', updateTealifePhotoBg);
