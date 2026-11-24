@@ -75,7 +75,7 @@ body {
   justify-self: end;
 }
 
-.headerMenuBtn {
+.headerLoginBtn {
   position: absolute;
   top: 50%;
   left: calc(var(--grid-margin) + 1345px); /* 12번째 컬럼 중앙(1920에서 1609px) — 컨텐츠 프레임 기준. 1440 이하는 style_1024.css에서 % */
@@ -90,6 +90,7 @@ body {
   padding: 0;
   cursor: pointer;
   z-index: 10;
+  text-decoration: none;
 }
 
 /* 3개의 div/span으로 만들면 DPR(예: 125% 배율)에 따라 줄마다 서브픽셀 반올림이 달라져 한 줄만 두꺼워 보이는 문제가 있어
@@ -152,23 +153,6 @@ body {
   outline-offset: 4px;
 }
 
-/* ---------- Mobile menu toggle (틀만) ---------- */
-.menuToggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 8px;
-}
-
-.menuToggle span {
-  display: block;
-  width: 22px;
-  height: 1px;
-  background: var(--color-text);
-  margin: 5px 0;
-}
-
 /* ---------- Responsive ---------- */
 @media (max-width: 480px) {
   :root {
@@ -177,9 +161,6 @@ body {
   }
   .gnb_list {
     display: none;
-  }
-  .menuToggle {
-    display: block;
   }
 }
 

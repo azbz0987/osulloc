@@ -35,7 +35,7 @@
     padding: 0 var(--side-padding);
   }
 
-  .headerMenuBtn {
+  .headerLoginBtn {
     left: 83.802%; /* 12번째 컬럼 중앙(1609px / 1920px) */
   }
 
@@ -45,6 +45,17 @@
 
   .gnb_link {
     font-size: 18px;
+  }
+
+  /* 좁은 화면(~860px 이하)에서는 메뉴 글자/간격을 줄여서 오른쪽 로그인 아이콘과 겹치지 않게 */
+  @media (max-width: 860px) {
+    .gnb_list {
+      gap: 16px;
+    }
+
+    .gnb_link {
+      font-size: 16px;
+    }
   }
 
   /* .logo img { ... } 변경 없음 */
@@ -169,7 +180,7 @@
      텍스트 크기/줄간격/여백/max-width는 1920과 동일한 고정값 유지 */
   /* 1440 이하에서는 컨텐츠 높이를 화면 폭에 따라 줄이지 않고 고정 */
   .banner_image {
-    height: 400px;
+    height: 450px;
   }
 
   /* ---------- Scroll indicator ---------- */
