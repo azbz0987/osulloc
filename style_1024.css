@@ -422,4 +422,56 @@
 
   /* ---------- Footer ---------- */
   /* 1920과 동일한 구조(높이 450px, 가운데 정렬 세로 배치)를 그대로 유지 — 별도 재정의 없음 */
+
+  /* =====================================================================
+     1024px 미만(모바일에 가까운 구간) 전용 — 아래 규칙은 1023px 이하에서만 적용됨
+     ===================================================================== */
+  @media (max-width: 1023px) {
+
+    /* jeju 인디케이터(01~05): 크기와 간격을 줄임 */
+    .jeju_indicator {
+      gap: 14px;
+      margin-top: 36px;
+    }
+
+    .jeju_indicatorItem {
+      font-size: 16px;
+    }
+
+    .jeju_indicatorItem.expandGap {
+      margin-right: 22px;
+    }
+
+    .jeju_indicatorLine {
+      width: 22px;
+    }
+
+    /* story: 본문 텍스트는 숨기고(HTML은 PC용으로 그대로 둠) 제목/부제목/구매하기 버튼만 남김 */
+    .story_infoBody {
+      display: none;
+    }
+
+    .story_infoTitle {
+      margin-bottom: 16px;
+    }
+
+    .story_infoSubtitle {
+      margin-bottom: 36px; /* 본문이 빠진 자리에 부제목 → 버튼 사이 여백 */
+    }
+
+    /* bento 1번 박스 텍스트: 사진 속 제품이 오른쪽 절반에 있어 글자가 겹치지 않도록
+       박스 폭에 비례해서 줄임(왼쪽 약 40% 안에 들어가게) */
+    .bento_box1TextLine1 {
+      font-size: clamp(11px, 1.7vw, 18px);
+    }
+
+    .bento_box1TextLine2 {
+      font-size: clamp(13px, 2.1vw, 22px);
+    }
+
+    .bento_box1More {
+      margin-top: 12px;
+      font-size: clamp(11px, 1.5vw, 15px);
+    }
+  }
 }

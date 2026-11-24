@@ -57,10 +57,10 @@ function initReveal() {
 
 initReveal();
 
-// ---------- Hero 슬로건: 영상이 3초 이후부터 서서히 나타나서 계속 유지 ----------
+// ---------- Hero 슬로건: 영상이 4초 이후부터 서서히 나타나서 계속 유지 ----------
 const heroVideo = document.getElementById('heroVideo');
 const heroSlogan = document.getElementById('heroSlogan');
-const HERO_SLOGAN_DELAY = 3;
+const HERO_SLOGAN_DELAY = 4;
 
 if (heroVideo && heroSlogan) {
   const showHeroSlogan = () => {
@@ -71,7 +71,7 @@ if (heroVideo && heroSlogan) {
     if (heroVideo.currentTime >= HERO_SLOGAN_DELAY) showHeroSlogan();
   }
   heroVideo.addEventListener('timeupdate', onHeroTimeUpdate);
-  /* 자동재생이 막혀 영상이 멈춰 있으면 timeupdate가 안 오므로 3초 뒤에 그대로 보여줌 */
+  /* 자동재생이 막혀 영상이 멈춰 있으면 timeupdate가 안 오므로 4초 뒤에 그대로 보여줌 */
   setTimeout(() => {
     if (heroVideo.paused) showHeroSlogan();
   }, HERO_SLOGAN_DELAY * 1000);
