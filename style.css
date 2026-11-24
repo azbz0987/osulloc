@@ -1238,7 +1238,7 @@ body {
 
 /* ---------- 등장 애니메이션 (data-reveal) ----------
    JS(initReveal)가 요소가 화면 아래 30% 지점을 넘어 '충분히 들어왔을 때' isVisible을 붙이고,
-   화면에서 완전히 벗어나면 떼어서 다시 올라올 때 재생됨. 속도는 0.3s, 순서는 data-delay(0.05s 단위). */
+   화면에서 완전히 벗어나면 떼어서 다시 올라올 때 재생됨. 속도는 0.3s, 지연이 필요하면 --reveal-delay로 지정. */
 [data-reveal] {
   opacity: 0;
   transition:
@@ -1269,7 +1269,6 @@ body {
   height: 150px;
 }
 
-[data-delay="6"] { --reveal-delay: 0.3s; } /* tealife 초록 박스: 사진(0.3s)이 다 들어온 뒤에 */
 
 /* ---------- Hero 슬로건 (영상 중앙, 영상 앞부분에서만 보였다가 사라짐) ---------- */
 .hero_slogan {
