@@ -300,6 +300,17 @@
     right: calc(var(--grid-margin) + 28.125vw + 40px); /* product 왼쪽 - 40px */
   }
 
+  /* 글이 사각형 끝(둥근 쪽)에 붙지 않도록 안쪽 여백(% = 화면 폭 기준):
+     1·3번은 오른쪽(둥근 모서리 쪽), 2번은 왼쪽(둥근 모서리 쪽)에 5% */
+  .story_info {
+    padding-right: 5%;
+  }
+
+  .story_group2 .story_info {
+    padding-left: 5%;
+    padding-right: 0;
+  }
+
   /* 그룹 높이는 그대로 두고 텍스트 위아래 여백을 넓히기 위해 제목/부제 글자를 약간 축소 */
   .story_infoTitle {
     font-size: 38px;
