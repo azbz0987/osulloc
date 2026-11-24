@@ -47,14 +47,28 @@
     font-size: 18px;
   }
 
-  /* 좁은 화면(~860px 이하)에서는 메뉴 글자/간격을 줄여서 오른쪽 로그인 아이콘과 겹치지 않게 */
-  @media (max-width: 860px) {
-    .gnb_list {
-      gap: 16px;
+  /* 1024px 미만: nav(메뉴 글자, 로그인 아이콘)를 모두 없애고 오른쪽에 메뉴 버튼만 남김 */
+  @media (max-width: 1023px) {
+    .gnb,
+    .headerLoginBtn {
+      display: none;
     }
 
-    .gnb_link {
-      font-size: 16px;
+    .headerMenuBtn {
+      position: absolute;
+      top: 50%;
+      right: var(--side-padding);
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 10;
     }
   }
 

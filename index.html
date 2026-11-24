@@ -16,6 +16,13 @@
 <body>
 
   <header class="header">
+    <button type="button" class="headerMenuBtn" aria-label="메뉴">
+      <svg width="24" height="20" viewBox="0 0 24 20" fill="none">
+        <line x1="0" y1="1" x2="24" y2="1" stroke="#1c1c1c" stroke-width="2"/>
+        <line x1="0" y1="10" x2="24" y2="10" stroke="#1c1c1c" stroke-width="2"/>
+        <line x1="0" y1="19" x2="24" y2="19" stroke="#1c1c1c" stroke-width="2"/>
+      </svg>
+    </button>
     <a href="#" class="headerLoginBtn" aria-label="로그인">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
         <circle cx="12" cy="8" r="4" stroke="#1c1c1c" stroke-width="2"/>
@@ -59,22 +66,22 @@
 
   <section class="intro">
     <div class="intro_inner">
-      <h2><img src="img/logo.png" alt="OSULLOC" class="intro_logo" data-reveal="up"></h2>
-      <p class="intro_eyebrow" data-reveal="up" data-delay="1">TEA FROM JEJU</p>
-      <p class="intro_body" data-reveal="up" data-delay="2">대한민국이 가진 천혜의 유산 제주 화산섬<br>제주가 가진 경이로운 생명력으로<br>오설록의 차는 탄생합니다.</p>
-      <div class="intro_divider" data-reveal="grow" data-delay="3"></div>
+      <h2><img src="img/logo.png" alt="OSULLOC" class="intro_logo" id="introLogo" data-reveal="up"></h2>
+      <p class="intro_eyebrow" data-reveal="up" data-reveal-follow="introLogo">TEA FROM JEJU</p>
+      <p class="intro_body" data-reveal="up" data-reveal-follow="introLogo">대한민국이 가진 천혜의 유산 제주 화산섬<br>제주가 가진 경이로운 생명력으로<br>오설록의 차는 탄생합니다.</p>
+      <div class="intro_divider" data-reveal="grow" data-reveal-follow="introLogo"></div>
     </div>
   </section>
 
   <section class="about" id="aboutSection">
-    <div class="about_box" data-reveal="fade">
-      <h2 class="about_title" data-reveal="up">ABOUT</h2>
-      <p class="about_subtitle" data-reveal="up" data-delay="1">since 1979</p>
-      <p class="about_body" data-reveal="up" data-delay="2">차밭을 개간한 집념을 근간으로 차를 재배하고, 가공 발효하여 세계적으로 권위있는 명차 대회에서 꾸준히 수상을<br class="about_br"> 이어가며 증명된 오설록의 차는 이제 전 세계의 사람들과 만나고 있습니다.</p>
-      <a href="#" class="about_more" data-reveal="up" data-delay="3">more</a>
+    <div class="about_box" id="aboutBox" data-reveal="fade">
+      <h2 class="about_title" data-reveal="up" data-reveal-follow="aboutBox">ABOUT</h2>
+      <p class="about_subtitle" data-reveal="up" data-reveal-follow="aboutBox">since 1979</p>
+      <p class="about_body" data-reveal="up" data-reveal-follow="aboutBox">차밭을 개간한 집념을 근간으로 차를 재배하고, 가공 발효하여 세계적으로 권위있는 명차 대회에서 꾸준히 수상을<br class="about_br"> 이어가며 증명된 오설록의 차는 이제 전 세계의 사람들과 만나고 있습니다.</p>
+      <a href="#" class="about_more" data-reveal="up" data-reveal-follow="aboutBox">more</a>
     </div>
 
-    <div class="about_slideViewport" id="aboutSlideViewport" data-reveal="up" data-delay="2">
+    <div class="about_slideViewport" id="aboutSlideViewport" data-reveal="up">
       <div class="about_slideTrack" id="aboutSlideTrack">
         <div class="about_slide">
           <img src="img/speciality_item_bg_2_1.png" alt="오설록 - 찻잎 덖음" class="mediaCover">
@@ -103,10 +110,10 @@
   <section class="tealife" aria-label="OSULLOC TEA LIFE">
     <div>
       <div>
-        <h2 class="tealife_title" data-reveal="up">OSULLOC TEA LIFE</h2>
-        <p class="tealife_subtitle" data-reveal="up" data-delay="1">#차한잔할까 ep.1</p>
-        <strong class="tealife_subhead" data-reveal="up" data-delay="2">안부, 위로, 비움</strong>
-        <p class="tealife_body" data-reveal="up" data-delay="3">차를 마시고 건네는 행위는 숨가뿐 일상에 쉼표를 찍고<br>소중한 사람과의 따뜻한 관계맺음을 의미합니다.</p>
+        <h2 class="tealife_title" id="tealifeTitle" data-reveal="up">OSULLOC TEA LIFE</h2>
+        <p class="tealife_subtitle" data-reveal="up" data-reveal-follow="tealifeTitle">#차한잔할까 ep.1</p>
+        <strong class="tealife_subhead" data-reveal="up" data-reveal-follow="tealifeTitle">안부, 위로, 비움</strong>
+        <p class="tealife_body" data-reveal="up" data-reveal-follow="tealifeTitle">차를 마시고 건네는 행위는 숨가뿐 일상에 쉼표를 찍고<br>소중한 사람과의 따뜻한 관계맺음을 의미합니다.</p>
       </div>
       <div>
         <div class="tealife_photoBg" data-reveal="fade" data-delay="6"></div>
@@ -123,7 +130,7 @@
       <div class="jeju_line"></div>
       <p class="jeju_body">대한민국이 가진 천혜의 유산 제주,<br>화산섬 제주가 가진 경이로운 생명력으로 오설록의 차는 탄생합니다.</p>
     </div>
-    <div class="jeju_photoWrap" id="jejuPhotoWrap" data-reveal="up" data-delay="1">
+    <div class="jeju_photoWrap" id="jejuPhotoWrap" data-reveal="up">
       <div class="jeju_slide isActive">
         <img src="img/light.png" alt="오설록 - 빛" class="jeju_photo">
         <img src="img/tea_field_icon_light.png" alt="아열대 기후 아이콘" class="jeju_photoIcon">
@@ -191,7 +198,7 @@
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="#ffffff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
-    <div class="jeju_indicator" id="jejuIndicator" data-reveal="up" data-delay="2" data-reveal-follow="jejuPhotoWrap">
+    <div class="jeju_indicator" id="jejuIndicator" data-reveal="up" data-reveal-follow="jejuPhotoWrap">
       <button type="button" class="jeju_indicatorItem isActive">01</button>
       <button type="button" class="jeju_indicatorItem">02</button>
       <button type="button" class="jeju_indicatorItem">03</button>
@@ -204,11 +211,11 @@
   <section class="banner">
     <img src="img/banner_notxt.jpg" alt="오설록 배너" class="banner_image" data-reveal="fade">
     <div class="banner_text">
-      <h2 class="banner_title" data-reveal="up" data-delay="1">MOON WALK TEA</h2>
-      <strong class="banner_subtitle" data-reveal="up" data-delay="2">은은한 향으로 채우는 오설록 달빛걷기</strong>
-      <p class="banner_body" data-reveal="up" data-delay="3">달빛 아래를 걷는 듯한 포근한 분위기를 한 잔의 차로 느껴보세요.<br>
+      <h2 class="banner_title" id="bannerTitle" data-reveal="up">MOON WALK TEA</h2>
+      <strong class="banner_subtitle" data-reveal="up" data-reveal-follow="bannerTitle">은은한 향으로 채우는 오설록 달빛걷기</strong>
+      <p class="banner_body" data-reveal="up" data-reveal-follow="bannerTitle">달빛 아래를 걷는 듯한 포근한 분위기를 한 잔의 차로 느껴보세요.<br>
         은은하게 퍼지는 향과 깔끔한 맛은 하루의 긴장을 풀고 여유를 더해줍니다.</p>
-      <a href="#" class="banner_more" data-reveal="up" data-delay="4">more</a>
+      <a href="#" class="banner_more" data-reveal="up" data-reveal-follow="bannerTitle">more</a>
     </div>
   </section>
 
@@ -283,19 +290,19 @@
 
   <section class="visual">
     <div><img src="img/visual_m.jpg" alt="오설록 비주얼" class="visual_image" data-reveal="scale">
-    <img src="img/visual_m2.png" alt="오설록 비주얼 디테일" class="visual_image2" data-reveal="scale" data-delay="2"></div>
+    <img src="img/visual_m2.png" alt="오설록 비주얼 디테일" class="visual_image2" data-reveal="scale"></div>
     <div class="visual_text">
-      <h2 class="visual_title" data-reveal="left" data-delay="1">제주의 자연을 담은 한 잔, 오설록 녹차</h2>
-      <p class="visual_subtitle" data-reveal="left" data-delay="2">자연이 전한 한 잔</p>
-      <p class="visual_body" data-reveal="left" data-delay="3">제주의 깨끗한 자연환경에서 자란 오설록 녹차는<br>
+      <h2 class="visual_title" id="visualTitle" data-reveal="left">제주의 자연을 담은 한 잔, 오설록 녹차</h2>
+      <p class="visual_subtitle" data-reveal="left" data-reveal-follow="visualTitle">자연이 전한 한 잔</p>
+      <p class="visual_body" data-reveal="left" data-reveal-follow="visualTitle">제주의 깨끗한 자연환경에서 자란 오설록 녹차는<br>
         신선한 향과 부드러운 맛이 조화를 이룹니다.</p>
-      <a href="#" class="visual_more" data-reveal="left" data-delay="4">more</a>
+      <a href="#" class="visual_more" data-reveal="left" data-reveal-follow="visualTitle">more</a>
     </div>
   </section>
 
   <section class="bento">
     <img src="img/logo.png" alt="OSULLOC" class="bento_logo" data-reveal="up">
-    <div class="bento_box bento_box1" id="bentoBox1" data-reveal="up" data-delay="1">
+    <div class="bento_box bento_box1" id="bentoBox1" data-reveal="up">
       <div class="bento_box1Slide isActive">
         <img src="img/bento1.jpg" alt="오설록 비주얼" class="bento_box1Photo">
         <div class="bento_box1Text">
@@ -338,15 +345,15 @@
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
-    <a href="#" class="bento_box bento_box2" data-reveal="up" data-delay="2">
+    <a href="#" class="bento_box bento_box2" data-reveal="up">
       <img src="img/bento2.png" alt="OSULLOC TEA FOOD" class="bento_boxPhoto">
       <p class="bento_boxLabel">OSULLOC TEA FOOD</p>
     </a>
-    <a href="#" class="bento_box bento_box3" data-reveal="up" data-delay="3">
+    <a href="#" class="bento_box bento_box3" data-reveal="up">
       <img src="img/bento3.png" alt="OSULLOC LIFE STYLE" class="bento_boxPhoto">
       <p class="bento_boxLabel">OSULLOC LIFE STYLE</p>
     </a>
-    <a href="#" class="bento_box bento_box4" data-reveal="up" data-delay="2">
+    <a href="#" class="bento_box bento_box4" data-reveal="up">
       <img src="img/bento4.png" alt="OSULLOC BEST" class="bento_boxPhoto">
       <p class="bento_boxLabel">OSULLOC BEST</p>
     </a>
@@ -354,13 +361,13 @@
 
   <footer class="footer" data-reveal-group>
     <img src="img/logo.png" alt="OSULLOC" class="footer_logo" data-reveal="up">
-    <nav class="footer_links" aria-label="footer 메뉴" data-reveal="up" data-delay="1">
+    <nav class="footer_links" aria-label="footer 메뉴" data-reveal="up">
       <a href="#" class="footer_link">이용약관</a>
       <a href="#" class="footer_link">개인정보처리방침</a>
       <a href="#" class="footer_link">이메일무단수집거부</a>
       <a href="#" class="footer_link">고객센터</a>
     </nav>
-    <div class="footer_social" data-reveal="up" data-delay="2">
+    <div class="footer_social" data-reveal="up">
       <a href="https://pf.kakao.com/_iAIau" target="_blank" title="새 창에서 열기" class="footer_socialLink" aria-label="카카오톡">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
           <path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.7-.2.8-.7 2.6-.8 3-.1.4.2.4.3.3.2-.1 2.5-1.7 3.5-2.4.7.1 1.5.2 2.3.2 5.5 0 10-3.6 10-8S17.5 3 12 3z" stroke="#ffffff" stroke-width="1.8" stroke-linejoin="round"/>
@@ -386,8 +393,8 @@
         </svg>
       </a>
     </div>
-    <p class="footer_info" data-reveal="up" data-delay="3">(주)아모레퍼시픽 오설록ㅣ사업자등록번호 390-87-01499ㅣ통신판매업신고 2024-제주안덕-0075<br>제주특별자치도 서귀포시 안덕면 신화역사로 15 (오설록 티뮤지엄)ㅣ고객센터 080-805-5555 (평일 09:00~18:00, 주말·공휴일 휴무)</p>
-    <p class="footer_copyright" data-reveal="up" data-delay="4">© OSULLOC. ALL RIGHTS RESERVED.</p>
+    <p class="footer_info" data-reveal="up">(주)아모레퍼시픽 오설록ㅣ사업자등록번호 390-87-01499ㅣ통신판매업신고 2024-제주안덕-0075<br>제주특별자치도 서귀포시 안덕면 신화역사로 15 (오설록 티뮤지엄)ㅣ고객센터 080-805-5555 (평일 09:00~18:00, 주말·공휴일 휴무)</p>
+    <p class="footer_copyright" data-reveal="up">© OSULLOC. ALL RIGHTS RESERVED.</p>
   </footer>
 
   </div>

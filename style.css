@@ -93,6 +93,11 @@ body {
   text-decoration: none;
 }
 
+/* 메뉴 버튼(햄버거): 1024px 미만에서만 나타남(style_1024.css) */
+.headerMenuBtn {
+  display: none;
+}
+
 /* 3개의 div/span으로 만들면 DPR(예: 125% 배율)에 따라 줄마다 서브픽셀 반올림이 달라져 한 줄만 두꺼워 보이는 문제가 있어
    다른 아이콘들처럼 SVG 하나로 통일 — 벡터 하나로 렌더링되어 항상 동일하게 그려짐 */
 
@@ -1259,11 +1264,6 @@ body {
   height: 150px;
 }
 
-[data-delay="1"] { --reveal-delay: 0.05s; }
-[data-delay="2"] { --reveal-delay: 0.1s; }
-[data-delay="3"] { --reveal-delay: 0.15s; }
-[data-delay="4"] { --reveal-delay: 0.2s; }
-[data-delay="5"] { --reveal-delay: 0.25s; }
 [data-delay="6"] { --reveal-delay: 0.3s; } /* tealife 초록 박스: 사진(0.3s)이 다 들어온 뒤에 */
 
 /* ---------- Hero 슬로건 (영상 중앙, 영상 앞부분에서만 보였다가 사라짐) ---------- */
