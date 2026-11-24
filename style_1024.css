@@ -73,6 +73,71 @@
       cursor: pointer;
       z-index: 10;
     }
+
+    /* 열렸을 때 햄버거 → X */
+    .header.isMenuOpen .headerMenuIconOpen {
+      display: none;
+    }
+
+    .header.isMenuOpen .headerMenuIconClose {
+      display: block;
+    }
+
+    /* 펼침 메뉴: 헤더 바로 아래에 가로 전체로 내려오며(0.3s) 나타남 */
+    .mobileMenu {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-line);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+      opacity: 0;
+      visibility: hidden;
+      translate: 0 -8px;
+      transition:
+        opacity 0.3s ease,
+        translate 0.3s ease,
+        visibility 0s linear 0.3s;
+      z-index: 9;
+    }
+
+    .header.isMenuOpen .mobileMenu {
+      opacity: 1;
+      visibility: visible;
+      translate: 0 0;
+      transition:
+        opacity 0.3s ease,
+        translate 0.3s ease,
+        visibility 0s;
+    }
+
+    .mobileMenu_list {
+      list-style: none;
+      padding: 8px var(--side-padding) 16px;
+    }
+
+    .mobileMenu_link {
+      display: block;
+      padding: 16px 0;
+      font-size: 20px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-line);
+    }
+
+    .mobileMenu_list li:last-child .mobileMenu_link {
+      border-bottom: none;
+    }
+
+    .mobileMenu_link:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: -2px;
+    }
   }
 
   /* .logo img { ... } 변경 없음 */

@@ -403,3 +403,27 @@ function setBentoBox1Slide(index) {
 
 document.getElementById('bentoBox1Prev').addEventListener('click', () => setBentoBox1Slide(bentoBox1Index - 1));
 document.getElementById('bentoBox1Next').addEventListener('click', () => setBentoBox1Slide(bentoBox1Index + 1));
+
+// ---------- 모바일 메뉴 (1024px 미만에서 햄버거 버튼으로 nav 메뉴 펼치기) ----------
+const menuBtn = document.getElementById('headerMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function setMenuOpen(open) {
+  headerEl.classList.toggle('isMenuOpen', open);
+  menuBtn.setAttribute('aria-expanded', String(open));
+  menuBtn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+}
+
+menuBtn.addEventListener('click', () => setMenuOpen(!headerEl.classList.contains('isMenuOpen')));
+mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenuOpen(false)));
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') setMenuOpen(false);
+});
+/* 메뉴 바깥(헤더 밖)을 누르면 닫힘 */
+document.addEventListener('click', (e) => {
+  if (!headerEl.contains(e.target)) setMenuOpen(false);
+});
+/* 1024px 이상으로 넓어지면 PC nav가 보이므로 열림 상태를 해제 */
+window.addEventListener('resize', () => {
+  if (document.documentElement.clientWidth >= 1024) setMenuOpen(false);
+});

@@ -94,8 +94,16 @@ body {
   text-decoration: none;
 }
 
-/* 메뉴 버튼(햄버거): 1024px 미만에서만 나타남(style_1024.css) */
+/* 메뉴 버튼(햄버거)과 펼침 메뉴: 1024px 미만에서만 나타남(style_1024.css) */
 .headerMenuBtn {
+  display: none;
+}
+
+.mobileMenu {
+  display: none;
+}
+
+.headerMenuIconClose {
   display: none;
 }
 
