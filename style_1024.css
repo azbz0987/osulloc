@@ -473,7 +473,29 @@
     }
 
     .bento_box1Text {
+      left: max(8.7%, 48px); /* 왼쪽 꺾쇠(<)와 글자가 겹치지 않게 */
       max-width: 40%;
+    }
+
+    /* 꺾쇠 버튼: 예전(vw)에는 버튼이 15px로 줄어 안의 아이콘(svg)이 5x9px까지 찌그러졌음 →
+       버튼 40px, 아이콘은 찌그러지지 않게 30px 고정(PC와 같은 크기) */
+    .bento_box1Nav {
+      width: 40px;
+      height: 40px;
+    }
+
+    .bento_box1Nav svg {
+      width: 30px;
+      height: 30px;
+      flex-shrink: 0;
+    }
+
+    .bento_box1NavPrev {
+      left: 8px;
+    }
+
+    .bento_box1NavNext {
+      right: 8px;
     }
 
     .bento_box1TextLine1 {
