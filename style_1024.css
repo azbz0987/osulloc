@@ -430,25 +430,30 @@
 
     /* jeju 인디케이터(01~05): 크기와 간격을 줄임 */
     .jeju_indicator {
-      gap: 14px;
-      margin-top: 36px;
+      gap: 22px;
+      margin-top: 48px;
     }
 
     .jeju_indicatorItem {
-      font-size: 16px;
+      font-size: 22px;
     }
 
     .jeju_indicatorItem.expandGap {
-      margin-right: 22px;
+      margin-right: 30px;
     }
 
     .jeju_indicatorLine {
-      width: 22px;
+      width: 30px;
     }
 
     /* story: 본문 텍스트는 숨기고(HTML은 PC용으로 그대로 둠) 제목/부제목/구매하기 버튼만 남김 */
     .story_infoBody {
       display: none;
+    }
+
+    /* "n종 n입"을 다음 줄로 내림 */
+    .story_br {
+      display: inline;
     }
 
     .story_infoTitle {
@@ -459,19 +464,45 @@
       margin-bottom: 36px; /* 본문이 빠진 자리에 부제목 → 버튼 사이 여백 */
     }
 
-    /* bento 1번 박스 텍스트: 사진 속 제품이 오른쪽 절반에 있어 글자가 겹치지 않도록
-       박스 폭에 비례해서 줄임(왼쪽 약 40% 안에 들어가게) */
+    /* bento 1번 박스 텍스트: 1024 직전 크기(28/33/16px)에서 끊기지 않고 이어지게, 그 아래로는 화면 폭에 따라
+       완만하게만 줄임(바닥 20/24/13px). 사진 속 제품이 오른쪽 절반에 있어서 글은 박스 왼쪽 약 40% 폭 안에서
+       줄바꿈하고, 그만큼 줄 수가 늘어나므로 박스 높이를 키우고 아래 박스들을 그만큼 내림 */
+    :root {
+      --bento1-height: max(30vw, 280px);
+      --bento1-extra: calc(var(--bento1-height) - 20.3125vw);
+    }
+
+    .bento_box1Text {
+      max-width: 40%;
+    }
+
     .bento_box1TextLine1 {
-      font-size: clamp(11px, 1.7vw, 18px);
+      font-size: clamp(20px, 2.75vw, 28px);
     }
 
     .bento_box1TextLine2 {
-      font-size: clamp(13px, 2.1vw, 22px);
+      font-size: clamp(24px, 3.25vw, 33px);
     }
 
     .bento_box1More {
       margin-top: 12px;
-      font-size: clamp(11px, 1.5vw, 15px);
+      font-size: clamp(13px, 1.6vw, 16px);
+    }
+
+    .bento {
+      height: calc(90.0521vw + var(--bento1-extra));
+    }
+
+    .bento_box1 {
+      height: var(--bento1-height);
+    }
+
+    .bento_box4 {
+      top: calc(39.2188vw + var(--bento1-extra));
+    }
+
+    .bento_box3 {
+      height: calc(25.4167vw + var(--bento1-extra));
     }
   }
 }

@@ -895,6 +895,11 @@ body {
   margin-bottom: 20px;
 }
 
+/* 줄바꿈용 <br>: PC에서는 숨김, 1024 미만에서만 style_1024.css가 켜서 "n종 n입"을 다음 줄로 내림 */
+.story_br {
+  display: none;
+}
+
 .story_infoSubtitle {
   font-size: 24px;
   font-weight: 500;
