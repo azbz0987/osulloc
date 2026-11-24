@@ -1,23 +1,64 @@
-// ---------- 섹션 등장 애니메이션 (화면에 들어올 때마다 재생, 벗어나면 초기화) ----------
-function revealOnScroll(el, options) {
-  const observer = new IntersectionObserver(
+// ---------- 섹션 등장 애니메이션 ([data-reveal], 화면에 들어올 때마다 재생) ----------
+/* 요소마다 따로 관찰해서, 아직 화면에 안 들어온 영역(예: tealife 위쪽 빈 패딩) 때문에 일찍 재생되지 않게 함.
+   - 보이기: 요소가 화면 아래 30% 지점을 넘어 '충분히 들어왔을 때' isVisible 추가
+   - 숨기기: 화면에서 완전히 벗어났을 때만 제거(다시 올라오면 재생)
+   - [data-reveal-group] 안의 요소는 그룹 컨테이너가 보일 때 같이 재생(페이지 맨 아래 footer처럼 끝까지 스크롤해도
+     화면 아래 30% 안에 있어 개별 요소가 트리거 지점에 못 닿는 경우 대비) */
+function initReveal() {
+  const targets = Array.from(document.querySelectorAll('[data-reveal-group], [data-reveal]')).filter(
+    (el) => el.hasAttribute('data-reveal-group') || !el.closest('[data-reveal-group]')
+  );
+
+  if (!('IntersectionObserver' in window)) {
+    targets.forEach((el) => el.classList.add('isVisible'));
+    return;
+  }
+
+  const showObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        el.classList.toggle('isVisible', entry.isIntersecting);
+        if (entry.isIntersecting) entry.target.classList.add('isVisible');
       });
     },
-    options || { threshold: 0.4, rootMargin: '0px 0px -10% 0px' }
+    { threshold: 0, rootMargin: '0px 0px -30% 0px' }
   );
-  observer.observe(el);
+
+  const hideObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) entry.target.classList.remove('isVisible');
+      });
+    },
+    { threshold: 0, rootMargin: '0px' }
+  );
+
+  targets.forEach((el) => {
+    showObserver.observe(el);
+    hideObserver.observe(el);
+  });
 }
 
-revealOnScroll(document.querySelector('.intro_inner'));
-/* tealife는 padding-top(375px)+min-height(675px)로 세로 길이가 길어서 threshold:0.4를 쓰면
-   섹션이 40% 보일 때까지 스크롤을 훨씬 많이 해야 해서 애니메이션이 느리게 나타나는 것처럼 보임 →
-   더 낮은 threshold로 화면에 조금만 들어와도 바로 재생되도록 함 */
-revealOnScroll(document.querySelector('.tealife'), { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-revealOnScroll(document.querySelector('.visual'));
-document.querySelectorAll('.story_group').forEach((group) => revealOnScroll(group));
+initReveal();
+
+// ---------- Hero 슬로건: 영상 앞부분(0.3s~5.3s)에서만 보였다가 사라지고, 영상이 반복될 때마다 다시 나옴 ----------
+const heroVideo = document.getElementById('heroVideo');
+const heroSlogan = document.getElementById('heroSlogan');
+const HERO_SLOGAN_START = 0.3;
+const HERO_SLOGAN_END = 5.3;
+
+function updateHeroSlogan() {
+  const t = heroVideo.currentTime;
+  heroSlogan.classList.toggle('isShown', t >= HERO_SLOGAN_START && t < HERO_SLOGAN_END);
+}
+
+if (heroVideo && heroSlogan) {
+  heroVideo.addEventListener('timeupdate', updateHeroSlogan);
+  updateHeroSlogan();
+  /* 자동재생이 막혀 영상이 멈춰 있으면 슬로건이 영영 안 보이므로 그대로 보여줌 */
+  setTimeout(() => {
+    if (heroVideo.paused) heroSlogan.classList.add('isShown');
+  }, 1500);
+}
 
 // ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
 const pageScaleOuter = document.querySelector('.pageScaleOuter');
