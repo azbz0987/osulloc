@@ -84,6 +84,7 @@ const heroSection = document.querySelector('.hero');
 const headerEl = document.querySelector('.header');
 let currentPageScale = 1; /* .pageScale 내부는 offsetTop/offsetHeight가 로컬(1920 기준) 좌표라, 실제 화면 좌표로 바꿀 때 이 값으로 곱/나눗셈 필요 */
 
+const MOBILE_BREAKPOINT = 767; /* 이 너비 이하는 style_1024.css의 모바일 블록이 적용됨 */
 const PAGE_SCALE_BREAKPOINT = 1440; /* 이 너비 이하에서는 style_1024.css의 실제 반응형 규칙이 적용되므로 비례 축소를 끔 */
 
 /* 화면 너비에 맞춰 페이지를 줄이는 zoom은 끔(PC에서 글자가 작게 나오는 문제) — 모든 너비에서 실제 크기로 렌더링.
@@ -254,11 +255,12 @@ function updateTealifePhotoBg() {
   const photoBottom = photo.offsetTop + photo.offsetHeight;
   /* 박스 폭은 1024 기준 사진 804px 대비 786px 비율로 사진을 따라 줄이되, 보이는 부분(오른쪽/아래로 삐져나오는 양)은
      오른쪽과 아래가 똑같이 78px가 되도록 고정 (사진 폭에 비례시키면 화면이 넓을 때 오른쪽만 더 넓어 보임) */
-  const OVERHANG = 78;
+  const isMobile = document.documentElement.clientWidth <= MOBILE_BREAKPOINT;
+  const OVERHANG = isMobile ? 20 : 78; /* 모바일은 화면 안에 들어오도록 튀어나오는 양을 줄임 */
   const bgWidth = (786 / 804) * photo.offsetWidth;
   photoBg.style.width = `${bgWidth}px`;
   photoBg.style.left = `${photoRight + OVERHANG - bgWidth}px`;
-  photoBg.style.top = `${photoBottom + 78 - 570}px`;
+  photoBg.style.top = `${photoBottom + OVERHANG - photoBg.offsetHeight}px`;
 }
 window.addEventListener('resize', updateTealifePhotoBg);
 updateTealifePhotoBg();
@@ -283,6 +285,10 @@ function getScrollPhoto1StartLeft() {
   if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
     return resolveGridLength('--grid-margin') + 856;
   }
+  /* 모바일: 글이 화면 거의 전체 폭을 쓰므로, 사진은 오른쪽 끝에서 시작해 화면 전체로 커짐 */
+  if (document.documentElement.clientWidth <= MOBILE_BREAKPOINT) {
+    return scrollPhotoArea.clientWidth;
+  }
   return scrollPhotoArea.clientWidth * (1120 / 1920);
 }
 
@@ -290,6 +296,9 @@ function getScrollText1CoverThreshold() {
   /* PC: 그리드 여백 + 586px (1920에서 850px) */
   if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
     return resolveGridLength('--grid-margin') + 586;
+  }
+  if (document.documentElement.clientWidth <= MOBILE_BREAKPOINT) {
+    return scrollPhotoArea.clientWidth * 0.25; /* 사진이 글 대부분(왼쪽 끝 근처까지)을 덮은 뒤에 흰 글자로 */
   }
   return scrollPhotoArea.clientWidth * (850 / 1920);
 }

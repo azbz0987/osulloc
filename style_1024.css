@@ -651,3 +651,411 @@
     }
   }
 }
+
+/* =====================================================================
+   모바일(767px 이하) 전용 — 위 규칙들 뒤에 와서 같은 선택자를 덮어씀. 768px 이상은 영향 없음.
+   글자 크기는 clamp()로 화면 폭에 따라 완만하게만 줄어들게(768 직전 크기에서 끊기지 않고 이어짐)
+   ===================================================================== */
+@media (max-width: 767px) {
+  :root {
+    --section-gap: 160px;
+  }
+
+  /* ---------- 공통 글자 크기: 768 직전(38/24/22px)에서 이어서 완만하게 ---------- */
+  .about_title,
+  .tealife_title,
+  .jeju_title,
+  .visual_title,
+  .story_infoTitle {
+    font-size: clamp(28px, 4.9vw, 38px);
+  }
+
+  .about_subtitle,
+  .tealife_subtitle,
+  .visual_subtitle,
+  .story_infoSubtitle {
+    font-size: clamp(18px, 3vw, 24px);
+  }
+
+  .tealife_subhead {
+    font-size: clamp(18px, 2.9vw, 22px);
+  }
+
+  .banner_title {
+    font-size: clamp(26px, 4.2vw, 32px);
+  }
+
+  /* ---------- About ---------- */
+  .about_box {
+    width: calc(100% - 20px);
+    padding: 48px var(--grid-margin) 56px;
+  }
+
+  .about_br {
+    display: none; /* 뒤에 공백이 있어 자연스럽게 이어짐 */
+  }
+
+  .about_slide {
+    flex: 0 0 270px;
+    width: 270px;
+    height: 380px;
+  }
+
+  .about_slideViewport {
+    height: 404px; /* 슬라이드 380 + 위 패딩 24 */
+  }
+
+  .about_slideCaption {
+    font-size: 20px;
+    bottom: 32px;
+  }
+
+  /* ---------- Tea Life ---------- */
+  .tealife_photo {
+    margin-left: var(--grid-margin);
+    width: 80%;
+    height: 400px;
+    margin-top: 40px;
+  }
+
+  .tealife_photoBg {
+    height: 390px; /* 위치/폭은 script.js(updateTealifePhotoBg)가 지정 */
+  }
+
+  /* ---------- Jeju & Osulloc ---------- */
+  .jeju {
+    margin-top: calc(var(--section-gap) + 20px); /* 초록 박스가 20px 튀어나와 있음 */
+  }
+
+  .jeju_row {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 0;
+  }
+
+  .jeju_line {
+    flex: none;
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  .jeju_body {
+    flex-shrink: 1;
+  }
+
+  .jeju_photoWrap {
+    height: 520px;
+  }
+
+  .jeju_photoIcon {
+    height: 48px;
+    top: 14px;
+    left: 14px;
+  }
+
+  .jeju_photoOverlay {
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    width: auto;
+    height: auto;
+    padding: 16px;
+  }
+
+  .jeju_photoOverlayTitle {
+    font-size: 20px;
+    line-height: 26px;
+    margin-bottom: 8px;
+  }
+
+  .jeju_photoOverlaySubtitle {
+    font-size: 17px;
+    line-height: 24px;
+  }
+
+  .jeju_photoOverlayBody {
+    font-size: 15px;
+    line-height: 22px;
+    margin-top: 6px;
+  }
+
+  .jeju_photoNav {
+    width: 40px;
+    height: 40px;
+    top: 38%; /* 아래 설명 박스를 가리지 않도록 약간 위 */
+  }
+
+  .jeju_photoNav svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .jeju_photoNavPrev {
+    left: 6px;
+  }
+
+  .jeju_photoNavNext {
+    right: 6px;
+  }
+
+  /* ---------- Banner ---------- */
+  .banner_image {
+    height: 450px;
+  }
+
+  /* ---------- Scroll ---------- */
+  .scroll_indicator {
+    width: 28px;
+  }
+
+  .scroll_thumb {
+    width: 24px;
+    height: 24px;
+  }
+
+  .scroll_photoText {
+    left: calc(var(--grid-margin) + 42px);
+    width: calc(100% - 2 * var(--grid-margin) - 42px);
+    max-width: none;
+    height: auto;
+  }
+
+  /* 밝은 차밭 사진 위에서도 읽히도록 그림자를 진하게 */
+  .scroll_photoText,
+  .scroll_photoText1.isCovered {
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.85), 0 0 14px rgba(0, 0, 0, 0.5);
+  }
+
+  .scroll_photoText1:not(.isCovered) {
+    text-shadow: none;
+  }
+
+  .scroll_photoTitle {
+    font-size: clamp(24px, 3.3vw, 28px);
+    line-height: 34px;
+    margin-bottom: 14px;
+  }
+
+  .scroll_photoBody {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  /* ---------- Story: 제품 사진을 위, 글을 아래에 쌓는 세로 구성 ---------- */
+  .story {
+    height: 1600px; /* 위 110 + 420*3 + 그룹 간 110*2 + 아래 110 */
+  }
+
+  .story_group {
+    height: 420px;
+  }
+
+  .story_group1 {
+    top: 110px;
+  }
+
+  .story_group2 {
+    top: 640px;
+  }
+
+  .story_group3 {
+    top: 1170px;
+  }
+
+  .story_shape {
+    left: -60px;
+    width: calc(90vw + 60px);
+    height: 420px;
+    border-radius: 60px;
+  }
+
+  .story_group2 .story_shape {
+    left: 10vw;
+    right: -60px;
+    width: auto;
+  }
+
+  /* 제품 사진은 위(밝은 쪽), 흰 글씨는 아래(어두운 쪽)에 오도록 세로 그라데이션 */
+  .story_shape,
+  .story_group2 .story_shape {
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.12));
+  }
+
+  .story_product,
+  .story_productLow {
+    top: 12px;
+    left: calc(var(--grid-margin) + 8px);
+    width: 170px;
+    height: 170px;
+  }
+
+  .story_productLow {
+    top: 12px;
+  }
+
+  .story_group2 .story_product {
+    left: auto;
+    right: calc(var(--grid-margin) + 8px);
+  }
+
+  .story_info,
+  .story_group2 .story_info {
+    top: 190px;
+    transform: none;
+    left: calc(var(--grid-margin) + 8px);
+    right: calc(10vw + 24px);
+    width: auto;
+    padding: 0;
+  }
+
+  .story_group2 .story_info {
+    left: calc(10vw + 24px);
+    right: calc(var(--grid-margin) + 8px);
+  }
+
+  .story_infoTitle {
+    margin-bottom: 8px;
+  }
+
+  .story_infoSubtitle {
+    margin-bottom: 20px;
+  }
+
+  .story_infoButton {
+    width: 130px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  /* ---------- Visual ---------- */
+  .visual_image {
+    width: calc(100% - var(--grid-margin) - 20px);
+    height: 340px;
+  }
+
+  .visual_image2 {
+    width: 190px;
+    height: 190px;
+    top: 250px; /* 큰 사진 아래쪽 끝(340px)과 90px 겹침 */
+    right: var(--grid-margin);
+  }
+
+  .visual_text {
+    margin-top: 120px; /* 작은 사진이 사진 아래로 100px 튀어나오므로 글과 겹치지 않게 */
+    padding-right: var(--grid-margin);
+  }
+
+  .visual_title,
+  .visual_subtitle {
+    max-width: none;
+  }
+
+  /* ---------- Bento: 절대 좌표 배치 → 2열 그리드(1번 박스·4번 박스는 가로 전체) ---------- */
+  .bento {
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 60px var(--grid-margin) 80px;
+    margin-top: var(--section-gap);
+    box-sizing: border-box;
+  }
+
+  .bento_logo {
+    position: static;
+    transform: none; /* 기본의 translateX(-50%)는 absolute 중앙 정렬용이라 static에서는 왼쪽으로 밀려남 */
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 200px;
+    height: 30px;
+    margin: 0 0 28px;
+  }
+
+  .bento_box,
+  .bento_box1,
+  .bento_box2,
+  .bento_box3,
+  .bento_box4 {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+  }
+
+  .bento_box1 {
+    grid-column: 1 / -1;
+    height: 300px;
+  }
+
+  .bento_box2,
+  .bento_box3 {
+    height: 240px;
+  }
+
+  .bento_box4 {
+    grid-column: 1 / -1;
+    height: 280px;
+  }
+
+  .bento_box1Text {
+    left: 52px; /* 왼쪽 꺾쇠와 겹치지 않게 */
+    max-width: 56%;
+  }
+
+  .bento_box1TextLine1 {
+    font-size: 16px;
+  }
+
+  .bento_box1TextLine2 {
+    font-size: 20px;
+  }
+
+  .bento_box1More {
+    margin-top: 10px;
+    font-size: 14px;
+  }
+
+  .bento_box2,
+  .bento_box3,
+  .bento_box4 {
+    padding-bottom: 24px;
+  }
+
+  .bento_boxLabel {
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    height: auto;
+    padding: 0 var(--grid-margin) 40px;
+  }
+
+  .footer_logo {
+    margin-top: 60px;
+  }
+
+  .footer_links {
+    flex-wrap: wrap;
+    row-gap: 6px;
+  }
+
+  .footer_link {
+    font-size: 14px;
+  }
+
+  .footer_link:not(:last-child)::after {
+    margin: 0 10px;
+  }
+
+  .footer_info {
+    font-size: 12px;
+    line-height: 20px;
+  }
+
+  .footer_copyright {
+    font-size: 12px;
+  }
+}
