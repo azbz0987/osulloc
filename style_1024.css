@@ -503,6 +503,34 @@
       right: calc(var(--grid-margin) + 28.125vw + 40px);
     }
 
+    /* 박스 길이는 늘리되 너무 길지 않게: 1·3번은 오른쪽 끝 92vw → 86vw, 2번은 왼쪽 시작 8vw → 14vw */
+    .story_shape {
+      width: calc(86vw + 245px);
+    }
+
+    .story_group2 .story_shape {
+      left: 14vw;
+    }
+
+    .story_info {
+      right: calc(100% - 86vw + 40px);
+    }
+
+    .story_group2 .story_info {
+      left: calc(14vw + 40px);
+    }
+
+    /* visual: 오른쪽 아래 작은 사진(visual_image2, 폭 386px)이 제목/부제목 글자 아래로 겹치지 않게
+       글 폭을 작은 사진 왼쪽까지로 제한하고 줄바꿈 */
+    .visual_br {
+      display: inline;
+    }
+
+    .visual_title,
+    .visual_subtitle {
+      max-width: calc(100% - var(--grid-margin) - 386px - 24px);
+    }
+
     /* 박스 높이가 줄어든 만큼 줄간격도 줄임 */
     .story_infoTitle {
       line-height: 1.15;
