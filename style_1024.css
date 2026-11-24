@@ -66,7 +66,7 @@
 
   /* ---------- About ---------- */
   .about_box {
-    width: 62vw; /* 박스 폭은 화면 폭에 대한 고정 비율. 안쪽 좌우 여백(그리드 여백)을 뺀 나머지가 본문 영역이라, 화면이 줄면 본문 영역이 비율로 좁아지고 자연스럽게 줄바꿈됨 */
+    width: 69.0625vw; /* 1920 기준 박스 폭(1326px)의 화면 폭 대비 비율 그대로 — 안쪽 좌우 여백(그리드 여백)을 뺀 나머지가 본문 영역 */
     padding: 60px var(--grid-margin) 60px var(--grid-margin); /* 텍스트가 오른쪽 끝으로 너무 빠지지 않도록 오른쪽 안쪽 여백도 왼쪽(그리드 여백)과 동일하게 */
   }
 
@@ -121,8 +121,8 @@
     margin-top: 50px; /* 텍스트와의 여백 50px */
     height: 580px;
   }
+  /* 폭/위치는 script.js의 updateTealifePhotoBg()가 사진 폭에 비례해서 지정(1024 기준 사진 804px 대비 박스 786px) */
   .tealife_photoBg {
-    width: 786px;
     height: 570px;
   }
 

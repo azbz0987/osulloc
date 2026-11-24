@@ -6,18 +6,35 @@
      화면 아래 30% 안에 있어 개별 요소가 트리거 지점에 못 닿는 경우 대비) */
 function initReveal() {
   const targets = Array.from(document.querySelectorAll('[data-reveal-group], [data-reveal]')).filter(
-    (el) => el.hasAttribute('data-reveal-group') || !el.closest('[data-reveal-group]')
+    (el) =>
+      !el.hasAttribute('data-reveal-follow') &&
+      (el.hasAttribute('data-reveal-group') || !el.closest('[data-reveal-group]'))
   );
 
+  /* data-reveal-follow="대상id": 자기 위치가 아니라 대상 요소가 보일 때 같이 재생
+     (예: jeju 인디케이터는 사진 아래 멀리 있어서 자기 위치 기준이면 화면에 보이는데도 한참 뒤에야 올라옴) */
+  const followers = new Map();
+  document.querySelectorAll('[data-reveal-follow]').forEach((el) => {
+    const id = el.getAttribute('data-reveal-follow');
+    if (!followers.has(id)) followers.set(id, []);
+    followers.get(id).push(el);
+  });
+
+  const setVisible = (target, visible) => {
+    target.classList.toggle('isVisible', visible);
+    (followers.get(target.id) || []).forEach((f) => f.classList.toggle('isVisible', visible));
+  };
+
   if (!('IntersectionObserver' in window)) {
-    targets.forEach((el) => el.classList.add('isVisible'));
+    targets.forEach((el) => setVisible(el, true));
+    document.querySelectorAll('[data-reveal-follow]').forEach((el) => el.classList.add('isVisible'));
     return;
   }
 
   const showObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add('isVisible');
+        if (entry.isIntersecting) setVisible(entry.target, true);
       });
     },
     { threshold: 0, rootMargin: '0px 0px -30% 0px' }
@@ -26,7 +43,7 @@ function initReveal() {
   const hideObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) entry.target.classList.remove('isVisible');
+        if (!entry.isIntersecting) setVisible(entry.target, false);
       });
     },
     { threshold: 0, rootMargin: '0px' }
@@ -40,24 +57,24 @@ function initReveal() {
 
 initReveal();
 
-// ---------- Hero 슬로건: 영상 앞부분(0.3s~5.3s)에서만 보였다가 사라지고, 영상이 반복될 때마다 다시 나옴 ----------
+// ---------- Hero 슬로건: 영상이 4초 이후부터 자연스럽게 나타나서 계속 유지 ----------
 const heroVideo = document.getElementById('heroVideo');
 const heroSlogan = document.getElementById('heroSlogan');
-const HERO_SLOGAN_START = 0.3;
-const HERO_SLOGAN_END = 5.3;
-
-function updateHeroSlogan() {
-  const t = heroVideo.currentTime;
-  heroSlogan.classList.toggle('isShown', t >= HERO_SLOGAN_START && t < HERO_SLOGAN_END);
-}
+const HERO_SLOGAN_DELAY = 4;
 
 if (heroVideo && heroSlogan) {
-  heroVideo.addEventListener('timeupdate', updateHeroSlogan);
-  updateHeroSlogan();
-  /* 자동재생이 막혀 영상이 멈춰 있으면 슬로건이 영영 안 보이므로 그대로 보여줌 */
+  const showHeroSlogan = () => {
+    heroSlogan.classList.add('isShown');
+    heroVideo.removeEventListener('timeupdate', onHeroTimeUpdate);
+  };
+  function onHeroTimeUpdate() {
+    if (heroVideo.currentTime >= HERO_SLOGAN_DELAY) showHeroSlogan();
+  }
+  heroVideo.addEventListener('timeupdate', onHeroTimeUpdate);
+  /* 자동재생이 막혀 영상이 멈춰 있으면 timeupdate가 안 오므로 4초 뒤에 그대로 보여줌 */
   setTimeout(() => {
-    if (heroVideo.paused) heroSlogan.classList.add('isShown');
-  }, 1500);
+    if (heroVideo.paused) showHeroSlogan();
+  }, HERO_SLOGAN_DELAY * 1000);
 }
 
 // ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
@@ -227,6 +244,7 @@ function updateTealifePhotoBg() {
     /* 1920 구간에서는 style.css의 고정 left/top(982px/86px)이 그대로 적용되도록 인라인 값 제거 */
     photoBg.style.left = '';
     photoBg.style.top = '';
+    photoBg.style.width = '';
     return;
   }
 
@@ -234,7 +252,12 @@ function updateTealifePhotoBg() {
      offsetLeft/offsetTop(레이아웃 좌표, photoBg와 동일한 offsetParent인 .tealife 기준)로 실측해서 계산 */
   const photoRight = photo.offsetLeft + photo.offsetWidth;
   const photoBottom = photo.offsetTop + photo.offsetHeight;
-  photoBg.style.left = `${photoRight + 78 - 786}px`;
+  /* 1024 기준 사진 804px 대비 박스 폭 786px, 오른쪽으로 삐져나오는 양 78px — 사진 폭이 줄면 같은 비율로 줄임
+     (높이는 사진 높이가 고정이라 570px / 78px 그대로) */
+  const photoScale = photo.offsetWidth / 804;
+  const bgWidth = 786 * photoScale;
+  photoBg.style.width = `${bgWidth}px`;
+  photoBg.style.left = `${photoRight + 78 * photoScale - bgWidth}px`;
   photoBg.style.top = `${photoBottom + 78 - 570}px`;
 }
 window.addEventListener('resize', updateTealifePhotoBg);
@@ -301,24 +324,41 @@ function updateScrollPhotos(progress) {
   let opacity2;
   let opacity3;
 
+  /* 사진은 교차 페이드하지만 텍스트는 겹쳐 보이면 읽기 힘드므로, 앞 글이 먼저 완전히 사라진 뒤(앞 절반)
+     다음 글이 나타나도록(뒤 절반) 나눔 — 두 글이 동시에 보이는 구간이 없음 */
+  const fadeOutFirstHalf = (l) => Math.max(0, 1 - l * 2);
+  const fadeInSecondHalf = (l) => Math.max(0, l * 2 - 1);
+  let textOpacity1;
+  let textOpacity2;
+  let textOpacity3;
+
   if (progress <= seg) {
     const local = progress / seg;
     left1 = photo1StartLeft * (1 - local);
     opacity1 = 1;
     opacity2 = 0;
     opacity3 = 0;
+    textOpacity1 = 1;
+    textOpacity2 = 0;
+    textOpacity3 = 0;
   } else if (progress <= seg * 2) {
     const local = (progress - seg) / seg;
     left1 = 0;
     opacity1 = 1 - local;
     opacity2 = local;
     opacity3 = 0;
+    textOpacity1 = fadeOutFirstHalf(local);
+    textOpacity2 = fadeInSecondHalf(local);
+    textOpacity3 = 0;
   } else {
     const local = (progress - seg * 2) / seg;
     left1 = 0;
     opacity1 = 0;
     opacity2 = 1 - local;
     opacity3 = local;
+    textOpacity1 = 0;
+    textOpacity2 = fadeOutFirstHalf(local);
+    textOpacity3 = fadeInSecondHalf(local);
   }
 
   scrollPhoto1.style.setProperty('--photo1-left', `${left1}px`);
@@ -327,9 +367,9 @@ function updateScrollPhotos(progress) {
   scrollPhoto3.style.opacity = opacity3;
 
   scrollText1.classList.toggle('isCovered', left1 <= getScrollText1CoverThreshold());
-  scrollText1.style.opacity = opacity1;
-  scrollText2.style.opacity = opacity2;
-  scrollText3.style.opacity = opacity3;
+  scrollText1.style.opacity = textOpacity1;
+  scrollText2.style.opacity = textOpacity2;
+  scrollText3.style.opacity = textOpacity3;
 }
 
 function updateScrollSection() {
