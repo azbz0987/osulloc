@@ -103,6 +103,14 @@ body {
    다른 아이콘들처럼 SVG 하나로 통일 — 벡터 하나로 렌더링되어 항상 동일하게 그려짐 */
 
 /* ---------- Logo ---------- */
+/* h1의 글자 줄 높이(32px 기준 38px)가 로고 이미지를 위로 밀어 올리던 것을 막아 세로 정중앙에 */
+.header_inner h1 {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  line-height: 0;
+}
+
 .logo {
   display: inline-flex;
   align-items: center;
