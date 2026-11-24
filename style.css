@@ -63,6 +63,7 @@ body {
 .header_inner {
   max-width: 1440px;
   height: 100%;
+  position: relative; /* 로그인 아이콘(.headerLoginBtn)의 기준 */
   margin: 0 auto;
   padding: 0 24px; /* PC: 컨텐츠 프레임(1440, 좌우 여백 24px)과 로고/메뉴가 같은 끝선에 오도록. 1440 이하는 style_1024.css에서 %로 */
   display: grid;
@@ -78,8 +79,8 @@ body {
 .headerLoginBtn {
   position: absolute;
   top: 50%;
-  left: calc(var(--grid-margin) + 1345px); /* 12번째 컬럼 중앙(1920에서 1609px) — 컨텐츠 프레임 기준. 1440 이하는 style_1024.css에서 % */
-  transform: translate(-50%, -50%);
+  right: 0; /* header_inner의 오른쪽 끝에 붙임 */
+  transform: translateY(-50%);
   width: 40px;
   height: 40px;
   display: flex;

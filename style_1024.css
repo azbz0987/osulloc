@@ -35,10 +35,6 @@
     padding: 0 var(--side-padding);
   }
 
-  .headerLoginBtn {
-    left: 83.802%; /* 12번째 컬럼 중앙(1609px / 1920px) */
-  }
-
   .gnb_list {
     gap: 28px;
   }
