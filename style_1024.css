@@ -945,7 +945,7 @@
 
   /* 사각형이 한쪽으로 10vw 비어 있으므로 같은 만큼 안쪽 여백을 줘서 사각형의 가운데에 맞춤 */
   .story_group {
-    --story-img: clamp(220px, 64vw, 260px);
+    --story-h: clamp(160px, 46vw, 190px); /* 눈에 보이는 상품 높이(세 그룹 공통) */
     height: 420px;
     display: flex;
     flex-direction: column;
@@ -998,10 +998,12 @@
     right: auto;
     left: auto;
     flex-shrink: 0;
-    width: var(--story-img);
-    height: var(--story-img);
-    /* 사진 파일의 투명 여백만큼 당겨서, 눈에 보이는 상품 기준으로 사각형 위아래 여백이 같아지게. 상품과 제목 사이는 24px */
-    margin: calc(var(--story-img) * var(--img-top) * -1) 0 calc(24px - var(--story-img) * var(--img-bottom));
+    /* 세 그룹의 상품이 눈에 보이는 높이(--story-h)가 같도록 사진 크기를 투명 여백 비율로 역산 */
+    --img-size: calc(var(--story-h) / (1 - var(--img-top) - var(--img-bottom)));
+    width: var(--img-size);
+    height: var(--img-size);
+    /* 투명 여백만큼 당겨서 위/아래 여백이 보이는 상품 기준이 되게. 상품과 제목 사이는 24px */
+    margin: calc(var(--img-size) * var(--img-top) * -1) 0 calc(24px - var(--img-size) * var(--img-bottom));
   }
 
   /* 각 사진의 위/아래 투명 여백 비율(3번은 scale(1.15) 확대를 반영한 값) */
