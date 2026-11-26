@@ -759,14 +759,20 @@
     display: none; /* 뒤에 공백이 있어 자연스럽게 이어짐 */
   }
 
+  /* 768 직전 크기(340x480)에서 완만하게만 줄어듦. 아주 좁은 화면에서는 화면 폭의 82%까지 */
+  .about {
+    --about-slide-w: min(clamp(310px, 44vw, 340px), 82vw);
+    --about-slide-h: calc(var(--about-slide-w) * 480 / 340);
+  }
+
   .about_slide {
-    flex: 0 0 270px;
-    width: 270px;
-    height: 380px;
+    flex: 0 0 var(--about-slide-w);
+    width: var(--about-slide-w);
+    height: var(--about-slide-h);
   }
 
   .about_slideViewport {
-    height: 404px; /* 슬라이드 380 + 위 패딩 24 */
+    height: calc(var(--about-slide-h) + 24px); /* 슬라이드 + 위 패딩 24 */
   }
 
   .about_slideCaption {
@@ -781,8 +787,10 @@
     margin-bottom: 18px;
   }
 
+  /* '안부, 위로, 비움'과 본문 사이는 visual의 부제목 → 본문 간격(줄높이 22px + 여백 14px)과 동일 */
   .tealife_subhead {
-    margin-bottom: 28px;
+    line-height: 22px;
+    margin-bottom: 14px;
   }
 
   .tealife_body {
@@ -921,12 +929,12 @@
 
   /* ---------- Story: 보이는 사각형 가운데에 제품 사진(위) → 글(아래)을 세로로 쌓음 ---------- */
   .story {
-    height: 1740px; /* 위 90 + 460*3 + 그룹 간 90*2 + 아래 90 */
+    height: 1600px; /* 위 110 + 420*3 + 그룹 간 110*2 + 아래 110 */
   }
 
   /* 사각형이 한쪽으로 10vw 비어 있으므로 같은 만큼 안쪽 여백을 줘서 사각형의 가운데에 맞춤 */
   .story_group {
-    height: 460px;
+    height: 420px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -940,7 +948,7 @@
   }
 
   .story_group1 {
-    top: 90px;
+    top: 110px;
   }
 
   .story_group2 {
@@ -948,13 +956,13 @@
   }
 
   .story_group3 {
-    top: 1190px;
+    top: 1170px;
   }
 
   .story_shape {
     left: -60px;
     width: calc(90vw + 60px);
-    height: 460px;
+    height: 420px;
     border-radius: 60px;
   }
 
@@ -995,12 +1003,12 @@
   }
 
   .story_infoTitle {
-    font-size: clamp(24px, 4.4vw, 32px);
+    font-size: clamp(22px, calc(4.4vw - 2px), 30px);
     margin-bottom: 6px;
   }
 
   .story_infoSubtitle {
-    font-size: clamp(16px, 2.6vw, 20px);
+    font-size: clamp(14px, calc(2.6vw - 2px), 18px);
     margin-bottom: 16px;
   }
 
@@ -1009,7 +1017,7 @@
     width: 124px;
     height: 34px;
     margin: 0 auto;
-    font-size: 15px;
+    font-size: 13px;
   }
 
   /* ---------- Visual ---------- */
@@ -1026,7 +1034,7 @@
   }
 
   .visual_text {
-    margin-top: 120px; /* 작은 사진이 사진 아래로 100px 튀어나오므로 글과 겹치지 않게 */
+    margin-top: 96px; /* 작은 사진이 사진 아래로 100px 튀어나옴(아래쪽 약 30px은 투명 여백이라 글과 겹쳐 보이지 않음) */
     padding-right: var(--grid-margin);
   }
 
@@ -1087,59 +1095,16 @@
   }
 
   .bento_box1 {
-    --b1-photo: min(87vw, 340px); /* 사진 높이: 상품 전체가 박스 폭에 들어오도록 화면 폭에 비례 */
     grid-column: 1 / -1;
-    height: calc(var(--b1-photo) + 60px); /* 위 60px은 글자 자리 */
+    height: 300px;
   }
 
-  /* 사진을 아래에 붙이고 윗부분은 배경색과 부드럽게 이어지도록 서서히 투명하게 */
-  .bento_box1Photo {
-    top: auto;
-    bottom: 0;
-    height: var(--b1-photo);
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 48px);
-    mask-image: linear-gradient(to bottom, transparent, #000 48px);
-  }
-
-  /* 각 사진 윗부분과 같은 배경색 */
-  .bento_box1Slide:nth-child(1) {
-    background: linear-gradient(to right, #b9c7c8 50%, #adbab8);
-  }
-
-  .bento_box1Slide:nth-child(2) {
-    background: #9ecd9f;
-  }
-
-  .bento_box1Slide3 {
-    background: #dcdae7;
-  }
-
-  .bento_box1Slide4 {
-    background: #dae5ab;
-  }
-
-  .bento_box1Slide5 {
-    background: #e6e2df;
-  }
-
-  /* 오른쪽에 있는 상품이 잘리지 않게 사진을 왼쪽으로 당김(값이 클수록 오른쪽 부분이 보임) */
+  /* 오른쪽 상품이 잘려 보이지 않게 사진을 왼쪽으로 당김(값이 클수록 오른쪽 부분이 보임). 2번(미피)은 가운데 그대로 */
   .bento_box1Slide:nth-child(1) .bento_box1Photo,
+  .bento_box1Slide3 .bento_box1Photo,
+  .bento_box1Slide4 .bento_box1Photo,
   .bento_box1Slide5 .bento_box1Photo {
-    object-position: 100% 50%;
-  }
-
-  .bento_box1Slide3 .bento_box1Photo {
-    object-position: 87% 50%;
-  }
-
-  .bento_box1Slide4 .bento_box1Photo {
-    object-position: 91% 50%;
-  }
-
-  /* 2번(미피)은 상품이 가로로 넓게 퍼져 있어 사진 높이를 조금 낮춰 전체가 보이게 */
-  .bento_box1Slide:nth-child(2) .bento_box1Photo {
-    height: calc(var(--b1-photo) * 0.82);
-    object-position: 50% 50%;
+    object-position: 70% 50%;
   }
 
   .bento_box2,
@@ -1153,10 +1118,8 @@
   }
 
   .bento_box1Text {
-    top: 20px; /* 사진 속 상품과 겹치지 않게 위쪽에 배치 */
-    left: 24px;
-    max-width: calc(100% - 48px);
-    transform: none;
+    left: 52px; /* 왼쪽 꺾쇠와 겹치지 않게 */
+    max-width: 56%;
   }
 
   .bento_box1TextLine1 {
@@ -1164,14 +1127,12 @@
   }
 
   .bento_box1TextLine2 {
-    margin-top: 4px;
     font-size: 18px;
   }
 
   .bento_box1More {
-    margin-top: 6px;
+    margin-top: 10px;
     font-size: 12px;
-    line-height: 18px;
   }
 
   .bento_box2,
