@@ -896,6 +896,8 @@
   /* ---------- Banner ---------- */
   .banner_image {
     height: 450px;
+    object-position: 73% 50%; /* 오른쪽에 있는 상품이 보이도록 사진을 왼쪽으로 당김 */
+    filter: brightness(0.5); /* dim: 상품 위에 겹치는 글자가 읽히도록 */
   }
 
   /* ---------- Scroll ---------- */
