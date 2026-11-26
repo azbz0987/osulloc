@@ -30,9 +30,12 @@
   /* ---------- Header ---------- */
   /* .header { ... } 변경 없음 */
 
+  /* 좌우 여백을 padding이 아니라 margin으로: header_inner 자체가 컨텐츠 폭이 되어
+     right:0인 로그인 아이콘이 화면 끝이 아니라 header_inner 안(로고 시작선과 대칭)에 놓임 */
   .header_inner {
-    max-width: 100%;
-    padding: 0 var(--side-padding);
+    max-width: none;
+    margin: 0 var(--side-padding);
+    padding: 0;
   }
 
   .gnb_list {
