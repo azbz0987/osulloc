@@ -853,8 +853,8 @@ body {
   border-radius: 245px;
   background: linear-gradient(
     to right,
-    rgba(255, 255, 255, 0.84),
-    rgba(255, 255, 255, 0.2)
+    rgba(255, 255, 255, 1),
+    rgba(255, 255, 255, 0.5)
   );
   z-index: 1;
 }
@@ -865,8 +865,8 @@ body {
   width: auto;
   background: linear-gradient(
     to right,
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.84)
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 1)
   );
 }
 

@@ -987,7 +987,7 @@
   /* 제품 사진은 위(밝은 쪽), 흰 글씨는 아래(어두운 쪽)에 오도록 세로 그라데이션 */
   .story_shape,
   .story_group2 .story_shape {
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.84), rgba(255, 255, 255, 0.12));
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.42));
   }
 
   .story_product,
