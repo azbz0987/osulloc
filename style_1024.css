@@ -645,11 +645,17 @@
 
     /* 박스 높이가 줄어든 만큼 줄간격도 줄임 */
     .story_infoTitle {
+      font-size: 36px;
       line-height: 1.15;
       margin-bottom: 12px;
     }
 
+    .story_infoButton {
+      font-size: 16px;
+    }
+
     .story_infoSubtitle {
+      font-size: 20px;
       line-height: 1.3;
       margin-bottom: 26px; /* 본문이 빠진 자리에 부제목 → 버튼 사이 여백 */
     }
@@ -1025,12 +1031,12 @@
   }
 
   .story_infoTitle {
-    font-size: clamp(22px, calc(4.4vw - 2px), 30px);
+    font-size: clamp(20px, calc(4.4vw - 4px), 28px);
     margin-bottom: 6px;
   }
 
   .story_infoSubtitle {
-    font-size: clamp(14px, calc(2.6vw - 2px), 18px);
+    font-size: clamp(13px, calc(2.6vw - 4px), 16px);
     margin-bottom: 16px;
   }
 
@@ -1039,7 +1045,7 @@
     width: 124px;
     height: 34px;
     margin: 0 auto;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   /* ---------- Visual ---------- */
