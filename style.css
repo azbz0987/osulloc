@@ -107,6 +107,10 @@ body {
   display: none;
 }
 
+.menuDim {
+  display: none;
+}
+
 /* 3개의 div/span으로 만들면 DPR(예: 125% 배율)에 따라 줄마다 서브픽셀 반올림이 달라져 한 줄만 두꺼워 보이는 문제가 있어
    다른 아이콘들처럼 SVG 하나로 통일 — 벡터 하나로 렌더링되어 항상 동일하게 그려짐 */
 
@@ -1322,6 +1326,33 @@ body {
   text-align: center;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
 }
+
+/* 텍스트 시간차(모든 화면): 스크롤 한 번에 제목 → 부제목 → 본문 순으로 0.15s 간격으로 나타남
+   (한 묶음은 대표 요소가 켜질 때 같이 켜지고, 아래 delay로 순서만 어긋남) */
+.intro_eyebrow { --reveal-delay: 0.15s; }
+.intro_body { --reveal-delay: 0.3s; }
+.intro_divider { --reveal-delay: 0.45s; }
+
+.about_subtitle { --reveal-delay: 0.15s; }
+.about_body { --reveal-delay: 0.3s; }
+.about_more { --reveal-delay: 0.45s; }
+
+.tealife_subtitle { --reveal-delay: 0.15s; }
+.tealife_subhead { --reveal-delay: 0.3s; }
+.tealife_body { --reveal-delay: 0.45s; }
+
+.banner_subtitle { --reveal-delay: 0.15s; }
+.banner_body { --reveal-delay: 0.3s; }
+.banner_more { --reveal-delay: 0.45s; }
+
+.visual_subtitle { --reveal-delay: 0.15s; }
+.visual_body { --reveal-delay: 0.3s; }
+.visual_more { --reveal-delay: 0.45s; }
+
+.footer_links { --reveal-delay: 0.15s; }
+.footer_social { --reveal-delay: 0.3s; }
+.footer_info { --reveal-delay: 0.45s; }
+.footer_copyright { --reveal-delay: 0.6s; }
 
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],

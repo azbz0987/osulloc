@@ -256,7 +256,7 @@ function updateTealifePhotoBg() {
   /* 박스 폭은 1024 기준 사진 804px 대비 786px 비율로 사진을 따라 줄이되, 보이는 부분(오른쪽/아래로 삐져나오는 양)은
      오른쪽과 아래가 똑같이 78px가 되도록 고정 (사진 폭에 비례시키면 화면이 넓을 때 오른쪽만 더 넓어 보임) */
   const isMobile = document.documentElement.clientWidth <= MOBILE_BREAKPOINT;
-  const OVERHANG = isMobile ? 20 : 78; /* 모바일은 화면 안에 들어오도록 튀어나오는 양을 줄임 */
+  const OVERHANG = isMobile ? 25 : 78; /* 모바일은 화면 안에 들어오도록 튀어나오는 양을 줄임 */
   const bgWidth = (786 / 804) * photo.offsetWidth;
   photoBg.style.width = `${bgWidth}px`;
   photoBg.style.left = `${photoRight + OVERHANG - bgWidth}px`;
@@ -407,6 +407,7 @@ document.getElementById('bentoBox1Next').addEventListener('click', () => setBent
 // ---------- 모바일 메뉴 (1024px 미만에서 햄버거 버튼으로 nav 메뉴 펼치기) ----------
 const menuBtn = document.getElementById('headerMenuBtn');
 const mobileMenu = document.getElementById('mobileMenu');
+const menuDim = document.getElementById('menuDim');
 
 function setMenuOpen(open) {
   headerEl.classList.toggle('isMenuOpen', open);
@@ -415,6 +416,7 @@ function setMenuOpen(open) {
 }
 
 menuBtn.addEventListener('click', () => setMenuOpen(!headerEl.classList.contains('isMenuOpen')));
+menuDim.addEventListener('click', () => setMenuOpen(false));
 mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenuOpen(false)));
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') setMenuOpen(false);
