@@ -759,9 +759,9 @@
     display: none; /* 뒤에 공백이 있어 자연스럽게 이어짐 */
   }
 
-  /* 768 직전 크기(340x480)에서 완만하게만 줄어듦. 아주 좁은 화면에서는 화면 폭의 82%까지 */
+  /* 768 직전 크기(340x480)에서 완만하게만 줄어듦. 아주 좁은 화면에서는 화면 폭의 85%까지 */
   .about {
-    --about-slide-w: min(clamp(310px, 44vw, 340px), 82vw);
+    --about-slide-w: min(clamp(310px, 44vw, 340px), 85vw);
     --about-slide-h: calc(var(--about-slide-w) * 480 / 340);
   }
 
