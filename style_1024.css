@@ -929,11 +929,12 @@
 
   /* ---------- Story: 보이는 사각형 가운데에 제품 사진(위) → 글(아래)을 세로로 쌓음 ---------- */
   .story {
-    height: 1600px; /* 위 110 + 420*3 + 그룹 간 110*2 + 아래 110 */
+    height: 1700px; /* 위 110 + 420*3 + 그룹 간 110*2 + 아래 110 */
   }
 
   /* 사각형이 한쪽으로 10vw 비어 있으므로 같은 만큼 안쪽 여백을 줘서 사각형의 가운데에 맞춤 */
   .story_group {
+    --story-img: clamp(220px, 64vw, 260px);
     height: 420px;
     display: flex;
     flex-direction: column;
@@ -986,8 +987,26 @@
     right: auto;
     left: auto;
     flex-shrink: 0;
-    width: clamp(220px, 64vw, 260px);
-    height: clamp(220px, 64vw, 260px);
+    width: var(--story-img);
+    height: var(--story-img);
+    /* 사진 파일의 투명 여백만큼 당겨서, 눈에 보이는 상품 기준으로 사각형 위아래 여백이 같아지게. 상품과 제목 사이는 24px */
+    margin: calc(var(--story-img) * var(--img-top) * -1) 0 calc(24px - var(--story-img) * var(--img-bottom));
+  }
+
+  /* 각 사진의 위/아래 투명 여백 비율(3번은 scale(1.15) 확대를 반영한 값) */
+  .story_group1 {
+    --img-top: 0.201;
+    --img-bottom: 0.167;
+  }
+
+  .story_group2 {
+    --img-top: 0.201;
+    --img-bottom: 0.143;
+  }
+
+  .story_group3 {
+    --img-top: 0.017;
+    --img-bottom: 0.176;
   }
 
   .story_info,
