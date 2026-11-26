@@ -4,7 +4,7 @@
   --color-line: #e5e3de;
   --color-accent: #2f4a3c; /* 오설록 딥 그린 톤 */
   --header-height: 84px;
-  --side-padding: 3.125%; /* 60px / 1920px — 헤더는 zoom 대상이 아니라서 px 대신 %로 둬야 실제 창 너비에서도 비율이 맞음 */
+  --side-padding: 3.125%; /* 60px / 1920px — px 대신 %로 둬야 실제 창 너비에서도 비율이 맞음 */
   --section-gap: 250px;
   --grid-margin: 264px; /* 1920 캔버스 12컬럼(94px)/gutter(24px) 기준 좌우 여백 */
   --column-width: 94px;
@@ -35,11 +35,7 @@ body {
   word-break: keep-all; /* 줄바꿈 시 단어가 잘리지 않고 어절 단위로 함께 넘어가도록 */
 }
 
-/* ---------- Page scale (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ---------- */
-.pageScaleOuter {
-  width: 100%;
-}
-
+/* ---------- 컨텐츠 프레임 ---------- */
 /* PC(1440 초과): 컨텐츠 영역은 가운데 1440px(좌우 여백 24px + 12컬럼 1392px)이고 배경은 화면 끝까지.
    --grid-margin은 script.js가 화면 폭에 맞춰 (화면폭-1440)/2 + 24px로 계산해서 지정함(1920에서 264px).
    컨텐츠는 모두 --grid-margin 기준으로 배치. 가로로 삐져나가는 배경/슬라이더는 clip으로 잘라냄(sticky 유지) */
@@ -70,10 +66,6 @@ body {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   column-gap: 24px;
-}
-
-.header_utility {
-  justify-self: end;
 }
 
 .headerLoginBtn {
@@ -177,17 +169,6 @@ body {
 .gnb_link:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 4px;
-}
-
-/* ---------- Responsive ---------- */
-@media (max-width: 480px) {
-  :root {
-    --side-padding: 20px;
-    --header-height: 64px;
-  }
-  .gnb_list {
-    display: none;
-  }
 }
 
 /* ---------- Hero video ---------- */
@@ -410,9 +391,11 @@ body {
 }
 
 .tealife_photoBg {
+  /* 사진 오른쪽/아래로 보이는 폭. 기본 90px, 화면 오른쪽 여백이 그보다 좁으면(약 1572px 미만) 잘리지 않게 여백만큼만 */
+  --bg-overhang: min(90px, var(--grid-margin));
   position: absolute;
-  top: 86px; /* 사진 top(0) + 86px = 사진 bottom(675) + 90px에서 역산 */
-  left: calc(var(--grid-margin) + 718px); /* 사진 left + 270px = 사진 right + 90px에서 역산 */
+  top: calc(var(--bg-overhang) - 4px); /* 사진 bottom(675) + overhang - 박스 높이(679) */
+  left: calc(var(--grid-margin) + 628px + var(--bg-overhang)); /* 사진 right(그리드 여백 + 1392) + overhang - 박스 폭(764) */
   width: 764px;
   height: 679px;
   background: #15301a;
@@ -423,7 +406,7 @@ body {
 /* ---------- Jeju & Osulloc ---------- */
 .jeju {
   width: 100%;
-  margin-top: calc(var(--section-gap) + 90px); /* tealife 초록 박스(photoBg)가 위 섹션 아래로 90px 튀어나와 있어, 눈에 보이는 간격이 250px가 되도록(여백끼리는 겹쳐져서 margin-bottom으로는 안 됨) */
+  margin-top: calc(var(--section-gap) + min(90px, var(--grid-margin))); /* tealife 초록 박스(photoBg)가 위 섹션 아래로 튀어나온 만큼(최대 90px) 더해, 눈에 보이는 간격이 250px가 되도록(여백끼리는 겹쳐져서 margin-bottom으로는 안 됨) */
   padding: 0 var(--grid-margin);
   box-sizing: border-box;
 }
@@ -1279,8 +1262,7 @@ body {
 [data-reveal="right"] { translate: 80px 0; }
 [data-reveal="scale"] { scale: 1.08; }
 
-[data-reveal].isVisible,
-[data-reveal-group].isVisible [data-reveal] {
+[data-reveal].isVisible {
   opacity: 1;
   translate: 0 0;
   scale: 1;

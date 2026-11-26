@@ -1,14 +1,13 @@
 @media all and (max-width:1440px){
 
   /* 767px~1024px(태블릿) 대응. 트리거 지점을 1440px로 잡은 이유는 세로 스크롤바/브라우저 여백을 감안한 여유값.
-     이 구간에서는 script.js가 .pageScale의 zoom을 끄기 때문에(1024 이하 실제 크기로 렌더링),
      아래 규칙들은 1920 캔버스가 아니라 이 구간 자체의 실제 px 기준으로 다시 짠 값들임.
      변경이 필요 없는 규칙(색상/리셋/트랜지션 타이밍 등)은 주석 처리해서 style.css 값을 그대로 사용함. */
 
   :root {
     /* 1024 기준 그리드(사용자 지정): margin 56px, gutter 24px(1920과 동일하게 고정, 축소 안 함), 12컬럼
        컬럼폭 = (1024 - 56*2 - 24*11) / 12 = (912 - 264) / 12 = 54px
-       zoom이 꺼진 구간이라 실제 창 너비 어디서든 비율이 맞도록 전부 %로 표기 */
+       실제 창 너비 어디서든 비율이 맞도록 전부 %로 표기 */
     --grid-margin: 5.46875%; /* 56px / 1024px */
     --column-width: 5.2734%; /* 54px / 1024px */
     --gutter: 2.34375%; /* 24px / 1024px — 1920과 동일한 고정값, 비율 축소하지 않음 */
@@ -20,12 +19,6 @@
   /* * { ... } 변경 없음 */
   /* .mediaCover { ... } 변경 없음 */
   /* body { ... } 변경 없음 — overflow-x:hidden을 html/body에 걸면 position:sticky(헤더, scroll_pinned)가 깨짐 */
-
-  /* ---------- Page scale ---------- */
-  /* 이 구간에서는 zoom을 끄고 1920 고정 캔버스 대신 뷰포트 폭을 그대로 사용 */
-  .pageScale {
-    width: 100%;
-  }
 
   /* ---------- Header ---------- */
   /* .header { ... } 변경 없음 */
@@ -49,7 +42,6 @@
   /* 1024px 미만: nav(메뉴 글자, 로그인 아이콘)를 모두 없애고 오른쪽에 메뉴 버튼만 남김 */
   @media (max-width: 1023px) {
     .gnb,
-    .header_utility,
     .headerLoginBtn {
       display: none;
     }
@@ -172,7 +164,7 @@
   /* .logo img { ... } 변경 없음 */
 
   /* ---------- Hero video ---------- */
-  /* .hero { ... } height:calc(100vh - header-height)는 zoom이 꺼져 있으므로 그대로 정상 동작, 변경 없음 */
+  /* .hero { ... } height:calc(100vh - header-height)는 그대로 사용, 변경 없음 */
 
   /* ---------- Intro ---------- */
   /* .intro / .intro_inner 는 이미 flex 중앙 정렬 + max-width라 폭 변경 불필요 */
@@ -296,7 +288,7 @@
 
   /* ---------- Scroll indicator ---------- */
   /* 1920과 동일한 형태(사진이 스크롤에 따라 가로로 커지며 텍스트가 그 위에 겹치는 방식)를 그대로 유지하되,
-     모든 px 값을 1920 캔버스 대비 비율(vw)로 재계산 — zoom이 꺼진 구간에서도 zoom과 동일한 효과를 냄 */
+     모든 px 값을 1920 캔버스 대비 비율(vw)로 재계산 */
   .scroll {
     min-height: 2600px; /* 4200px → 태블릿에서는 스크롤 구간(읽는 시간)만 짧게, 비율 대상 아님 */
   }
@@ -338,7 +330,7 @@
   /* scroll/story 텍스트(크기·줄간격·여백)와 버튼은 다른 영역처럼 1920과 동일한 고정값(style.css) 사용 */
 
   /* ---------- Story ---------- */
-  /* 1920과 완전히 동일하게 보이도록, px 값을 전부 1920 캔버스 대비 비율(vw)로 재계산 (zoom과 동일한 효과) */
+  /* 1920과 완전히 동일하게 보이도록, px 값을 전부 1920 캔버스 대비 비율(vw)로 재계산 */
   /* 그룹 높이 420px (위 170 + 420*3 + 그룹간 100*2 + 아래 170 = 1800px) */
   .story {
     height: 1800px;
@@ -587,14 +579,14 @@
       top: 1030px; /* 600 + 350 + 80 */
     }
 
-    /* 높이가 줄어 뭉툭해 보이지 않도록 길이를 늘림: 1·3번은 오른쪽 끝을 80vw → 92vw, 2번은 왼쪽 시작을 20vw → 8vw */
+    /* 높이가 줄어 뭉툭해 보이지 않도록 길이를 늘림: 1·3번은 오른쪽 끝 80vw → 86vw, 2번은 왼쪽 시작 20vw → 14vw */
     .story_shape {
-      width: calc(92vw + 245px);
+      width: calc(86vw + 245px);
       height: 350px;
     }
 
     .story_group2 .story_shape {
-      left: 8vw;
+      left: 14vw;
       width: auto;
     }
 
@@ -607,29 +599,12 @@
     }
 
     .story_info {
-      right: calc(100% - 92vw + 40px);
-    }
-
-    .story_group2 .story_info {
-      left: calc(8vw + 40px);
-      right: calc(var(--grid-margin) + 28.125vw + 40px);
-    }
-
-    /* 박스 길이는 늘리되 너무 길지 않게: 1·3번은 오른쪽 끝 92vw → 86vw, 2번은 왼쪽 시작 8vw → 14vw */
-    .story_shape {
-      width: calc(86vw + 245px);
-    }
-
-    .story_group2 .story_shape {
-      left: 14vw;
-    }
-
-    .story_info {
       right: calc(100% - 86vw + 40px);
     }
 
     .story_group2 .story_info {
       left: calc(14vw + 40px);
+      right: calc(var(--grid-margin) + 28.125vw + 40px);
     }
 
     /* visual: 오른쪽 아래 작은 사진(visual_image2, 폭 386px)이 제목/부제목 글자 아래로 겹치지 않게

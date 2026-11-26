@@ -1,14 +1,10 @@
 // ---------- 섹션 등장 애니메이션 ([data-reveal], 화면에 들어올 때마다 재생) ----------
 /* 요소마다 따로 관찰해서, 아직 화면에 안 들어온 영역(예: tealife 위쪽 빈 패딩) 때문에 일찍 재생되지 않게 함.
    - 보이기: 요소가 화면 아래 30% 지점을 넘어 '충분히 들어왔을 때' isVisible 추가
-   - 숨기기: 화면에서 완전히 벗어났을 때만 제거(다시 올라오면 재생)
-   - [data-reveal-group] 안의 요소는 그룹 컨테이너가 보일 때 같이 재생(페이지 맨 아래 footer처럼 끝까지 스크롤해도
-     화면 아래 30% 안에 있어 개별 요소가 트리거 지점에 못 닿는 경우 대비) */
+   - 숨기기: 화면에서 완전히 벗어났을 때만 제거(다시 올라오면 재생) */
 function initReveal() {
-  const targets = Array.from(document.querySelectorAll('[data-reveal-group], [data-reveal]')).filter(
-    (el) =>
-      !el.hasAttribute('data-reveal-follow') &&
-      (el.hasAttribute('data-reveal-group') || !el.closest('[data-reveal-group]'))
+  const targets = Array.from(document.querySelectorAll('[data-reveal]')).filter(
+    (el) => !el.hasAttribute('data-reveal-follow')
   );
 
   /* data-reveal-follow="대상id": 자기 위치가 아니라 대상 요소가 보일 때 같이 재생
@@ -77,29 +73,20 @@ if (heroVideo && heroSlogan) {
   }, HERO_SLOGAN_DELAY * 1000);
 }
 
-// ---------- 페이지 스케일 (1920px 고정 디자인을 화면 너비에 비례해서 축소/확대) ----------
-const pageScaleOuter = document.querySelector('.pageScaleOuter');
-const pageScale = document.getElementById('pageScale');
-const heroSection = document.querySelector('.hero');
+// ---------- 그리드 여백 (PC: 1440px 컨텐츠를 화면 가운데에) ----------
 const headerEl = document.querySelector('.header');
-let currentPageScale = 1; /* .pageScale 내부는 offsetTop/offsetHeight가 로컬(1920 기준) 좌표라, 실제 화면 좌표로 바꿀 때 이 값으로 곱/나눗셈 필요 */
 
 const MOBILE_BREAKPOINT = 767; /* 이 너비 이하는 style_1024.css의 모바일 블록이 적용됨 */
-const PAGE_SCALE_BREAKPOINT = 1440; /* 이 너비 이하에서는 style_1024.css의 실제 반응형 규칙이 적용되므로 비례 축소를 끔 */
+const PC_BREAKPOINT = 1440; /* 이 너비 이하에서는 style_1024.css의 반응형 규칙이 적용됨 */
 
-/* 화면 너비에 맞춰 페이지를 줄이는 zoom은 끔(PC에서 글자가 작게 나오는 문제) — 모든 너비에서 실제 크기로 렌더링.
-   PC(1440 초과)는 컨텐츠 영역이 가운데 1440px(좌우 여백 24px)이므로 그리드 여백을 화면 폭에 맞춰 계산해서 지정.
+/* PC(1440 초과)는 컨텐츠 영역이 가운데 1440px(좌우 여백 24px)이므로 그리드 여백을 화면 폭에 맞춰 계산해서 지정.
    1440 이하는 style_1024.css의 %값이 적용되도록 인라인 값을 제거 */
 const CONTENT_WIDTH = 1440;
 const CONTENT_SIDE_GAP = 24;
 
-function updatePageScale() {
-  currentPageScale = 1;
-  pageScale.style.zoom = 1;
-  heroSection.style.height = '';
-
+function updateGridMargin() {
   const viewportWidth = document.documentElement.clientWidth;
-  if (viewportWidth > PAGE_SCALE_BREAKPOINT) {
+  if (viewportWidth > PC_BREAKPOINT) {
     document.documentElement.style.setProperty(
       '--grid-margin',
       `${(viewportWidth - CONTENT_WIDTH) / 2 + CONTENT_SIDE_GAP}px`
@@ -109,8 +96,8 @@ function updatePageScale() {
   }
 }
 
-window.addEventListener('resize', updatePageScale);
-updatePageScale();
+window.addEventListener('resize', updateGridMargin);
+updateGridMargin();
 
 // ---------- 드래그 슬라이드 캐러셀 (공통) ----------
 function initDragSlider(dragZone, track, getStartInset, viewport = dragZone) {
@@ -146,8 +133,7 @@ function initDragSlider(dragZone, track, getStartInset, viewport = dragZone) {
 
   function onDragMove(e) {
     if (!isDragging) return;
-    /* 마우스 이동량은 실제 화면 px, translateX는 페이지 스케일(zoom) 내부 로컬 px이므로 scale로 보정 */
-    const delta = (getClientX(e) - dragStartX) / currentPageScale;
+    const delta = getClientX(e) - dragStartX;
     setTranslate(dragStartTranslate + delta);
   }
 
@@ -204,8 +190,7 @@ let jejuIndex = 0;
 function updateJejuIndicatorLine() {
   const gapIndex = Math.min(jejuIndex, jejuIndicatorItems.length - 2);
 
-  /* getBoundingClientRect(실제 렌더링 좌표) 대신 offsetLeft/offsetWidth(레이아웃 좌표)를 사용해야
-     페이지 스케일(zoom)이 걸려도 항상 .jeju_indicator 기준의 올바른 위치가 계산됨 */
+  /* offsetLeft/offsetWidth(레이아웃 좌표)를 사용해 등장 애니메이션 중에도 .jeju_indicator 기준 위치가 맞게 */
   const leftItem = jejuIndicatorItems[gapIndex];
   const rightItem = jejuIndicatorItems[gapIndex + 1];
   const centerLocal = (leftItem.offsetLeft + leftItem.offsetWidth + rightItem.offsetLeft) / 2;
@@ -279,10 +264,10 @@ const scrollIndicatorEl = document.querySelector('.scroll_indicator');
 const SCROLL_THUMB_SIZE = 60;
 
 /* 1920px 기준 photo1 시작 여백(1120px)과 텍스트 커버 기준(850px)의 비율을 유지하되,
-   1440px 이하(zoom 꺼짐)에서는 photoArea의 실제 너비를 기준으로 다시 계산 — 하드코딩된 px는 좁은 화면에서 깨짐 */
+   1440px 이하에서는 photoArea의 실제 너비를 기준으로 다시 계산 — 하드코딩된 px는 좁은 화면에서 깨짐 */
 function getScrollPhoto1StartLeft() {
   /* PC: 컨텐츠 왼쪽 끝(그리드 여백) 기준 +856px (1920에서 1120px) */
-  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
+  if (document.documentElement.clientWidth > PC_BREAKPOINT) {
     return resolveGridLength('--grid-margin') + 856;
   }
   /* 모바일: 글이 화면 거의 전체 폭을 쓰므로, 사진은 오른쪽 끝에서 시작해 화면 전체로 커짐 */
@@ -294,7 +279,7 @@ function getScrollPhoto1StartLeft() {
 
 function getScrollText1CoverThreshold() {
   /* PC: 그리드 여백 + 586px (1920에서 850px) */
-  if (document.documentElement.clientWidth > PAGE_SCALE_BREAKPOINT) {
+  if (document.documentElement.clientWidth > PC_BREAKPOINT) {
     return resolveGridLength('--grid-margin') + 586;
   }
   if (document.documentElement.clientWidth <= MOBILE_BREAKPOINT) {
@@ -310,14 +295,9 @@ function getScrollTrackHeight() {
 }
 
 function getScrollProgress() {
-  /* scrollSection.offsetTop/offsetHeight는 .pageScale 내부 로컬(1920 기준) 좌표이므로
-     실제 화면(scrollY) 기준으로 비교하려면 헤더 높이(스케일 없음) + 로컬값*scale 로 환산해야 함 */
-  const headerHeight = headerEl.offsetHeight;
-  const realOffsetTop = headerHeight + (scrollSection.offsetTop - headerHeight) * currentPageScale;
-  const realOffsetHeight = scrollSection.offsetHeight * currentPageScale;
-  const scrollableRange = realOffsetHeight - window.innerHeight;
+  const scrollableRange = scrollSection.offsetHeight - window.innerHeight;
   return scrollableRange > 0
-    ? Math.min(1, Math.max(0, (window.scrollY - realOffsetTop) / scrollableRange))
+    ? Math.min(1, Math.max(0, (window.scrollY - scrollSection.offsetTop) / scrollableRange))
     : 0;
 }
 
