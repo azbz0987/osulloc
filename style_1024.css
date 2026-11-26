@@ -849,12 +849,12 @@
   }
 
   .jeju_photoOverlay {
-    left: 12px;
-    right: 12px;
-    bottom: 12px;
+    left: 20px; /* 박스 바깥 여백(사진 가장자리와의 간격) */
+    right: 20px;
+    bottom: 20px;
     width: auto;
     height: auto;
-    padding: 16px;
+    padding: 16px 22px 22px; /* 박스 안 여백: 좌우와 아래를 넓힘 */
   }
 
   .jeju_photoOverlayTitle {
