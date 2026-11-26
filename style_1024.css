@@ -1141,6 +1141,11 @@
     max-width: 50%; /* 상품과 덜 겹치도록 글 폭을 좁히되, 의도한 줄(<br>)이 더 쪼개지지 않는 폭 */
   }
 
+  /* 모바일에서는 제목의 일부 단어("오설록", "티")를 빼서 상품과 덜 겹치게. PC/태블릿에는 그대로 보임 */
+  .bento_omitMobile {
+    display: none;
+  }
+
   /* 768px에서의 크기(약 21/25px)보다 2px 정도만 작게 */
   .bento_box1TextLine1 {
     font-size: 19px;
