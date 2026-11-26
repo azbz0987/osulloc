@@ -1349,11 +1349,6 @@ body {
 .visual_body { --reveal-delay: 0.3s; }
 .visual_more { --reveal-delay: 0.45s; }
 
-.footer_links { --reveal-delay: 0.15s; }
-.footer_social { --reveal-delay: 0.3s; }
-.footer_info { --reveal-delay: 0.45s; }
-.footer_copyright { --reveal-delay: 0.6s; }
-
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],
   .hero_slogan {
