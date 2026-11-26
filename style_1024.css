@@ -124,7 +124,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.55);
+      background: rgba(0, 0, 0, 0.75);
       opacity: 0;
       visibility: hidden;
       touch-action: none; /* 어두운 부분을 밀어도 뒤 화면이 스크롤되지 않도록 */
