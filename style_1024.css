@@ -1119,7 +1119,7 @@
 
   .bento_box1Text {
     left: 52px; /* 왼쪽 꺾쇠와 겹치지 않게 */
-    max-width: 56%;
+    max-width: 40%; /* 상품과 덜 겹치도록 글 폭을 좁혀 두세 줄로 줄바꿈 */
   }
 
   .bento_box1TextLine1 {
