@@ -1126,13 +1126,9 @@
     object-position: 70% 50%;
   }
 
-  /* 제목의 단어를 뺀 1번(블렌디드티)·5번(프리미엄 컬렉션)은 상품이 다 보이도록 더 왼쪽으로 당김 */
+  /* 1번(블렌디드티) 사진만 상품이 다 보이도록 더 왼쪽으로 당김 */
   .bento_box1Slide:nth-child(1) .bento_box1Photo {
     object-position: 95% 50%;
-  }
-
-  .bento_box1Slide5 .bento_box1Photo {
-    object-position: 92% 50%;
   }
 
   .bento_box2,
